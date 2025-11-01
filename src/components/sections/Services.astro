@@ -1,0 +1,47 @@
+---
+import Button from '../ui/Button.astro';
+
+const services = [
+  {
+    title: 'Holistic Estate Planning',
+    description: 'Comprehensive, customized planning for individuals and families — because peace of mind should last a lifetime.'
+  },
+  {
+    title: 'Legacy & Family Trusts',
+    description: 'Preserve your wealth, values, and impact across generations with expert, caring guidance.'
+  },
+  {
+    title: 'Green Estate Planning',
+    description: 'Align your plan with your love for the planet. Explore sustainable options for your estate and memorial wishes.'
+  }
+];
+---
+
+<section class="py-20 bg-warm-neutral">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-deep-slate mb-4">
+        What We Offer
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+      {services.map(service => (
+        <div class="bg-white rounded-lg p-8 shadow-sm hover:shadow-md transition-shadow duration-300">
+          <h3 class="text-2xl font-serif font-semibold text-deep-slate mb-4">
+            {service.title}
+          </h3>
+          <p class="text-text-secondary leading-relaxed mb-6">
+            {service.description}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <div class="text-center">
+      <Button href="/services" variant="outline" size="lg">
+        Explore All Services
+      </Button>
+    </div>
+  </div>
+</section>

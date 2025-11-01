@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  /* Color Palette - Small Planet Law Brand */
+  --color-earth-green: oklch(42% 0.09 145);
+  --color-earth-green-light: oklch(52% 0.09 145);
+  --color-earth-green-dark: oklch(32% 0.09 145);
+  --color-warm-neutral: oklch(97% 0.01 85);
+  --color-warm-neutral-dark: oklch(92% 0.01 85);
+  --color-deep-slate: oklch(25% 0.02 210);
+  --color-deep-slate-light: oklch(35% 0.02 210);
+  
+  /* Additional semantic colors */
+  --color-text-primary: oklch(20% 0.01 210);
+  --color-text-secondary: oklch(45% 0.01 210);
+  --color-background: oklch(99% 0.005 85);
+  
+  /* Typography */
+  --font-family-sans: ui-sans-serif, system-ui, sans-serif;
+  --font-family-serif: ui-serif, Georgia, serif;
+  
+  /* Spacing scale adjustments */
+  --spacing-section: 4rem;
+  
+  /* Breakpoints */
+  --breakpoint-3xl: 1920px;
+}

@@ -1,0 +1,49 @@
+---
+const features = [
+  {
+    icon: '🌿',
+    title: 'Holistic & Relationship-Based',
+    description: 'We guide you through every step with care and clarity, ensuring your plan truly works when needed.'
+  },
+  {
+    icon: '💚',
+    title: 'Environmentally Conscious',
+    description: 'Sustainable practices woven into every aspect of our operations and planning options.'
+  },
+  {
+    icon: '🤝',
+    title: 'Here for You and Your Family for Life',
+    description: 'We serve as trusted advisors for life, adapting your plan as your circumstances evolve.'
+  }
+];
+---
+
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto text-center mb-16">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-deep-slate mb-6">
+        The Small Planet Difference
+      </h2>
+      <p class="text-xl text-text-secondary leading-relaxed">
+        Estate Planning That Feels Human — and Aligned With Your Values.
+      </p>
+      <p class="text-lg text-text-secondary mt-4 leading-relaxed">
+        We believe estate planning should feel like peace of mind, not paperwork. At Small Planet Law, we combine professional excellence with genuine care — guiding you to create a plan that truly works when it matters most.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+      {features.map(feature => (
+        <div class="text-center space-y-4">
+          <div class="text-5xl mb-4">{feature.icon}</div>
+          <h3 class="text-xl font-semibold text-deep-slate">
+            {feature.title}
+          </h3>
+          <p class="text-text-secondary leading-relaxed">
+            {feature.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,22 +1,88 @@
+---
+import "../styles/global.css";
+import Header from "../components/layout/Header.astro";
+import Footer from "../components/layout/Footer.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const { 
+  title = "Small Planet Law | Holistic Estate Planning in Denver, CO",
+  description = "Compassionate, comprehensive estate planning for families who care about their loved ones and the planet. Green estate planning options available. Serving Denver, Colorado.",
+  image = "/og-image.jpg"
+} = Astro.props;
+
+const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astro.url.pathname;
+const fullImageURL = Astro.site ? new URL(image, Astro.site).toString() : image;
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullImageURL} />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={fullImageURL} />
+    
+    <!-- Local Business Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LegalService",
+        "name": "Small Planet Law LLC",
+        "description": "Holistic estate planning law firm in Denver, CO",
+        "url": "https://smallplanetlaw.com",
+        "logo": "https://smallplanetlaw.com/logo.png",
+        "image": "https://smallplanetlaw.com/og-image.jpg",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Denver",
+          "addressRegion": "CO",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "39.7392",
+          "longitude": "-104.9903"
+        },
+        "priceRange": "$$",
+        "telephone": "+1-303-555-0123",
+        "email": "hello@smallplanetlaw.com",
+        "areaServed": {
+          "@type": "State",
+          "name": "Colorado"
+        }
+      }
+    </script>
+  </head>
+  <body class="bg-background text-text-primary font-sans">
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
