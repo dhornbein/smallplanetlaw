@@ -11,17 +11,17 @@ const navItems = [
 ---
 
 <header
-  class="bg-cosmic-blue-dark/50 border-b border-cosmic-blue-light backdrop-blur-md sticky top-0 z-50 h-20"
+  class="bg-stone-800/80 border-b border-stone-700 backdrop-blur-md sticky top-0 z-50 h-20"
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center py-4">
       <!-- Logo -->
-      <a href="/" class="flex items-center space-x-3 group">
+      <a href="/" class="flex items-center space-x-3 group z-30">
         <div
-          class="w-12 h-12 rounded-full bg-earth-green flex items-center justify-center group-hover:bg-earth-green-dark transition-colors duration-200"
+          class="w-12 h-12 rounded-full bg-cosmic-blue-dark flex items-center justify-center"
         >
           <svg
-            class="w-7 h-7 text-white"
+            class="w-7 h-7 group-hover:text-blue-300 text-cosmic-blue"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -35,10 +35,11 @@ const navItems = [
           </svg>
         </div>
         <div class="flex flex-col">
-          <span class="text-xl font-serif font-semibold text-warm-neutral-dark"
+          <span
+            class="text-xl font-serif font-semibold text-warm-neutral group-hover:text-white"
             >Small Planet Law</span
           >
-          <span class="text-xs text-warm-neutral"
+          <span class="text-xs text-warm-neutral-dark"
             >Estate Planning • Denver, CO</span
           >
         </div>
@@ -50,7 +51,7 @@ const navItems = [
           navItems.map((item) => (
             <a
               href={item.href}
-              class="text-warm-neutral hover:text-earth-green-light transition-colors duration-200 font-medium"
+              class="text-warm-neutral hover:text-white transition-colors duration-200 font-medium"
             >
               {item.name}
             </a>
@@ -62,7 +63,7 @@ const navItems = [
       <!-- Mobile Menu Button -->
       <button
         id="mobile-menu-button"
-        class="md:hidden p-2 rounded-md text-text-secondary hover:text-earth-green focus:outline-none focus:ring-2 focus:ring-earth-green"
+        class="md:hidden p-2 rounded-md text-warm-neutral-dark hover:text-white focus:outline-none focus:ring-2 focus:ring-white/70 z-40"
         aria-label="Toggle menu"
       >
         <svg
@@ -81,20 +82,26 @@ const navItems = [
     </div>
 
     <!-- Mobile Navigation -->
-    <nav id="mobile-menu" class="hidden md:hidden pb-4 space-y-2">
-      {
-        navItems.map((item) => (
-          <a
-            href={item.href}
-            class="block py-2 text-text-secondary hover:text-earth-green transition-colors duration-200 font-medium"
-          >
-            {item.name}
-          </a>
-        ))
-      }
-      <div class="pt-2">
-        <Button href="/contact" size="sm" class="w-full">Start Your Plan</Button
-        >
+    <nav
+      id="mobile-menu"
+      class="hidden md:hidden fixed top-0 left-0 w-full bg-stone-800 inset-shadow-lg"
+    >
+      <div
+        class="flex flex-col justify-around h-full min-h-dvh pt-24 pb-4 px-6"
+      >
+        {
+          navItems.map((item) => (
+            <a
+              href={item.href}
+              class="py-2 text-warm-neutral hover:text-white transition-colors duration-200 font-medium font-serif text-2xl lowercase"
+            >
+              {item.name}
+            </a>
+          ))
+        }
+        <div class="pt-2">
+          <Button href="/contact" size="lg" class="w-full">Get Started</Button>
+        </div>
       </div>
     </nav>
   </div>
