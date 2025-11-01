@@ -1,3 +1,7 @@
+/* Import variable fonts - loaded immediately, no FOUT */
+@import "@fontsource-variable/lora";
+@import "@fontsource-variable/source-sans-3";
+
 @import "tailwindcss";
 
 @theme {
@@ -16,8 +20,8 @@
   --color-background: oklch(99% 0.005 85);
   
   /* Typography */
-  --font-family-sans: ui-sans-serif, system-ui, sans-serif;
-  --font-family-serif: ui-serif, Georgia, serif;
+  --font-sans: "Source Sans 3 Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Lora Variable", ui-serif, Georgia, serif;
   
   /* Spacing scale adjustments */
   --spacing-section: 4rem;

@@ -32,7 +32,7 @@
 - **Tone**: Warm, conversational, reassuring, values-driven
 - **Visual Style**: Natural imagery, Colorado landscapes, family-focused
 - **Logo**: Circular mark suggesting planet/continuity with leaf motif
-- **Typography**: Clean, modern serif for headings; legible sans-serif for body text
+- **Typography**: Lora for headings; Source Sans Pro for body text
 
 ## Astro Best Practices
 
