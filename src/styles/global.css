@@ -13,6 +13,9 @@
   --color-warm-neutral-dark: oklch(92% 0.01 85);
   --color-deep-slate: oklch(25% 0.02 210);
   --color-deep-slate-light: oklch(35% 0.02 210);
+  --color-cosmic-blue: oklab(57% 0.00002 -0.04657);
+  --color-cosmic-blue-dark: oklab(16% -0.00534 -0.01032);
+  --color-cosmic-blue-light: oklab(75% 0.00003 -0.06076);
   
   /* Additional semantic colors */
   --color-text-primary: oklch(20% 0.01 210);

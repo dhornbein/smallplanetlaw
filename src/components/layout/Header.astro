@@ -1,68 +1,100 @@
 ---
-import Button from '../ui/Button.astro';
+import Button from "../ui/Button.astro";
 
 const navItems = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Services', href: '/services' },
-  { name: 'Blog', href: '/blog' },
-  { name: 'Contact', href: '/contact' }
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Services", href: "/services" },
+  { name: "Blog", href: "/blog" },
+  { name: "Contact", href: "/contact" },
 ];
 ---
 
-<header class="bg-white border-b border-warm-neutral-dark sticky top-0 z-50">
+<header
+  class="bg-cosmic-blue-dark/50 border-b border-cosmic-blue-light backdrop-blur-md sticky top-0 z-50 h-20"
+>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center py-4">
       <!-- Logo -->
       <a href="/" class="flex items-center space-x-3 group">
-        <div class="w-12 h-12 rounded-full bg-earth-green flex items-center justify-center group-hover:bg-earth-green-dark transition-colors duration-200">
-          <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        <div
+          class="w-12 h-12 rounded-full bg-earth-green flex items-center justify-center group-hover:bg-earth-green-dark transition-colors duration-200"
+        >
+          <svg
+            class="w-7 h-7 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
           </svg>
         </div>
         <div class="flex flex-col">
-          <span class="text-xl font-serif font-semibold text-deep-slate">Small Planet Law</span>
-          <span class="text-xs text-text-secondary">Estate Planning • Denver, CO</span>
+          <span class="text-xl font-serif font-semibold text-warm-neutral-dark"
+            >Small Planet Law</span
+          >
+          <span class="text-xs text-warm-neutral"
+            >Estate Planning • Denver, CO</span
+          >
         </div>
       </a>
 
       <!-- Desktop Navigation -->
       <nav class="hidden md:flex items-center space-x-8">
-        {navItems.map(item => (
-          <a 
-            href={item.href} 
-            class="text-text-secondary hover:text-earth-green transition-colors duration-200 font-medium"
-          >
-            {item.name}
-          </a>
-        ))}
+        {
+          navItems.map((item) => (
+            <a
+              href={item.href}
+              class="text-warm-neutral hover:text-earth-green-light transition-colors duration-200 font-medium"
+            >
+              {item.name}
+            </a>
+          ))
+        }
         <Button href="/contact" size="sm">Start Your Plan</Button>
       </nav>
 
       <!-- Mobile Menu Button -->
-      <button 
+      <button
         id="mobile-menu-button"
         class="md:hidden p-2 rounded-md text-text-secondary hover:text-earth-green focus:outline-none focus:ring-2 focus:ring-earth-green"
         aria-label="Toggle menu"
       >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
     </div>
 
     <!-- Mobile Navigation -->
     <nav id="mobile-menu" class="hidden md:hidden pb-4 space-y-2">
-      {navItems.map(item => (
-        <a 
-          href={item.href} 
-          class="block py-2 text-text-secondary hover:text-earth-green transition-colors duration-200 font-medium"
-        >
-          {item.name}
-        </a>
-      ))}
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class="block py-2 text-text-secondary hover:text-earth-green transition-colors duration-200 font-medium"
+          >
+            {item.name}
+          </a>
+        ))
+      }
       <div class="pt-2">
-        <Button href="/contact" size="sm" class="w-full">Start Your Plan</Button>
+        <Button href="/contact" size="sm" class="w-full">Start Your Plan</Button
+        >
       </div>
     </nav>
   </div>
@@ -70,10 +102,10 @@ const navItems = [
 
 <script>
   // Mobile menu toggle
-  const mobileMenuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
 
-  mobileMenuButton?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('hidden');
+  mobileMenuButton?.addEventListener("click", () => {
+    mobileMenu?.classList.toggle("hidden");
   });
 </script>

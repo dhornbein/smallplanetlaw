@@ -1,33 +1,47 @@
 ---
-import Button from '../ui/Button.astro';
+import Button from "../ui/Button.astro";
+import PaleBlueDot from "../ui/PaleBlueDot.astro";
 ---
 
-<section class="relative bg-gradient-to-b from-warm-neutral to-background py-20 lg:py-28">
+<section
+  class="relative py-24 lg:py-28 min-h-dvh -mt-20 flex items-center"
+  style="background-image: url('/starfield.svg'), linear-gradient(to top right, var(--color-cosmic-blue), var(--color-cosmic-blue-dark)); background-size: cover; background-position: center;"
+>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="max-w-4xl mx-auto text-center">
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-deep-slate mb-6 leading-tight">
-        Protect What Matters — People, Planet, and Peace of Mind
+    <div class="max-w-4xl mx-auto text-center text-warm-neutral">
+      <h1
+        class="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-blue-100 mb-6 leading-tight"
+      >
+        Protect What Matters
+        <PaleBlueDot size="sm" class="mx-auto my-6 lg:my-16" />
+        People, Planet, and Peace of Mind
       </h1>
-      <p class="text-xl lg:text-2xl text-text-secondary mb-8 leading-relaxed">
-        Small Planet Law helps families design estate plans that honor their loved ones and their values — including care for the planet.
+
+      <p class="text-xl lg:text-2xl mb-8 leading-relaxed">
+        Small Planet Law helps families design estate plans that honor their
+        loved ones and their values — including care for the planet.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <Button href="/contact" size="lg">
-          Start Your Plan
-        </Button>
-        <a 
-          href="/about" 
-          class="text-earth-green hover:text-earth-green-dark font-medium flex items-center space-x-2 transition-colors duration-200"
+        <Button href="/contact" size="lg" variant="secondary"> Start Your Plan </Button>
+        <a
+          href="/about"
+          class="text-blue-300 hover:text-blue-50 font-medium flex items-center space-x-2 transition-colors duration-200"
         >
           <span>Learn how holistic estate planning works</span>
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
           </svg>
         </a>
       </div>
     </div>
   </div>
-  
-  <!-- Decorative element -->
-  <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-earth-green to-transparent opacity-30"></div>
 </section>
