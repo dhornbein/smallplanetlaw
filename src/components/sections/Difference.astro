@@ -1,49 +1,98 @@
 ---
 const features = [
   {
-    icon: '🌿',
-    title: 'Holistic & Relationship-Based',
-    description: 'We guide you through every step with care and clarity, ensuring your plan truly works when needed.'
+    icon: "🌿",
+    title: "Holistic & Relationship-Based",
+    description:
+      "We guide you through every step with care and clarity, ensuring your plan truly works when needed.",
   },
   {
-    icon: '💚',
-    title: 'Environmentally Conscious',
-    description: 'Sustainable practices woven into every aspect of our operations and planning options.'
+    icon: "💚",
+    title: "Environmentally Conscious",
+    description:
+      "Sustainable practices woven into every aspect of our operations and planning options.",
   },
   {
-    icon: '🤝',
-    title: 'Here for You and Your Family for Life',
-    description: 'We serve as trusted advisors for life, adapting your plan as your circumstances evolve.'
-  }
+    icon: "🤝",
+    title: "Here for You and Your Family for Life",
+    description:
+      "We serve as trusted advisors for life, adapting your plan as your circumstances evolve.",
+  },
 ];
 ---
 
-<section class="py-20 bg-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section
+  class="relative py-20 lg:py-40 bg-linear-to-b from-amber-100 via-20% via-warm-neutral to-warm-neutral-dark"
+>
+  <!-- Curved horizon edge at the top with atmospheric glow -->
+  <div
+    class="absolute left-0 right-0 overflow-hidden leading-none -top-12 md:-top-16 lg:-top-20"
+  >
+    <svg
+      class="relative block w-full h-12 md:h-16 lg:h-20"
+      preserveAspectRatio="none"
+      viewBox="0 0 1200 120"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <!-- Filter for the bright atmospheric rim -->
+        <filter id="horizonGlow">
+          <feGaussianBlur stdDeviation="2" result="blur"></feGaussianBlur>
+          <feColorMatrix
+            in="blur"
+            type="matrix"
+            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 8 0"></feColorMatrix>
+          <feComposite in="SourceGraphic" in2="blur" operator="over"
+          ></feComposite>
+        </filter>
+      </defs>
+
+      <!-- Bright horizon line -->
+      <path
+        d="M0,120 Q600,40 1200,120"
+        fill="none"
+        stroke="#fbbf24"
+        stroke-width="2"
+        opacity="0.8"
+        filter="url(#horizonGlow)"></path>
+
+      <!-- Main planet surface -->
+      <path
+        d="M0,120 Q600,40 1200,120 L1200,120 L0,120 Z"
+        class="fill-amber-100"></path>
+    </svg>
+  </div>
+
+  <div
+    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-deep-slate"
+  >
     <div class="max-w-3xl mx-auto text-center mb-16">
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-deep-slate mb-6">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold mb-6">
         The Small Planet Difference
       </h2>
-      <p class="text-xl text-text-secondary leading-relaxed">
+      <p class="text-xl text-deep-slate-light leading-relaxed">
         Estate Planning That Feels Human — and Aligned With Your Values.
       </p>
-      <p class="text-lg text-text-secondary mt-4 leading-relaxed">
-        We believe estate planning should feel like peace of mind, not paperwork. At Small Planet Law, we combine professional excellence with genuine care — guiding you to create a plan that truly works when it matters most.
+      <p class="text-lg text-deep-slate-light mt-4 leading-relaxed">
+        We believe estate planning should feel like peace of mind, not
+        paperwork. At Small Planet Law, we combine professional excellence with
+        genuine care — guiding you to create a plan that truly works when it
+        matters most.
       </p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-      {features.map(feature => (
-        <div class="text-center space-y-4">
-          <div class="text-5xl mb-4">{feature.icon}</div>
-          <h3 class="text-xl font-semibold text-deep-slate">
-            {feature.title}
-          </h3>
-          <p class="text-text-secondary leading-relaxed">
-            {feature.description}
-          </p>
-        </div>
-      ))}
+      {
+        features.map((feature) => (
+          <div class="text-center space-y-4">
+            <div class="text-5xl mb-4">{feature.icon}</div>
+            <h3 class="text-xl font-semibold text-deep-slate">
+              {feature.title}
+            </h3>
+            <p class="leading-relaxed">{feature.description}</p>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>
