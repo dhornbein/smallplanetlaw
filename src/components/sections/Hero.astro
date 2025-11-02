@@ -4,44 +4,21 @@ import PaleBlueDot from "../ui/PaleBlueDot.astro";
 ---
 
 <section
-  class="relative py-24 lg:py-28 min-h-dvh -mt-20 flex items-center"
-  style="background-image: url('/smallplanetlaw/starfield.svg'), linear-gradient(to top right, var(--color-cosmic-blue), var(--color-cosmic-blue-dark)); background-size: cover; background-position: center;"
+  class="relative py-24 lg:py-28 min-h-dvh -mt-20 flex items-center justify-start bg-cover bg-left bg-[url('/smallplanetlaw/hero-girl-planet.jpg')]"
 >
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="max-w-4xl mx-auto text-center text-warm-neutral">
-      <h1
-        class="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold mb-6 leading-tight"
-      >
-        Protect What Matters
-        <PaleBlueDot size="sm" class="mx-auto my-6 lg:my-16" />
-        People, Planet, and Peace of Mind
-      </h1>
+  <div class="max-w-2xl ml-8 text-slate-900">
+    <h1
+      class="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold mb-6 leading-tight"
+    >
+      Protect What Matters People, Planet, and Peace of Mind
+    </h1>
 
-      <p class="text-xl lg:text-2xl mb-8 leading-relaxed">
-        Small Planet Law helps families design estate plans that honor their
-        loved ones and their values — including care for the planet.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <Button href="/contact" size="lg" variant="secondary"> Start Your Plan </Button>
-        <a
-          href="/about"
-          class="text-blue-300 hover:text-blue-50 font-medium flex items-center space-x-2 transition-colors duration-200"
-        >
-          <span>Learn how holistic estate planning works</span>
-          <svg
-            class="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-          </svg>
-        </a>
-      </div>
-    </div>
+    <p class="text-xl lg:text-2xl mb-8 leading-relaxed">
+      Small Planet Law helps families design estate plans that honor their
+      loved ones and their values — including care for the planet.
+    </p>
+    <Button href="/contact" size="lg" variant="secondary">
+      Start Your Plan
+    </Button>
   </div>
 </section>
