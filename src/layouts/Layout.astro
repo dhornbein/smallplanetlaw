@@ -9,13 +9,15 @@ interface Props {
   image?: string;
 }
 
-const { 
+const {
   title = "Small Planet Law | Holistic Estate Planning in Denver, CO",
   description = "Compassionate, comprehensive estate planning for families who care about their loved ones and the planet. Green estate planning options available. Serving Denver, Colorado.",
-  image = "/og-image.jpg"
+  image = "/og-image.jpg",
 } = Astro.props;
 
-const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astro.url.pathname;
+const canonicalURL = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site)
+  : Astro.url.pathname;
 const fullImageURL = Astro.site ? new URL(image, Astro.site).toString() : image;
 ---
 
@@ -24,29 +26,29 @@ const fullImageURL = Astro.site ? new URL(image, Astro.site).toString() : image;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={import.meta.env.BASE_URL + 'favicon.svg'} />
     <meta name="generator" content={Astro.generator} />
-    
+
     <!-- Primary Meta Tags -->
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={fullImageURL} />
-    
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={fullImageURL} />
-    
+
     <!-- Local Business Schema -->
     <script type="application/ld+json">
       {

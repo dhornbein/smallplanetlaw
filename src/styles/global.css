@@ -32,3 +32,30 @@
   /* Breakpoints */
   --breakpoint-3xl: 1920px;
 }
+
+
+/* Typography Styles */
+h1 {
+  @apply text-4xl sm:text-5xl lg:text-6xl font-serif font-bold mb-6 leading-tight;
+}
+
+h2 {
+  @apply text-3xl sm:text-4xl lg:text-5xl font-serif font-bold mb-5 leading-tight;
+}
+
+h3 {
+  @apply text-2xl sm:text-3xl font-serif font-semibold mb-4 leading-snug;
+}
+
+h4 {
+  @apply text-xl sm:text-2xl font-serif font-semibold mb-3 leading-snug;
+}
+
+/* Body text defaults */
+p {
+  @apply mb-4 leading-relaxed;
+}
+
+/* Generic variable-driven background helpers */
+.bg-var { background-image: var(--bg-img); }
+@media (min-width: 48rem) { .bg-var { background-image: var(--bg-img-md); } }

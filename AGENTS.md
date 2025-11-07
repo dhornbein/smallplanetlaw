@@ -108,7 +108,6 @@ src/
   ```
 - Use modern CSS features like `oklch()` for wide-gamut colors
 - All theme values automatically available as CSS variables
-- No JavaScript configuration file needed for most projects
 
 ### Modern CSS Features (v4)
 - **Native cascade layers**: Proper `@layer` rules for better specificity control
@@ -120,6 +119,9 @@ src/
 
 ### Component & Utility Strategy
 - Embrace utility-first approach in Astro components
+- Use native CSS nesting within `<style>` blocks in `.astro` files for component-specific styles
+- For long or repeating groups of utility classes, define named class selectors and use `@apply` to group shared utility patterns
+- Name elements logically and apply class names for better readability and maintainability. Use BEM conventions where appropriate
 - Use arbitrary values with CSS variables: `p-[calc(var(--spacing-6)-1px)]`
 - Create component classes only for truly repeated patterns
 - Leverage Tailwind's responsive prefixes: `sm:`, `md:`, `lg:`, `xl:`, `2xl:`

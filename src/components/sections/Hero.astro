@@ -1,21 +1,19 @@
 ---
 import Button from "../ui/Button.astro";
-import PaleBlueDot from "../ui/PaleBlueDot.astro";
+import heroImg from "../../assets/hero-space-girl-wide.jpg";
+import heroImgTall from "../../assets/hero-space-girl-tall.jpg";
 ---
 
 <section
-  class="relative py-24 lg:py-28 min-h-dvh -mt-20 flex items-center justify-start bg-cover bg-left bg-[url('/smallplanetlaw/hero-girl-planet.jpg')]"
+  class="relative py-24 lg:py-28 min-h-dvh -mt-20 flex items-start md:items-center justify-start bg-cover bg-center bg-fixed bg-cosmic-blue-light bg-var"
+  style={`--bg-img: url(${heroImgTall.src}); --bg-img-md: url(${heroImg.src});`}
 >
-  <div class="max-w-2xl ml-8 text-slate-900">
-    <h1
-      class="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold mb-6 leading-tight"
-    >
-      Protect What Matters People, Planet, and Peace of Mind
-    </h1>
+  <div class="max-w-2xl mx-2 text-warm-neutral">
+    <h1>Protect What Matters Most</h1>
 
     <p class="text-xl lg:text-2xl mb-8 leading-relaxed">
-      Small Planet Law helps families design estate plans that honor their
-      loved ones and their values — including care for the planet.
+      Small Planet Law helps families design estate plans that honor their loved
+      ones and their values — including care for the planet.
     </p>
     <Button href="/contact" size="lg" variant="secondary">
       Start Your Plan
