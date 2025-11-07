@@ -1,6 +1,7 @@
 ---
 import Button from "../ui/Button.astro";
 import LogoMark from "../ui/LogoMark.astro";
+import bgImg from "../../assets/header-space.jpg";
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -9,34 +10,72 @@ const navItems = [
   { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ];
+
+// You can customize this selector to target any element on the page
+const { triggerSelector = ".hero-section" } = Astro.props;
 ---
 
+<style>
+  @reference "../../styles/global.css";
+
+  header,
+  header.is-top {
+    @apply text-warm-neutral bg-transparent transition-colors duration-300;
+    .logo .logo-circle,
+    .logo .logo-path {
+      fill: none;
+      stroke: var(--color-warm-neutral);
+    }
+  }
+
+  header.is-stuck {
+    @apply bg-warm-neutral/70 text-text-primary backdrop-blur-md shadow-lg;
+    @apply z-50 sticky top-0 left-0 w-full transition-transform duration-300;
+    .logo .logo-circle,
+    .logo .logo-path {
+      fill: none;
+      stroke: var(--color-text-primary);
+    }
+  }
+
+  header.is-stuck {
+    animation: slideDown 0.3s ease-in-out;
+  }
+
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+</style>
+
 <header
-  class="bg-stone-800/80 border-b border-stone-700 backdrop-blur-md sticky top-0 z-50 h-20"
+  id="main-header"
+  class="h-20 relative z-50"
+  data-trigger-selector={triggerSelector}
+  style={`--bgImg: url('${bgImg.src}')`}
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center py-4">
       <!-- Logo -->
       <a href="/" class="flex items-center space-x-3 group z-30">
-        <LogoMark size="sm" />
+        <LogoMark size="sm" class="logo" />
         <div class="flex flex-col">
-          <span
-            class="text-xl font-serif font-semibold text-warm-neutral group-hover:text-white"
-            >Small Planet Law</span
-          >
-          <span class="text-xs text-warm-neutral-dark"
-            >Estate Planning • Denver, CO</span
-          >
+          <span class="text-xl font-serif font-semibold">Small Planet Law</span>
+          <span class="text-xs">Estate Planning • Denver, CO</span>
         </div>
       </a>
 
       <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center space-x-8">
+      <nav class="hidden md:flex items-center space-x-8 z-50">
         {
           navItems.map((item) => (
             <a
               href={item.href}
-              class="text-warm-neutral hover:text-white transition-colors duration-200 font-medium"
+              class="transition-colors duration-200 font-medium"
             >
               {item.name}
             </a>
@@ -100,4 +139,50 @@ const navItems = [
   mobileMenuButton?.addEventListener("click", () => {
     mobileMenu?.classList.toggle("hidden");
   });
+
+  // Track when we're at the top of the viewport
+  const header = document.getElementById("main-header");
+
+  if (header) {
+    const checkScrollPosition = () => {
+      if (window.scrollY === 0) {
+        header.classList.add("is-top");
+        header.classList.remove("is-stuck");
+      } else {
+        header.classList.remove("is-top");
+      }
+    };
+
+    // Check on scroll
+    window.addEventListener("scroll", checkScrollPosition);
+
+    // Check on page load
+    checkScrollPosition();
+  }
+
+  // Sticky header on scroll past trigger element
+  const triggerSelector = header?.dataset.triggerSelector;
+
+  if (header && triggerSelector) {
+    const triggerElement = document.querySelector(triggerSelector);
+
+    if (triggerElement) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+              // Trigger element has passed - make header sticky
+              header.classList.add("is-stuck");
+            }
+          });
+        },
+        {
+          threshold: 0,
+          rootMargin: "0px",
+        }
+      );
+
+      observer.observe(triggerElement);
+    }
+  }
 </script>
