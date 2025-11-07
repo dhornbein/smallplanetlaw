@@ -62,7 +62,7 @@ const labelled = !ariaHidden && (title || desc);
     viewBox="0 0 600 600"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    class="w-full h-full"
+    class="w-full h-full logo-svg"
     role={!ariaHidden ? "img" : undefined}
     aria-hidden={ariaHidden ? "true" : undefined}
   >
@@ -72,18 +72,32 @@ const labelled = !ariaHidden && (title || desc);
       cx="300"
       cy="300"
       r="267.36"
-      style={`fill:${fillColor};stroke:${strokeColor};stroke-width:38.7px;`}
+      class="logo-circle"
     ></circle>
     <path
       d="M91.119,466.345c75.557,44.881 198.092,-5.451 201.072,-137.069c3.496,-154.422 -163.876,-151.058 -163.876,-151.058c0,0 -19.829,188.348 163.876,151.058"
-      style={`fill:none;stroke:${pathStrokeColor};stroke-width:28.64px;`}
+      class="logo-path"
     ></path>
     <path
       d="M476.64,496.141c-100.744,61.222 -184.722,-6.597 -180.565,-117.018c7.099,-188.547 81.49,-168.993 171.653,-206.526c-16.451,199.804 -109.512,123.828 -171.509,226.509"
-      style={`fill:none;stroke:${pathStrokeColor};stroke-width:28.64px;`}
+      class="logo-path"
     ></path>
   </svg>
 </figure>
+
+<style define:vars={{ fillColor, strokeColor, pathStrokeColor }}>
+  .logo-circle {
+    fill: var(--fillColor);
+    stroke: var(--strokeColor);
+    stroke-width: 38px;
+  }
+
+  .logo-path {
+    fill: none;
+    stroke: var(--pathStrokeColor);
+    stroke-width: 30px;
+  }
+</style>
 
 <!-- Example Usage:
   <LogoMark size="lg" />
