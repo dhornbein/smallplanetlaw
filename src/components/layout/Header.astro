@@ -1,18 +1,17 @@
 ---
 import Button from "../ui/Button.astro";
 import LogoMark from "../ui/LogoMark.astro";
-import bgImg from "../../assets/header-space.jpg";
 
 const navItems = [
   { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Services", href: "/services" },
+  { name: "About Us", href: "/about" },
+  { name: "Our Services", href: "/services" },
   { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ];
 
-// You can customize this selector to target any element on the page
-const { triggerSelector = ".hero-section" } = Astro.props;
+// element that will trigger the sticky header when scrolled past
+const { triggerSelector = ".show-header" } = Astro.props;
 ---
 
 <style>
@@ -56,7 +55,6 @@ const { triggerSelector = ".hero-section" } = Astro.props;
   id="main-header"
   class="h-20 relative z-50"
   data-trigger-selector={triggerSelector}
-  style={`--bgImg: url('${bgImg.src}')`}
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center py-4">
