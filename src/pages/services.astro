@@ -1,0 +1,369 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Button from "../components/ui/Button.astro";
+import CurvedEdge from "../components/ui/CurvedEdge.astro";
+import Icon from "../components/ui/Icon.astro";
+import CTA from "../components/sections/CTA.astro";
+import Newsletter from "../components/sections/Newsletter.astro";
+import heroImg from "../assets/hero-umbrella-wide.jpg";
+import heroImgTall from "../assets/hero-umbrella-tall.jpg";
+---
+
+<Layout
+  title="Estate Planning Services | Small Planet Law, Denver CO"
+  description="Comprehensive, holistic estate planning services in Denver. Wills, trusts, green estate planning, and legacy planning for Colorado families."
+>
+  <!-- Hero Section -->
+  <section
+    class="hero-section show-header relative px-8 py-24 lg:py-28 min-h-dvh -mt-20 flex flex-col items-start lg:pl-[40vw] lg:justify-center justify-start bg-cover bg-left bg-fixed bg-var"
+    style={`--bg-img: url(${heroImgTall.src}); --bg-img-md: url(${heroImg.src});`}
+  >
+    <h1 class="text-text-secondary">Estate Planning Services</h1>
+    <p class="text-xl leading-relaxed max-w-prose">
+      Comprehensive, values-driven planning designed to protect your loved ones,
+      honor your legacy, and reflect your commitment to the planet.
+    </p>
+  </section>
+
+  <!-- Our Approach -->
+  <section
+    class="relative bg-primary text-text-primary-inverse flex flex-col gap-8 px-4 sm:px-6 lg:px-8 pt-10 pb-30"
+  >
+    <CurvedEdge fillColor="fill-primary" />
+
+    <h2 class="text-secondary text-center">Our Approach</h2>
+
+    <div class="text-2xl leading-relaxed max-w-prose mx-auto space-y-6">
+      <p>
+        At Small Planet Law, we believe estate planning should be clear,
+        compassionate, and customized to your unique situation. We take the time
+        to understand your family, your values, and your goals — then craft a
+        plan that actually works when you need it most.
+      </p>
+      <p>
+        Whether you're creating your first will, establishing a trust for your
+        family, or exploring green estate planning options, we're here to guide
+        you every step of the way.
+      </p>
+    </div>
+  </section>
+
+  <!-- Core Services -->
+  <section class="relative py-20 bg-neutral-warm">
+    <CurvedEdge fillColor="fill-neutral-warm" />
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-center">What We Offer</h2>
+
+      <div class="space-y-16 mt-16">
+        <!-- Service 1: Holistic Estate Planning -->
+        <div
+          id="holistic-planning"
+          class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start"
+        >
+          <div>
+            <h3 class="text-primary mb-4">Holistic Estate Planning</h3>
+            <p class="text-lg mb-6 leading-relaxed">
+              Comprehensive, customized planning for individuals and families —
+              because peace of mind should last a lifetime.
+            </p>
+            <p class="mb-6 leading-relaxed">
+              Our holistic approach goes beyond basic documents. We help you
+              create a complete plan that addresses your assets, healthcare
+              wishes, family dynamics, and long-term goals.
+            </p>
+          </div>
+          <div class="bg-white/60 rounded-lg p-8">
+            <h4 class="text-primary mb-4">What's Included:</h4>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <Icon name="check" class="text-primary mr-3 mt-1" />
+                <span>Last Will and Testament</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="check" class="text-primary mr-3 mt-1" />
+                <span>Healthcare Directives & Living Will</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="check" class="text-primary mr-3 mt-1" />
+                <span>Durable Power of Attorney</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="check" class="text-primary mr-3 mt-1" />
+                <span>Guardianship Designations for Minor Children</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="check" class="text-primary mr-3 mt-1" />
+                <span>Digital Asset Planning</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="check" class="text-primary mr-3 mt-1" />
+                <span>Asset Protection Strategies</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="check" class="text-primary mr-3 mt-1" />
+                <span>Ongoing Support & Plan Updates</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Service 2: Legacy & Family Trusts -->
+        <div
+          id="legacy-trusts"
+          class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start"
+        >
+          <div class="lg:order-2">
+            <h3 class="text-primary mb-4">Legacy & Family Trusts</h3>
+            <p class="text-lg mb-6 leading-relaxed">
+              Preserve your wealth, values, and impact across generations with
+              expert, caring guidance.
+            </p>
+            <p class="mb-6 leading-relaxed">
+              Trusts offer powerful benefits for families who want to protect
+              assets, minimize taxes, avoid probate, and maintain privacy. We'll
+              help you determine if a trust is right for your situation and
+              design one that serves your unique goals.
+            </p>
+          </div>
+          <div class="bg-white/60 rounded-lg p-8 lg:order-1">
+            <h4 class="text-primary mb-4">Trust Services Include:</h4>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <Icon name="check" class="text-primary mr-3 mt-1" />
+                <span>Revocable Living Trusts</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="check" class="text-primary mr-3 mt-1" />
+                <span>Irrevocable Trusts for Asset Protection</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="check" class="text-primary mr-3 mt-1" />
+                <span>Special Needs Trusts</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="check" class="text-primary mr-3 mt-1" />
+                <span>Charitable Remainder Trusts</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="check" class="text-primary mr-3 mt-1" />
+                <span>Family Legacy Planning</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="check" class="text-primary mr-3 mt-1" />
+                <span>Trust Administration Support</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="check" class="text-primary mr-3 mt-1" />
+                <span>Probate Avoidance Strategies</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Service 3: Green Estate Planning -->
+        <div
+          id="green-planning"
+          class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start"
+        >
+          <div>
+            <h3 class="text-primary mb-4">Green Estate Planning</h3>
+            <p class="text-lg mb-6 leading-relaxed">
+              Align your plan with your love for our world. Explore sustainable
+              options for your estate and memorial wishes.
+            </p>
+            <p class="mb-6 leading-relaxed">
+              Your legacy can reflect your environmental values. We integrate
+              eco-conscious practices and partnerships into every aspect of our
+              work, and we help you explore green options for charitable giving,
+              investments, and end-of-life planning.
+            </p>
+            <Button
+              href="./green-planning"
+              variant="primary"
+              class="bg-primary text-text-primary-inverse"
+            >
+              Learn More About Green Planning
+            </Button>
+          </div>
+          <div class="bg-white/60 rounded-lg p-8">
+            <h4 class="text-primary mb-4">Green Planning Features:</h4>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <Icon name="check" class="text-primary mr-3 mt-1" />
+                <span>ESG Investment Guidance Connections</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="check" class="text-primary mr-3 mt-1" />
+                <span>Charitable Giving to Environmental Causes</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="check" class="text-primary mr-3 mt-1" />
+                <span>Green Burial & Memorial Options</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="check" class="text-primary mr-3 mt-1" />
+                <span>Paperless, Carbon-Neutral Operations</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="check" class="text-primary mr-3 mt-1" />
+                <span>Donation to Environmental Nonprofits with Each Plan</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Planning Features Section -->
+  <section
+    class="relative bg-primary text-text-primary-inverse px-4 sm:px-6 lg:px-8 pt-10 pb-30"
+  >
+    <CurvedEdge fillColor="fill-primary" />
+
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-secondary text-center mb-12">
+        What Makes Our Planning Different
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-8">
+          <div class="flex items-start space-x-4">
+            <Icon name="users" size="lg" class="text-secondary" />
+            <div>
+              <h3 class="text-secondary mb-2">Family-Focused</h3>
+              <p class="opacity-90 leading-relaxed">
+                We consider your entire family dynamic, including pets, to
+                create a plan that truly protects everyone you love.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-8">
+          <div class="flex items-start space-x-4">
+            <Icon name="target" size="lg" class="text-secondary" />
+            <div>
+              <h3 class="text-secondary mb-2">Clear Communication</h3>
+              <p class="opacity-90 leading-relaxed">
+                No legal jargon. We explain everything in plain language so you
+                understand exactly what you're signing.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-8">
+          <div class="flex items-start space-x-4">
+            <Icon name="refresh" size="lg" class="text-secondary" />
+            <div>
+              <h3 class="text-secondary mb-2">Lifetime Support</h3>
+              <p class="opacity-90 leading-relaxed">
+                Your plan evolves as your life changes. We're here to update and
+                support you for years to come.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-8">
+          <div class="flex items-start space-x-4">
+            <Icon name="lock" size="lg" class="text-secondary" />
+            <div>
+              <h3 class="text-secondary mb-2">Secure & Confidential</h3>
+              <p class="opacity-90 leading-relaxed">
+                Your information is protected with bank-level security and
+                client confidentiality.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-8">
+          <div class="flex items-start space-x-4">
+            <Icon name="clipboard" size="lg" class="text-secondary" />
+            <div>
+              <h3 class="text-secondary mb-2">Thorough & Detailed</h3>
+              <p class="opacity-90 leading-relaxed">
+                We don't cut corners. Every document is carefully crafted and
+                reviewed to ensure it works when needed.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-8">
+          <div class="flex items-start space-x-4">
+            <Icon name="globe" size="lg" class="text-secondary" />
+            <div>
+              <h3 class="text-secondary mb-2">Values-Aligned</h3>
+              <p class="opacity-90 leading-relaxed">
+                We help you incorporate your environmental and social values
+                into your estate plan.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Getting Started Section -->
+  <section class="py-20 bg-neutral-cool">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-center mb-12">Getting Started is Easy</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div class="text-center">
+          <div
+            class="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4"
+          >
+            1
+          </div>
+          <h3 class="mb-3">Schedule a Consultation</h3>
+          <p class="leading-relaxed">
+            Book a free initial consultation to discuss your needs and goals.
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div
+            class="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4"
+          >
+            2
+          </div>
+          <h3 class="mb-3">Create Your Plan</h3>
+          <p class="leading-relaxed">
+            We'll guide you through the planning process with care and clarity.
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div
+            class="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4"
+          >
+            3
+          </div>
+          <h3 class="mb-3">Gain Peace of Mind</h3>
+          <p class="leading-relaxed">
+            Rest easy knowing your loved ones and legacy are protected.
+          </p>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <Button
+          href="./contact"
+          variant="primary"
+          size="xl"
+          class="bg-primary text-text-primary-inverse"
+        >
+          Schedule Your Free Consultation
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+  <Newsletter />
+</Layout>
