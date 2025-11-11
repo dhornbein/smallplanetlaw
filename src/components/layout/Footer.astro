@@ -1,11 +1,11 @@
 ---
 import LogoMark from "../ui/LogoMark.astro";
 const quickLinks = [
-  { name: "Home", href: "/" },
-  { name: "Our Services", href: "/services" },
-  { name: "About Us", href: "/about" },
-  { name: "Blog", href: "/blog" },
-  { name: "Contact", href: "/contact" },
+  { name: "Home", href: "./" },
+  { name: "About Us", href: "./about" },
+  { name: "Our Services", href: "./services" },
+  { name: "Blog", href: "./blog" },
+  { name: "Contact", href: "./contact" },
 ];
 
 const disclaimer =
@@ -177,13 +177,13 @@ const currentYear = new Date().getFullYear();
         </p>
         <div class="flex space-x-6 text-sm">
           <a
-            href="/privacy"
+            href="./privacy"
             class="text-gray-400 hover:text-secondary transition-colors duration-200"
           >
             Privacy Policy
           </a>
           <a
-            href="/terms"
+            href="./terms"
             class="text-gray-400 hover:text-secondary transition-colors duration-200"
           >
             Terms of Service

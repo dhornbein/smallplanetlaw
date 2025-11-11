@@ -3,11 +3,11 @@ import Button from "../ui/Button.astro";
 import LogoMark from "../ui/LogoMark.astro";
 
 const navItems = [
-  { name: "Home", href: "/" },
-  { name: "About Us", href: "/about" },
-  { name: "Our Services", href: "/services" },
-  { name: "Blog", href: "/blog" },
-  { name: "Contact", href: "/contact" },
+  { name: "Home", href: "./" },
+  { name: "About Us", href: "./about" },
+  { name: "Our Services", href: "./services" },
+  { name: "Blog", href: "./blog" },
+  { name: "Contact", href: "./contact" },
 ];
 
 // element that will trigger the sticky header when scrolled past
@@ -79,7 +79,7 @@ const { triggerSelector = ".show-header" } = Astro.props;
             </a>
           ))
         }
-        <Button href="/contact" size="sm">Start Your Plan</Button>
+        <Button href="./contact" size="sm">Start Your Plan</Button>
       </nav>
 
       <!-- Mobile Menu Button -->
