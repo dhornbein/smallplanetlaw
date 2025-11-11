@@ -1,0 +1,44 @@
+---
+interface Props {
+  fillColor?: string;
+  position?: "top" | "bottom";
+  height?: "sm" | "md" | "lg";
+}
+
+const {
+  fillColor = "neutral-warm",
+  position = "top",
+  height = "md",
+} = Astro.props;
+
+const heightClasses = {
+  sm: "h-8 md:h-10 lg:h-12",
+  md: "h-12 md:h-16 lg:h-20",
+  lg: "h-16 md:h-20 lg:h-24",
+};
+
+const positionClasses = {
+  top: "-top-12 md:-top-16 lg:-top-20",
+  bottom: "-bottom-12 md:-bottom-16 lg:-bottom-20",
+};
+
+const pathDirection = position === "top" 
+  ? "M0,120 Q600,40 1200,120 L1200,120 L0,120 Z"
+  : "M0,0 Q600,80 1200,0 L1200,0 L0,0 Z";
+---
+
+<div
+  class={`absolute left-0 right-0 overflow-hidden leading-none ${positionClasses[position]}`}
+>
+  <svg
+    class={`relative block w-full ${heightClasses[height]}`}
+    preserveAspectRatio="none"
+    viewBox="0 0 1200 120"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d={pathDirection}
+      class={fillColor}
+    />
+  </svg>
+</div>

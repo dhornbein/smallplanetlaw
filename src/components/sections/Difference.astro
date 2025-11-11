@@ -1,5 +1,6 @@
 ---
 import LogoMark from "../ui/LogoMark.astro";
+import CurvedEdge from "../ui/CurvedEdge.astro";
 const features = [
   {
     icon: "🌿",
@@ -23,22 +24,8 @@ const features = [
 ---
 
 <section class="relative py-20 lg:py-40 bg-linear-to-b bg-neutral-warm text-text-primary">
-  <!-- Curved horizon edge at the top with atmospheric glow -->
-  <div
-    class="absolute left-0 right-0 overflow-hidden leading-none -top-12 md:-top-16 lg:-top-20"
-  >
-    <svg
-      class="relative block w-full h-12 md:h-16 lg:h-20"
-      preserveAspectRatio="none"
-      viewBox="0 0 1200 120"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <!-- Main planet surface -->
-      <path
-        d="M0,120 Q600,40 1200,120 L1200,120 L0,120 Z"
-        class="fill-neutral-warm"></path>
-    </svg>
-  </div>
+  
+  <CurvedEdge fillColor="fill-neutral-warm" />
 
   <div
     class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"

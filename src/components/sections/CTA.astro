@@ -1,12 +1,13 @@
 ---
 import Button from "../ui/Button.astro";
+import CurvedEdge from "../ui/CurvedEdge.astro";
 import portraitShadow from "../../assets/hero-shadow-wide.jpg";
 import portraitShadowTall from "../../assets/hero-shadow-tall.jpg";
 ---
 
-<section class="pb-40 bg-neutral-warm">
+<section class="relative pb-40 bg-neutral-warm">
   <div
-    class="shadow-lg mb-40 bg-var min-h-[80vh] bg-cover bg-bottom"
+    class="shadow-lg mb-40 bg-var min-h-[80vh] bg-cover bg-center"
     style={`--bg-img: url(${portraitShadowTall.src}); --bg-img-md: url(${portraitShadow.src});`}
   >
   </div>
@@ -22,4 +23,5 @@ import portraitShadowTall from "../../assets/hero-shadow-tall.jpg";
     </p>
     <Button href="/contact" size="lg" variant="accent">Start Your Plan</Button>
   </div>
+  <CurvedEdge fillColor="fill-neutral-warm" position="bottom" />
 </section>

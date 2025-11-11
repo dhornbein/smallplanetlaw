@@ -1,5 +1,6 @@
 ---
 import Button from "../ui/Button.astro";
+import CurvedEdge from "../ui/CurvedEdge.astro";
 import leaf from "../../assets/leaf.jpg";
 import { Image } from "astro:assets";
 
@@ -22,7 +23,8 @@ const services = [
 ];
 ---
 
-<section class="py-30 bg-neutral-cool shadow-xl">
+<section class="relative py-30 bg-neutral-cool">
+  <CurvedEdge fillColor="fill-neutral-cool" />
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <Image src={leaf} alt="Leaf" class="mx-auto max-h-80 w-auto" />
     <div class="text-center mb-12">
