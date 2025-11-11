@@ -19,15 +19,19 @@ const currentYear = new Date().getFullYear();
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
       <!-- Logo and Tagline -->
       <div class="space-y-4">
-        <a href="/" class="flex items-center space-x-3 group">
+        <div class="flex items-center space-x-3 group">
           <LogoMark
             size="md"
             fillColor="transparent"
             strokeColor="var(--color-neutral-warm)"
           />
-          <span class="text-lg font-serif font-semibold">Small Planet Law</span>
-        </a>
-        <p class="text-sm text-gray-300">Protect What Matters Most</p>
+          <div>
+            <span class="text-lg font-serif font-semibold"
+              >Small Planet Law</span
+            >
+            <p class="text-sm text-gray-300 mb-0">Protect What Matters Most</p>
+          </div>
+        </div>
         <p class="text-sm text-gray-400">
           Colorado Green Business Network (CGBN) Certified Business Applicant
         </p>
@@ -38,14 +42,14 @@ const currentYear = new Date().getFullYear();
 
       <!-- Quick Links -->
       <div>
-        <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+        <h3>Quick Links</h3>
         <ul class="space-y-2">
           {
             quickLinks.map((link) => (
               <li>
                 <a
                   href={link.href}
-                  class="text-gray-300 hover:text-earth-green-light transition-colors duration-200"
+                  class="text-gray-300 hover:text-secondary transition-colors duration-200"
                 >
                   {link.name}
                 </a>
@@ -57,11 +61,11 @@ const currentYear = new Date().getFullYear();
 
       <!-- Contact Info -->
       <div>
-        <h3 class="text-lg font-semibold mb-4">Contact</h3>
+        <h3>Contact</h3>
         <ul class="space-y-3 text-gray-300">
           <li class="flex items-start space-x-2">
             <svg
-              class="w-5 h-5 mt-0.5 text-earth-green-light shrink-0"
+              class="w-5 h-5 mt-0.5 text-secondary shrink-0"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -75,14 +79,14 @@ const currentYear = new Date().getFullYear();
             </svg>
             <a
               href="tel:+1234567890"
-              class="hover:text-earth-green-light transition-colors duration-200"
+              class="hover:text-secondary transition-colors duration-200"
             >
               (303) 555-0123
             </a>
           </li>
           <li class="flex items-start space-x-2">
             <svg
-              class="w-5 h-5 mt-0.5 text-earth-green-light shrink-0"
+              class="w-5 h-5 mt-0.5 text-secondary shrink-0"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -96,14 +100,14 @@ const currentYear = new Date().getFullYear();
             </svg>
             <a
               href="mailto:hello@smallplanetlaw.com"
-              class="hover:text-earth-green-light transition-colors duration-200"
+              class="hover:text-secondary transition-colors duration-200"
             >
               hello@smallplanetlaw.com
             </a>
           </li>
           <li class="flex items-start space-x-2">
             <svg
-              class="w-5 h-5 mt-0.5 text-earth-green-light shrink-0"
+              class="w-5 h-5 mt-0.5 text-secondary shrink-0"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -128,7 +132,7 @@ const currentYear = new Date().getFullYear();
         <div class="flex space-x-4 mt-6">
           <a
             href="#"
-            class="text-gray-300 hover:text-earth-green-light transition-colors duration-200"
+            class="text-gray-300 hover:text-secondary transition-colors duration-200"
             aria-label="Facebook"
           >
             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -139,7 +143,7 @@ const currentYear = new Date().getFullYear();
           </a>
           <a
             href="#"
-            class="text-gray-300 hover:text-earth-green-light transition-colors duration-200"
+            class="text-gray-300 hover:text-secondary transition-colors duration-200"
             aria-label="LinkedIn"
           >
             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -150,7 +154,7 @@ const currentYear = new Date().getFullYear();
           </a>
           <a
             href="#"
-            class="text-gray-300 hover:text-earth-green-light transition-colors duration-200"
+            class="text-gray-300 hover:text-secondary transition-colors duration-200"
             aria-label="Instagram"
           >
             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -164,7 +168,7 @@ const currentYear = new Date().getFullYear();
     </div>
 
     <!-- Bottom Bar -->
-    <div class="border-t border-deep-slate-light pt-8 mt-8">
+    <div class="border-t border-gray-600 pt-8 mt-8">
       <div
         class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0"
       >
@@ -174,19 +178,26 @@ const currentYear = new Date().getFullYear();
         <div class="flex space-x-6 text-sm">
           <a
             href="/privacy"
-            class="text-gray-400 hover:text-earth-green-light transition-colors duration-200"
+            class="text-gray-400 hover:text-secondary transition-colors duration-200"
           >
             Privacy Policy
           </a>
           <a
             href="/terms"
-            class="text-gray-400 hover:text-earth-green-light transition-colors duration-200"
+            class="text-gray-400 hover:text-secondary transition-colors duration-200"
           >
             Terms of Service
           </a>
         </div>
       </div>
-      <div><p class="text-xs text-gray-500 mt-4 max-w-prose">{disclaimer}</p></div>
+      <div class="flex justify-between items-end mt-6">
+        <p class="text-xs text-gray-500 mt-4 max-w-prose">{disclaimer}</p>
+        <LogoMark
+          size="lg"
+          fillColor="transparent"
+          strokeColor="var(--color-text-secondary)"
+        />
+      </div>
     </div>
   </div>
 </footer>

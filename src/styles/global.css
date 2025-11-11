@@ -119,7 +119,7 @@ h4 {
 
 /* Body text defaults */
 p {
-  @apply mb-4 leading-relaxed;
+  @apply leading-relaxed;
 }
 
 /* Generic variable-driven background helpers */
