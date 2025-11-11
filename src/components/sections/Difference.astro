@@ -22,9 +22,7 @@ const features = [
 ];
 ---
 
-<section
-  class="relative py-20 lg:py-40 bg-linear-to-b bg-amber-100"
->
+<section class="relative py-20 lg:py-40 bg-linear-to-b bg-neutral-warm text-text-primary">
   <!-- Curved horizon edge at the top with atmospheric glow -->
   <div
     class="absolute left-0 right-0 overflow-hidden leading-none -top-12 md:-top-16 lg:-top-20"
@@ -35,47 +33,25 @@ const features = [
       viewBox="0 0 1200 120"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <defs>
-        <!-- Filter for the bright atmospheric rim -->
-        <filter id="horizonGlow">
-          <feGaussianBlur stdDeviation="2" result="blur"></feGaussianBlur>
-          <feColorMatrix
-            in="blur"
-            type="matrix"
-            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 8 0"></feColorMatrix>
-          <feComposite in="SourceGraphic" in2="blur" operator="over"
-          ></feComposite>
-        </filter>
-      </defs>
-
-      <!-- Bright horizon line -->
-      <path
-        d="M0,120 Q600,40 1200,120"
-        fill="none"
-        stroke="#fbbf24"
-        stroke-width="2"
-        opacity="0.8"
-        filter="url(#horizonGlow)"></path>
-
       <!-- Main planet surface -->
       <path
         d="M0,120 Q600,40 1200,120 L1200,120 L0,120 Z"
-        class="fill-amber-100"></path>
+        class="fill-neutral-warm"></path>
     </svg>
   </div>
 
   <div
-    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-deep-slate"
+    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
   >
     <div class="max-w-3xl mx-auto text-center mb-16">
       <LogoMark size="xl" class="mx-auto mb-6" fillColor="none" />
       <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold mb-6">
         The Small Planet Difference
       </h2>
-      <p class="text-xl text-deep-slate-light leading-relaxed">
+      <p class="text-xl leading-relaxed">
         Estate Planning That Feels Human and Aligned With Your Values.
       </p>
-      <p class="text-lg text-deep-slate-light mt-4 leading-relaxed">
+      <p class="text-lg mt-4 leading-relaxed">
         We believe estate planning should feel like peace of mind, not
         paperwork. At Small Planet Law, we combine professional excellence with
         genuine care — guiding you to create a plan that truly works when it

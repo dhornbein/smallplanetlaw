@@ -28,7 +28,13 @@
 - Optimized image handling with Astro's built-in `<Image />` component
 
 ### Brand Elements
-- **Colors**: Earth greens, warm neutrals, deep blue/slate
+- **Colors**: 
+  - **Hunter Green**: `#386641` (100: `#0b140d`, 200: `#16291a`, 300: `#223d27`, 400: `#2d5234`, 500: `#386641`, 600: `#51935e`, 700: `#77b483`, 800: `#a4cdac`, 900: `#d2e6d6`)
+  - **Olivine**: `#90ba78` (100: `#1c2815`, 200: `#38512a`, 300: `#54793e`, 400: `#70a253`, 500: `#90ba78`, 600: `#a6c893`, 700: `#bdd5ae`, 800: `#d3e3c9`, 900: `#e9f1e4`)
+  - **Outer Space**: `#49575b` (100: `#0f1112`, 200: `#1d2324`, 300: `#2c3436`, 400: `#3a4548`, 500: `#49575b`, 600: `#677c81`, 700: `#8c9da2`, 800: `#b2bec1`, 900: `#d9dee0`)
+  - **Honeydew**: `#daf5e1` (100: `#144922`, 200: `#289244`, 300: `#49cd6c`, 400: `#92e1a7`, 500: `#daf5e1`, 600: `#e2f7e8`, 700: `#e9f9ee`, 800: `#f1fbf3`, 900: `#f8fdf9`)
+  - **Dutch White**: `#ede0bf` (100: `#433513`, 200: `#866a26`, 300: `#c79f3a`, 400: `#dac07d`, 500: `#ede0bf`, 600: `#f1e6cc`, 700: `#f4ecd9`, 800: `#f8f3e6`, 900: `#fbf9f2`)
+  - **Redwood**: `#b44143` (100: `#240d0d`, 200: `#481a1b`, 300: `#6c2728`, 400: `#903435`, 500: `#b44143`, 600: `#c76365`, 700: `#d58a8b`, 800: `#e3b1b2`, 900: `#f1d8d8`)
 - **Tone**: Warm, conversational, reassuring, values-driven
 - **Visual Style**: Natural imagery, Colorado landscapes, family-focused
 - **Logo**: Circular mark suggesting planet/continuity with leaf motif
@@ -101,7 +107,7 @@ src/
   @theme {
     --font-family-display: "Satoshi", sans-serif;
     --color-earth-green: oklch(45% 0.08 145);
-    --color-warm-neutral: oklch(97% 0.01 85);
+    --color-neutral-warm: oklch(97% 0.01 85);
     --color-deep-slate: oklch(25% 0.02 210);
     --breakpoint-3xl: 1920px;
   }

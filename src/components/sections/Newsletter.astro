@@ -1,14 +1,16 @@
 ---
+import Button from "../ui/Button.astro";
 ---
 
-<section class="py-20 bg-deep-slate text-white">
+<section class="py-20 bg-dark text-light">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-8">
       <h2 class="text-3xl sm:text-4xl font-serif font-bold mb-4">
         Stay Connected
       </h2>
       <p class="text-lg text-gray-300">
-        Get estate planning tips, green living insights, and updates from Small Planet Law.
+        Get estate planning tips, green living insights, and updates from Small
+        Planet Law.
       </p>
     </div>
 
@@ -41,12 +43,7 @@
           />
         </div>
 
-        <button
-          type="submit"
-          class="w-full bg-earth-green text-white px-6 py-3 rounded-md font-medium hover:bg-earth-green-dark transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-earth-green-light focus:ring-offset-2 focus:ring-offset-deep-slate"
-        >
-          Sign Up
-        </button>
+        <Button href="/contact" class="w-full">Sign Up</Button>
       </div>
 
       <p class="text-sm text-gray-400 text-center mt-4">

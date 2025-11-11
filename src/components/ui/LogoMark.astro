@@ -4,7 +4,7 @@
  * Adjustable via props; defaults pulled from Tailwind v4 @theme CSS variables.
  *
  * Props:
- * - fillColor?: string (circle fill) default: 'var(--color-warm-neutral)'
+ * - fillColor?: string (circle fill) default: 'var(--color-neutral-warm)'
  * - strokeColor?: string (outer circle stroke) default: 'var(--color-deep-slate)'
  * - pathStrokeColor?: string (internal path stroke) default: same as strokeColor
  * - size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' (maps to Tailwind width/height classes)
@@ -29,8 +29,8 @@ interface Props {
 }
 
 const {
-  fillColor = "var(--color-warm-neutral)",
-  strokeColor = "var(--color-earth-green-dark)",
+  fillColor = "var(--color-neutral-warm)",
+  strokeColor = "var(--color-primary)",
   pathStrokeColor = strokeColor,
   size = "md",
   width,

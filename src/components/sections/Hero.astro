@@ -1,15 +1,15 @@
 ---
 import Button from "../ui/Button.astro";
-import heroImg from "../../assets/hero-space-girl-wide.jpg";
-import heroImgTall from "../../assets/hero-space-girl-tall.jpg";
+import heroImg from "../../assets/hero-mtn-flowers.jpg";
+import heroImgTall from "../../assets/hero-mtn-flowers.jpg";
 ---
 
 <section
-  class="hero-section show-header relative py-24 lg:py-28 min-h-dvh -mt-20 flex items-start md:items-center justify-start bg-cover bg-center bg-fixed bg-cosmic-blue-light bg-var"
+  class="hero-section show-header relative py-24 lg:py-28 min-h-dvh -mt-20 flex items-center justify-start bg-cover bg-center bg-fixed bg-var"
   style={`--bg-img: url(${heroImgTall.src}); --bg-img-md: url(${heroImg.src});`}
 >
   <div
-    class="max-w-2xl mx-6 text-warm-neutral md:text-text-primary text-shadow-sm md:text-shadow-none"
+    class="max-w-2xl mx-6 text-text-primary text-shadow-sm md:text-shadow-none"
   >
     <h1>Protect What Matters Most</h1>
 
@@ -17,7 +17,7 @@ import heroImgTall from "../../assets/hero-space-girl-tall.jpg";
       Small Planet Law helps families design estate plans that honor their loved
       ones and their values including care for the planet.
     </p>
-    <Button href="/contact" size="lg" variant="secondary">
+    <Button href="/contact" size="xl" variant="secondary" class="bg-[#f0d746] hover:bg-[#f8e265] shadow-[-4px_4px_0_rgba(0,0,0,0.8)] font-bold">
       Start Your Plan
     </Button>
   </div>

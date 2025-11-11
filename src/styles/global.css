@@ -5,22 +5,88 @@
 @import "tailwindcss";
 
 @theme {
-  /* Color Palette - Small Planet Law Brand */
-  --color-earth-green: oklch(42% 0.09 145);
-  --color-earth-green-light: oklch(52% 0.09 145);
-  --color-earth-green-dark: oklch(32% 0.09 145);
-  --color-warm-neutral: oklch(97% 0.01 85);
-  --color-warm-neutral-dark: oklch(92% 0.01 85);
-  --color-deep-slate: oklch(25% 0.02 210);
-  --color-deep-slate-light: oklch(35% 0.02 210);
-  --color-cosmic-blue: oklab(57% 0.00002 -0.04657);
-  --color-cosmic-blue-dark: oklab(16% -0.00534 -0.01032);
-  --color-cosmic-blue-light: oklab(75% 0.00003 -0.06076);
-  
+  /* Updated Color Palette - Small Planet Law Brand */
+  --color-hunter-green: #386641;
+  --color-hunter-green-100: #0b140d;
+  --color-hunter-green-200: #16291a;
+  --color-hunter-green-300: #223d27;
+  --color-hunter-green-400: #2d5234;
+  --color-hunter-green-500: #386641;
+  --color-hunter-green-600: #51935e;
+  --color-hunter-green-700: #77b483;
+  --color-hunter-green-800: #a4cdac;
+  --color-hunter-green-900: #d2e6d6;
+
+  --color-olivine: #90ba78;
+  --color-olivine-100: #1c2815;
+  --color-olivine-200: #38512a;
+  --color-olivine-300: #54793e;
+  --color-olivine-400: #70a253;
+  --color-olivine-500: #90ba78;
+  --color-olivine-600: #a6c893;
+  --color-olivine-700: #bdd5ae;
+  --color-olivine-800: #d3e3c9;
+  --color-olivine-900: #e9f1e4;
+
+  --color-outer-space: #49575b;
+  --color-outer-space-100: #0f1112;
+  --color-outer-space-200: #1d2324;
+  --color-outer-space-300: #2c3436;
+  --color-outer-space-400: #3a4548;
+  --color-outer-space-500: #49575b;
+  --color-outer-space-600: #677c81;
+  --color-outer-space-700: #8c9da2;
+  --color-outer-space-800: #b2bec1;
+  --color-outer-space-900: #d9dee0;
+
+  --color-honeydew: #daf5e1;
+  --color-honeydew-100: #144922;
+  --color-honeydew-200: #289244;
+  --color-honeydew-300: #49cd6c;
+  --color-honeydew-400: #92e1a7;
+  --color-honeydew-500: #daf5e1;
+  --color-honeydew-600: #e2f7e8;
+  --color-honeydew-700: #e9f9ee;
+  --color-honeydew-800: #f1fbf3;
+  --color-honeydew-900: #f8fdf9;
+
+  --color-dutch-white: #ede0bf;
+  --color-dutch-white-100: #433513;
+  --color-dutch-white-200: #866a26;
+  --color-dutch-white-300: #c79f3a;
+  --color-dutch-white-400: #dac07d;
+  --color-dutch-white-500: #ede0bf;
+  --color-dutch-white-600: #f1e6cc;
+  --color-dutch-white-700: #f4ecd9;
+  --color-dutch-white-800: #f8f3e6;
+  --color-dutch-white-900: #fbf9f2;
+
+  --color-redwood: #b44143;
+  --color-redwood-100: #240d0d;
+  --color-redwood-200: #481a1b;
+  --color-redwood-300: #6c2728;
+  --color-redwood-400: #903435;
+  --color-redwood-500: #b44143;
+  --color-redwood-600: #c76365;
+  --color-redwood-700: #d58a8b;
+  --color-redwood-800: #e3b1b2;
+  --color-redwood-900: #f1d8d8;
+
+  /* Simplified color palette */
+  --color-primary: var(--color-hunter-green);
+  --color-secondary: var(--color-olivine);
+  --color-accent: var(--color-redwood);
+  --color-dark: var(--color-outer-space-200);
+  --color-light: var(--color-dutch-white);
+  --color-neutral: var(--color-ash-gray);  
+  --color-neutral-warm: var(--color-dutch-white);  
+  --color-neutral-cool: var(--color-honeydew);  
+
   /* Additional semantic colors */
-  --color-text-primary: oklch(20% 0.01 210);
-  --color-text-secondary: oklch(45% 0.01 210);
-  --color-background: oklch(99% 0.005 85);
+  --color-text-primary: var(--color-outer-space-200);
+  --color-text-secondary: var(--color-outer-space-400);
+  --color-text-primary-inverse: var(--color-dutch-white-900);
+  --color-text-secondary-inverse: var(--color-dutch-white-700);
   
   /* Typography */
   --font-sans: "Source Sans 3 Variable", ui-sans-serif, system-ui, sans-serif;
