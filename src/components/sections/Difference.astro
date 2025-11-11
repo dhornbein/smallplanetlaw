@@ -1,21 +1,22 @@
 ---
 import LogoMark from "../ui/LogoMark.astro";
 import CurvedEdge from "../ui/CurvedEdge.astro";
+import Icon from "../ui/Icon.astro";
 const features = [
   {
-    icon: "🌿",
+    icon: "heart" as const,
     title: "Holistic & Relationship-Based",
     description:
       "We guide you through every step with care and clarity, ensuring your plan truly works when needed.",
   },
   {
-    icon: "💚",
+    icon: "globe" as const,
     title: "Environmentally Conscious",
     description:
       "Sustainable practices are woven into every aspect of our operations and planning options.",
   },
   {
-    icon: "🤝",
+    icon: "users" as const,
     title: "Here for You and Your Family for Life",
     description:
       "We serve as trusted advisors for life, adapting your plan as your circumstances evolve.",
@@ -50,7 +51,9 @@ const features = [
       {
         features.map((feature) => (
           <div class="text-center space-y-4">
-            <div class="text-5xl mb-4">{feature.icon}</div>
+            <div class="flex justify-center mb-4">
+              <Icon name={feature.icon} size="xl" class="text-primary" />
+            </div>
             <h3>
               {feature.title}
             </h3>
