@@ -2,6 +2,18 @@
 import Layout from "../layouts/Layout.astro";
 import Button from "../components/ui/Button.astro";
 
+// Import logo assets
+import logo from "../assets/logo.svg";
+import logoLite from "../assets/logo-lite.svg";
+import logoMark from "../assets/logo-mark.svg";
+import logoMarkDark from "../assets/logo-mark-dark.svg";
+
+// Import hero images
+import heroFamilyLeaf from "../assets/hero-family-leaf-wide.jpg";
+import heroUmbrella from "../assets/hero-umbrella-wide.jpg";
+import heroMtnFlowers from "../assets/hero-mtn-flowers.jpg";
+import heroMtnSunset from "../assets/hero-mtn-sunset.jpg";
+
 // Brand colors organized by function
 const brandColors = {
   primary: {
@@ -110,7 +122,7 @@ const brandAssets = [
     id: 'logo',
     name: 'Logo',
     description: 'Full logo with text - for light backgrounds',
-    svgPath: import.meta.env.BASE_URL + 'src/assets/logo.svg',
+    svgImage: logo,
     bgClass: 'bg-white',
     isLite: false,
   },
@@ -118,7 +130,7 @@ const brandAssets = [
     id: 'logo-lite',
     name: 'Logo Lite',
     description: 'Full logo with text - for dark backgrounds',
-    svgPath: import.meta.env.BASE_URL + 'src/assets/logo-lite.svg',
+    svgImage: logoLite,
     bgClass: 'bg-hunter-green-900',
     isLite: true,
   },
@@ -126,7 +138,7 @@ const brandAssets = [
     id: 'logo-mark',
     name: 'Logo Mark',
     description: 'Logo mark only - for light backgrounds',
-    svgPath: import.meta.env.BASE_URL + 'src/assets/logo-mark.svg',
+    svgImage: logoMark,
     bgClass: 'bg-white',
     isLite: false,
   },
@@ -134,7 +146,7 @@ const brandAssets = [
     id: 'logo-mark-dark',
     name: 'Logo Mark Lite',
     description: 'Logo mark only - for dark backgrounds',
-    svgPath: import.meta.env.BASE_URL + 'src/assets/logo-mark-dark.svg',
+    svgImage: logoMarkDark,
     bgClass: 'bg-hunter-green-900',
     isLite: true,
   },
@@ -227,7 +239,7 @@ const brandAssets = [
             <div class="bg-white rounded-lg shadow-sm border border-hunter-green-800 overflow-hidden">
               <div class={`flex justify-center items-center p-8 min-h-[200px] ${asset.bgClass}`}>
                 <div class="max-w-xs w-full" data-svg-container={asset.id}>
-                  <img src={asset.svgPath} alt={asset.name} class="w-full h-auto" />
+                  <img src={asset.svgImage.src} alt={asset.name} class="w-full h-auto" />
                 </div>
               </div>
               
@@ -1038,7 +1050,7 @@ const brandAssets = [
           <div class="bg-white rounded-lg border border-hunter-green-200 overflow-hidden">
             <div class="aspect-21/9 overflow-hidden">
               <img 
-                src="/src/assets/hero-family-leaf-wide.jpg" 
+                src={heroFamilyLeaf.src} 
                 alt="Double exposure example - family and leaf"
                 class="w-full h-full object-cover"
               />
@@ -1051,7 +1063,7 @@ const brandAssets = [
           <div class="bg-white rounded-lg border border-hunter-green-200 overflow-hidden">
             <div class="aspect-21/9 overflow-hidden">
               <img 
-                src="/src/assets/hero-umbrella-wide.jpg" 
+                src={heroUmbrella.src} 
                 alt="Double exposure example - umbrella"
                 class="w-full h-full object-cover"
               />
@@ -1065,7 +1077,7 @@ const brandAssets = [
           <div class="bg-white rounded-lg border border-hunter-green-200 overflow-hidden">
             <div class="aspect-21/9 overflow-hidden">
               <img 
-                src="/src/assets/hero-mtn-flowers.jpg" 
+                src={heroMtnFlowers.src} 
                 alt="Soft light overlay example"
                 class="w-full h-full object-cover"
               />
@@ -1081,7 +1093,7 @@ const brandAssets = [
           <div class="bg-white rounded-lg border border-hunter-green-200 overflow-hidden">
             <div class="aspect-21/9 overflow-hidden">
               <img 
-                src="/src/assets/hero-mtn-sunset.jpg" 
+                src={heroMtnSunset.src} 
                 alt="Color mix effect example"
                 class="w-full h-full object-cover"
               />
