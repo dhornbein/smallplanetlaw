@@ -110,7 +110,7 @@ const brandAssets = [
     id: 'logo',
     name: 'Logo',
     description: 'Full logo with text - for light backgrounds',
-    svgPath: '/src/assets/logo.svg',
+    svgPath: import.meta.env.BASE_URL + 'src/assets/logo.svg',
     bgClass: 'bg-white',
     isLite: false,
   },
@@ -118,7 +118,7 @@ const brandAssets = [
     id: 'logo-lite',
     name: 'Logo Lite',
     description: 'Full logo with text - for dark backgrounds',
-    svgPath: '/src/assets/logo-lite.svg',
+    svgPath: import.meta.env.BASE_URL + 'src/assets/logo-lite.svg',
     bgClass: 'bg-hunter-green-900',
     isLite: true,
   },
@@ -126,7 +126,7 @@ const brandAssets = [
     id: 'logo-mark',
     name: 'Logo Mark',
     description: 'Logo mark only - for light backgrounds',
-    svgPath: '/src/assets/logo-mark.svg',
+    svgPath: import.meta.env.BASE_URL + 'src/assets/logo-mark.svg',
     bgClass: 'bg-white',
     isLite: false,
   },
@@ -134,7 +134,7 @@ const brandAssets = [
     id: 'logo-mark-dark',
     name: 'Logo Mark Lite',
     description: 'Logo mark only - for dark backgrounds',
-    svgPath: '/src/assets/logo-mark-dark.svg',
+    svgPath: import.meta.env.BASE_URL + 'src/assets/logo-mark-dark.svg',
     bgClass: 'bg-hunter-green-900',
     isLite: true,
   },
@@ -290,10 +290,139 @@ const brandAssets = [
     <section id="colors" class="py-16 sm:py-24">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         <h2 class="text-text-primary">Primary Colors</h2>
-        <p class="text-lg text-text-secondary mb-12 max-w-3xl">
+        <p class="text-lg text-text-secondary mb-8 max-w-3xl">
           Our primary color palette reflects our commitment to environmental
-          consciousness and professional estate planning services.
+          consciousness and professional estate planning services. (click to copy HEX code)
         </p>
+
+        <!-- Base Colors Row -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
+          <!-- Hunter Green -->
+          <button
+            class="color-swatch cursor-pointer group"
+            data-color={brandColors.primary.base.hex}
+            title="Click to copy"
+          >
+            <div
+              class="aspect-square rounded-lg shadow-lg relative overflow-hidden transition-all group-hover:shadow-xl group-hover:-translate-y-1"
+              style={`background-color: ${brandColors.primary.base.hex}`}
+            >
+              <div class="absolute inset-0 flex flex-col items-center justify-center p-2">
+                <span class="text-white font-bold text-xs sm:text-sm mb-1 text-center leading-tight drop-shadow-lg">
+                  {brandColors.primary.name}
+                </span>
+                <span class="text-white/90 font-mono text-[10px] sm:text-xs drop-shadow">
+                  {brandColors.primary.base.hex}
+                </span>
+              </div>
+            </div>
+          </button>
+
+          <!-- Olivine -->
+          <button
+            class="color-swatch cursor-pointer group"
+            data-color={brandColors.secondary.base.hex}
+            title="Click to copy"
+          >
+            <div
+              class="aspect-square rounded-lg shadow-lg relative overflow-hidden transition-all group-hover:shadow-xl group-hover:-translate-y-1"
+              style={`background-color: ${brandColors.secondary.base.hex}`}
+            >
+              <div class="absolute inset-0 flex flex-col items-center justify-center p-2">
+                <span class="text-white font-bold text-xs sm:text-sm mb-1 text-center leading-tight drop-shadow-lg">
+                  {brandColors.secondary.name}
+                </span>
+                <span class="text-white/90 font-mono text-[10px] sm:text-xs drop-shadow">
+                  {brandColors.secondary.base.hex}
+                </span>
+              </div>
+            </div>
+          </button>
+
+          <!-- Redwood -->
+          <button
+            class="color-swatch cursor-pointer group"
+            data-color={brandColors.accent.base.hex}
+            title="Click to copy"
+          >
+            <div
+              class="aspect-square rounded-lg shadow-lg relative overflow-hidden transition-all group-hover:shadow-xl group-hover:-translate-y-1"
+              style={`background-color: ${brandColors.accent.base.hex}`}
+            >
+              <div class="absolute inset-0 flex flex-col items-center justify-center p-2">
+                <span class="text-white font-bold text-xs sm:text-sm mb-1 text-center leading-tight drop-shadow-lg">
+                  {brandColors.accent.name}
+                </span>
+                <span class="text-white/90 font-mono text-[10px] sm:text-xs drop-shadow">
+                  {brandColors.accent.base.hex}
+                </span>
+              </div>
+            </div>
+          </button>
+
+          <!-- Outer Space -->
+          <button
+            class="color-swatch cursor-pointer group"
+            data-color={brandColors.neutral.base.hex}
+            title="Click to copy"
+          >
+            <div
+              class="aspect-square rounded-lg shadow-lg relative overflow-hidden transition-all group-hover:shadow-xl group-hover:-translate-y-1"
+              style={`background-color: ${brandColors.neutral.base.hex}`}
+            >
+              <div class="absolute inset-0 flex flex-col items-center justify-center p-2">
+                <span class="text-white font-bold text-xs sm:text-sm mb-1 text-center leading-tight drop-shadow-lg">
+                  {brandColors.neutral.name}
+                </span>
+                <span class="text-white/90 font-mono text-[10px] sm:text-xs drop-shadow">
+                  {brandColors.neutral.base.hex}
+                </span>
+              </div>
+            </div>
+          </button>
+
+          <!-- Celadon -->
+          <button
+            class="color-swatch cursor-pointer group"
+            data-color={brandColors.supporting[0].base.hex}
+            title="Click to copy"
+          >
+            <div
+              class="aspect-square rounded-lg shadow-lg relative overflow-hidden transition-all group-hover:shadow-xl group-hover:-translate-y-1"
+              style={`background-color: ${brandColors.supporting[0].base.hex}`}
+            >
+              <div class="absolute inset-0 flex flex-col items-center justify-center p-2">
+                <span class="text-text-primary font-bold text-xs sm:text-sm mb-1 text-center leading-tight drop-shadow-lg">
+                  {brandColors.supporting[0].name}
+                </span>
+                <span class="text-text-secondary font-mono text-[10px] sm:text-xs drop-shadow">
+                  {brandColors.supporting[0].base.hex}
+                </span>
+              </div>
+            </div>
+          </button>
+
+          <!-- Dutch White -->
+          <button
+            class="color-swatch cursor-pointer group"
+            data-color={brandColors.supporting[1].base.hex}
+            title="Click to copy"
+          >
+            <div
+              class="aspect-square rounded-lg shadow-lg relative overflow-hidden transition-all group-hover:shadow-xl group-hover:-translate-y-1"
+              style={`background-color: ${brandColors.supporting[1].base.hex}`}
+            >
+              <div class="absolute inset-0 flex flex-col items-center justify-center p-2">
+                <span class="text-text-primary font-bold text-xs sm:text-sm mb-1 text-center leading-tight">
+                  {brandColors.supporting[1].name}
+                </span>
+                <span class="text-text-secondary font-mono text-[10px] sm:text-xs">
+                  {brandColors.supporting[1].base.hex}
+                </span>
+              </div>
+            </div>
+          </button>
+        </div>
 
         <div class="space-y-12">
           {/* Hunter Green - Primary */}
@@ -504,7 +633,7 @@ const brandAssets = [
     </section>
 
     <!-- Neutral Colors Section -->
-    <section class="py-16 sm:py-24 bg-hunter-green-50">
+    <section class="py-8 sm:py-16 bg-hunter-green-50">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         <h2 class="text-text-primary">Neutral Colors</h2>
         <p class="text-lg text-text-secondary mb-12 max-w-3xl">
@@ -585,7 +714,7 @@ const brandAssets = [
     </section>
 
     <!-- Supporting Colors Section -->
-    <section class="py-16 sm:py-24">
+    <section class="py-8 sm:py-16">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         <h2 class="text-text-primary">Supporting Colors</h2>
         <p class="text-lg text-text-secondary mb-12 max-w-3xl">
