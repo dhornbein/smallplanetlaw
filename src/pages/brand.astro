@@ -1,0 +1,1211 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Button from "../components/ui/Button.astro";
+
+// Brand colors organized by function
+const brandColors = {
+  primary: {
+    name: "Hunter Green",
+    description: "Primary brand color for headers, CTAs, and key elements",
+    base: { hex: "#386641", var: "--color-hunter-green" },
+    shades: [
+      { shade: "100", hex: "#0b140d", var: "--color-hunter-green-100" },
+      { shade: "200", hex: "#16291a", var: "--color-hunter-green-200" },
+      { shade: "300", hex: "#223d27", var: "--color-hunter-green-300" },
+      { shade: "400", hex: "#2d5234", var: "--color-hunter-green-400" },
+      { shade: "500", hex: "#386641", var: "--color-hunter-green-500" },
+      { shade: "600", hex: "#51935e", var: "--color-hunter-green-600" },
+      { shade: "700", hex: "#77b483", var: "--color-hunter-green-700" },
+      { shade: "800", hex: "#a4cdac", var: "--color-hunter-green-800" },
+      { shade: "900", hex: "#d2e6d6", var: "--color-hunter-green-900" },
+    ],
+  },
+  secondary: {
+    name: "Olivine",
+    description: "Secondary brand color for accents and supporting elements",
+    base: { hex: "#90ba78", var: "--color-olivine" },
+    shades: [
+      { shade: "100", hex: "#1c2815", var: "--color-olivine-100" },
+      { shade: "200", hex: "#38512a", var: "--color-olivine-200" },
+      { shade: "300", hex: "#54793e", var: "--color-olivine-300" },
+      { shade: "400", hex: "#70a253", var: "--color-olivine-400" },
+      { shade: "500", hex: "#90ba78", var: "--color-olivine-500" },
+      { shade: "600", hex: "#a6c893", var: "--color-olivine-600" },
+      { shade: "700", hex: "#bdd5ae", var: "--color-olivine-700" },
+      { shade: "800", hex: "#d3e3c9", var: "--color-olivine-800" },
+      { shade: "900", hex: "#e9f1e4", var: "--color-olivine-900" },
+    ],
+  },
+  accent: {
+    name: "Redwood",
+    description: "Accent color for emphasis and important notifications",
+    base: { hex: "#b44143", var: "--color-redwood" },
+    shades: [
+      { shade: "100", hex: "#240d0d", var: "--color-redwood-100" },
+      { shade: "200", hex: "#481a1b", var: "--color-redwood-200" },
+      { shade: "300", hex: "#6c2728", var: "--color-redwood-300" },
+      { shade: "400", hex: "#903435", var: "--color-redwood-400" },
+      { shade: "500", hex: "#b44143", var: "--color-redwood-500" },
+      { shade: "600", hex: "#c76365", var: "--color-redwood-600" },
+      { shade: "700", hex: "#d58a8b", var: "--color-redwood-700" },
+      { shade: "800", hex: "#e3b1b2", var: "--color-redwood-800" },
+      { shade: "900", hex: "#f1d8d8", var: "--color-redwood-900" },
+    ],
+  },
+  neutral: {
+    name: "Outer Space",
+    description: "Neutral color for text and UI elements",
+    base: { hex: "#49575b", var: "--color-outer-space" },
+    shades: [
+      { shade: "100", hex: "#0f1112", var: "--color-outer-space-100" },
+      { shade: "200", hex: "#1d2324", var: "--color-outer-space-200" },
+      { shade: "300", hex: "#2c3436", var: "--color-outer-space-300" },
+      { shade: "400", hex: "#3a4548", var: "--color-outer-space-400" },
+      { shade: "500", hex: "#49575b", var: "--color-outer-space-500" },
+      { shade: "600", hex: "#677c81", var: "--color-outer-space-600" },
+      { shade: "700", hex: "#8c9da2", var: "--color-outer-space-700" },
+      { shade: "800", hex: "#b2bec1", var: "--color-outer-space-800" },
+      { shade: "900", hex: "#d9dee0", var: "--color-outer-space-900" },
+    ],
+  },
+  supporting: [
+    {
+      name: "Celadon",
+      description: "Supporting neutral-cool color",
+      base: { hex: "#B1CFA0", var: "--color-celadon" },
+      shades: [
+        { shade: "50", hex: "#f1f6ee", var: "--color-celadon-50" },
+        { shade: "100", hex: "#e3eedd", var: "--color-celadon-100" },
+        { shade: "200", hex: "#c8ddbb", var: "--color-celadon-200" },
+        { shade: "300", hex: "#accc99", var: "--color-celadon-300" },
+        { shade: "400", hex: "#90bb77", var: "--color-celadon-400" },
+        { shade: "500", hex: "#74aa55", var: "--color-celadon-500" },
+        { shade: "600", hex: "#5d8844", var: "--color-celadon-600" },
+        { shade: "700", hex: "#466633", var: "--color-celadon-700" },
+        { shade: "800", hex: "#2f4422", var: "--color-celadon-800" },
+        { shade: "900", hex: "#172211", var: "--color-celadon-900" },
+        { shade: "950", hex: "#10180c", var: "--color-celadon-950" },
+      ],
+    },
+    {
+      name: "Dutch White",
+      description: "Supporting neutral-warm color",
+      base: { hex: "#ede0bf", var: "--color-dutch-white" },
+      shades: [
+        { shade: "100", hex: "#433513", var: "--color-dutch-white-100" },
+        { shade: "200", hex: "#866a26", var: "--color-dutch-white-200" },
+        { shade: "300", hex: "#c79f3a", var: "--color-dutch-white-300" },
+        { shade: "400", hex: "#dac07d", var: "--color-dutch-white-400" },
+        { shade: "500", hex: "#ede0bf", var: "--color-dutch-white-500" },
+        { shade: "600", hex: "#f1e6cc", var: "--color-dutch-white-600" },
+        { shade: "700", hex: "#f4ecd9", var: "--color-dutch-white-700" },
+        { shade: "800", hex: "#f8f3e6", var: "--color-dutch-white-800" },
+        { shade: "900", hex: "#fbf9f2", var: "--color-dutch-white-900" },
+      ],
+    },
+  ],
+};
+
+// Brand assets - SVG sources for download generation
+const brandAssets = [
+  {
+    id: 'logo',
+    name: 'Logo',
+    description: 'Full logo with text - for light backgrounds',
+    svgPath: '/src/assets/logo.svg',
+    bgClass: 'bg-white',
+    isLite: false,
+  },
+  {
+    id: 'logo-lite',
+    name: 'Logo Lite',
+    description: 'Full logo with text - for dark backgrounds',
+    svgPath: '/src/assets/logo-lite.svg',
+    bgClass: 'bg-hunter-green-200',
+    isLite: true,
+  },
+  {
+    id: 'logo-mark',
+    name: 'Logo Mark',
+    description: 'Logo mark only - for light backgrounds',
+    svgPath: '/src/assets/logo-mark.svg',
+    bgClass: 'bg-white',
+    isLite: false,
+  },
+  {
+    id: 'logo-mark-dark',
+    name: 'Logo Mark Lite',
+    description: 'Logo mark only - for dark backgrounds',
+    svgPath: '/src/assets/logo-mark-dark.svg',
+    bgClass: 'bg-hunter-green-200',
+    isLite: true,
+  },
+];
+---
+
+<Layout
+  title="Brand Guidelines | Small Planet Law"
+  description="Brand guidelines, color palette, and assets for Small Planet Law LLC - Holistic estate planning in Denver, CO."
+>
+  <div class="bg-white">
+    <!-- Hero Section -->
+    <section class="bg-primary text-white py-16 sm:py-24">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
+          <div class="lg:w-2/3">
+            <p class="font-mono">Brand Guidelines</p>
+            <h1 class="text-white">Small Planet Law</h1>
+            <p class="text-xl sm:text-2xl text-white/90">
+              Estate planning that feels human, meaningful, and good for the Earth.
+            </p>
+          </div>
+          <div class="lg:w-1/3">
+            <h2 class="text-lg font-semibold text-white mb-4">Contents</h2>
+            <ul class="space-y-2 text-white/90">
+              <li><a href="brand#brand-assets" class="hover:text-white transition-colors">• Brand Assets</a></li>
+              <li><a href="brand#colors" class="hover:text-white transition-colors">• Colors</a></li>
+              <li><a href="brand#typography" class="hover:text-white transition-colors">• Typography</a></li>
+              <li><a href="brand#brand-voice" class="hover:text-white transition-colors">• Brand Voice</a></li>
+              <li><a href="brand#image-treatment" class="hover:text-white transition-colors">• Image Treatment</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Brand Assets Section -->
+    <section id="brand-assets" class="py-16 sm:py-24 bg-dutch-white-900">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+        <h2 class="text-text-primary">Brand Assets</h2>
+        <p class="text-lg text-text-secondary mb-8 max-w-3xl">
+          Download our logo and brand assets for use in marketing materials and
+          communications.
+        </p>
+
+        <!-- Format Guide -->
+        <div class="bg-white rounded-lg border border-hunter-green-200 p-6 mb-12">
+          <h3 class="text-lg font-semibold text-text-primary mb-4">Choosing the Right Format</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-white font-bold text-xs">
+                  SVG
+                </div>
+                <h4 class="font-semibold text-text-primary mb-0!">Vector (Best)</h4>
+              </div>
+              <p class="text-text-secondary leading-relaxed">
+                Perfect for web, print, and any size. Scales infinitely without losing quality. Use for websites, large prints, and professional materials.
+              </p>
+            </div>
+            
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <div class="w-8 h-8 rounded bg-secondary flex items-center justify-center text-white font-bold text-xs">
+                  PNG
+                </div>
+                <h4 class="font-semibold text-text-primary mb-0!">Transparent</h4>
+              </div>
+              <p class="text-text-secondary leading-relaxed">
+                High-quality with transparent background. Great for presentations, documents, and social media when you need a specific size.
+              </p>
+            </div>
+            
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <div class="w-8 h-8 rounded bg-accent flex items-center justify-center text-white font-bold text-xs">
+                  JPG
+                </div>
+                <h4 class="font-semibold text-text-primary mb-0!">Compressed</h4>
+              </div>
+              <p class="text-text-secondary leading-relaxed">
+                Smaller file size with white background. Best for email signatures, quick sharing, and when file size matters more than quality.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {brandAssets.map((asset) => (
+            <div class="bg-white rounded-lg shadow-sm border border-hunter-green-200 overflow-hidden">
+              <div class={`flex justify-center items-center p-8 min-h-[200px] ${asset.bgClass}`}>
+                <div class="max-w-xs w-full" data-svg-container={asset.id}>
+                  <img src={asset.svgPath} alt={asset.name} class="w-full h-auto" />
+                </div>
+              </div>
+              
+              <div class="p-6 space-y-4 border-t border-hunter-green-800">
+                <div>
+                  <h3 class="text-lg font-semibold text-text-primary mb-1">{asset.name}</h3>
+                  <p class="text-sm text-text-secondary">{asset.description}</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <label for={`format-${asset.id}`} class="block text-xs font-medium text-text-primary mb-1.5">
+                      Format
+                    </label>
+                    <select
+                      id={`format-${asset.id}`}
+                      class="format-select w-full px-3 py-2 text-sm border-2 border-hunter-green-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white text-text-primary transition-colors"
+                      data-asset-id={asset.id}
+                    >
+                      <option value="png">PNG</option>
+                      <option value="jpg">JPG</option>
+                      <option value="svg">SVG</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label for={`size-${asset.id}`} class="block text-xs font-medium text-text-primary mb-1.5">
+                      Size
+                    </label>
+                    <select
+                      id={`size-${asset.id}`}
+                      class="size-select w-full px-3 py-2 text-sm border-2 border-hunter-green-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white text-text-primary transition-colors"
+                      data-asset-id={asset.id}
+                    >
+                      <option value="2048">Large (2048px)</option>
+                      <option value="1024" selected>Medium (1024px)</option>
+                      <option value="512">Small (512px)</option>
+                      <option value="256">Tiny (256px)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <button
+                  class="download-asset-btn w-full inline-flex items-center justify-center px-4 py-2.5 bg-primary text-white rounded-md hover:bg-hunter-green-600 transition-colors duration-200 font-medium text-sm"
+                  data-asset-id={asset.id}
+                >
+                  <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                  Download
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Primary Colors Section -->
+    <section id="colors" class="py-16 sm:py-24">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+        <h2 class="text-text-primary">Primary Colors</h2>
+        <p class="text-lg text-text-secondary mb-12 max-w-3xl">
+          Our primary color palette reflects our commitment to environmental
+          consciousness and professional estate planning services.
+        </p>
+
+        <div class="space-y-12">
+          {/* Hunter Green - Primary */}
+          <div>
+            <div class="mb-4">
+              <h3 class="text-text-primary">{brandColors.primary.name}</h3>
+              <p class="text-text-secondary">
+                {brandColors.primary.description}
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2 items-start">
+              {/* Main color - fixed width, stays square */}
+              <div class="flex-none w-32 sm:w-40">
+                <div
+                  class="w-full aspect-square rounded-lg shadow-md relative group overflow-hidden cursor-pointer color-swatch"
+                  style={`background-color: ${brandColors.primary.base.hex}`}
+                  data-color={brandColors.primary.base.hex}
+                  title="Click to copy"
+                >
+                  <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200"
+                  >
+                  </div>
+                </div>
+                <div class="mt-2 text-center">
+                  <div class="text-sm font-medium text-text-primary">
+                    {brandColors.primary.name}
+                  </div>
+                  <button
+                    class="text-xs text-text-secondary font-mono hover:text-primary transition-colors duration-200 cursor-pointer copy-hex"
+                    data-color={brandColors.primary.base.hex}
+                    title="Click to copy"
+                  >
+                    {brandColors.primary.base.hex}
+                  </button>
+                </div>
+              </div>
+
+              {/* Shades - dynamic width, squish on mobile */}
+              <div class="flex flex-wrap gap-2 flex-1 min-w-0">
+                {
+                  brandColors.primary.shades.map((shade) => (
+                    <div class="flex-1 min-w-[60px] max-w-20">
+                      <div
+                        class="w-full aspect-square rounded-lg shadow-sm relative group overflow-hidden cursor-pointer color-swatch"
+                        style={`background-color: ${shade.hex}`}
+                        data-color={shade.hex}
+                        title="Click to copy"
+                      >
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200" />
+                      </div>
+                      <div class="mt-1 text-center">
+                        <div class="text-xs font-medium text-text-secondary">
+                          {shade.shade}
+                        </div>
+                        <button
+                          class="text-[10px] text-text-secondary font-mono leading-tight break-all hover:text-primary transition-colors duration-200 cursor-pointer copy-hex"
+                          data-color={shade.hex}
+                          title="Click to copy"
+                        >
+                          {shade.hex}
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+
+          {/* Olivine - Secondary */}
+          <div>
+            <div class="mb-4">
+              <h3 class="text-text-primary">{brandColors.secondary.name}</h3>
+              <p class="text-text-secondary">
+                {brandColors.secondary.description}
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2 items-start">
+              {/* Main color - fixed width, stays square */}
+              <div class="flex-none w-32 sm:w-40">
+                <div
+                  class="w-full aspect-square rounded-lg shadow-md relative group overflow-hidden cursor-pointer color-swatch"
+                  style={`background-color: ${brandColors.secondary.base.hex}`}
+                  data-color={brandColors.secondary.base.hex}
+                  title="Click to copy"
+                >
+                  <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200"
+                  >
+                  </div>
+                </div>
+                <div class="mt-2 text-center">
+                  <div class="text-sm font-medium text-text-primary">
+                    {brandColors.secondary.name}
+                  </div>
+                  <button
+                    class="text-xs text-text-secondary font-mono hover:text-primary transition-colors duration-200 cursor-pointer copy-hex"
+                    data-color={brandColors.secondary.base.hex}
+                    title="Click to copy"
+                  >
+                    {brandColors.secondary.base.hex}
+                  </button>
+                </div>
+              </div>
+
+              {/* Shades - dynamic width, squish on mobile */}
+              <div class="flex flex-wrap gap-2 flex-1 min-w-0">
+                {
+                  brandColors.secondary.shades.map((shade) => (
+                    <div class="flex-1 min-w-[60px] max-w-20">
+                      <div
+                        class="w-full aspect-square rounded-lg shadow-sm relative group overflow-hidden cursor-pointer color-swatch"
+                        style={`background-color: ${shade.hex}`}
+                        data-color={shade.hex}
+                        title="Click to copy"
+                      >
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200" />
+                      </div>
+                      <div class="mt-1 text-center">
+                        <div class="text-xs font-medium text-text-secondary">
+                          {shade.shade}
+                        </div>
+                        <button
+                          class="text-[10px] text-text-secondary font-mono leading-tight break-all hover:text-primary transition-colors duration-200 cursor-pointer copy-hex"
+                          data-color={shade.hex}
+                          title="Click to copy"
+                        >
+                          {shade.hex}
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+
+          {/* Redwood - Accent */}
+          <div>
+            <div class="mb-4">
+              <h3 class="text-text-primary">{brandColors.accent.name}</h3>
+              <p class="text-text-secondary">
+                {brandColors.accent.description}
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2 items-start">
+              {/* Main color - fixed width, stays square */}
+              <div class="flex-none w-32 sm:w-40">
+                <div
+                  class="w-full aspect-square rounded-lg shadow-md relative group overflow-hidden cursor-pointer color-swatch"
+                  style={`background-color: ${brandColors.accent.base.hex}`}
+                  data-color={brandColors.accent.base.hex}
+                  title="Click to copy"
+                >
+                  <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200"
+                  >
+                  </div>
+                </div>
+                <div class="mt-2 text-center">
+                  <div class="text-sm font-medium text-text-primary">
+                    {brandColors.accent.name}
+                  </div>
+                  <button
+                    class="text-xs text-text-secondary font-mono hover:text-primary transition-colors duration-200 cursor-pointer copy-hex"
+                    data-color={brandColors.accent.base.hex}
+                    title="Click to copy"
+                  >
+                    {brandColors.accent.base.hex}
+                  </button>
+                </div>
+              </div>
+
+              {/* Shades - dynamic width, squish on mobile */}
+              <div class="flex flex-wrap gap-2 flex-1 min-w-0">
+                {
+                  brandColors.accent.shades.map((shade) => (
+                    <div class="flex-1 min-w-[60px] max-w-20">
+                      <div
+                        class="w-full aspect-square rounded-lg shadow-sm relative group overflow-hidden cursor-pointer color-swatch"
+                        style={`background-color: ${shade.hex}`}
+                        data-color={shade.hex}
+                        title="Click to copy"
+                      >
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200" />
+                      </div>
+                      <div class="mt-1 text-center">
+                        <div class="text-xs font-medium text-text-secondary">
+                          {shade.shade}
+                        </div>
+                        <button
+                          class="text-[10px] text-text-secondary font-mono leading-tight break-all hover:text-primary transition-colors duration-200 cursor-pointer copy-hex"
+                          data-color={shade.hex}
+                          title="Click to copy"
+                        >
+                          {shade.hex}
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Neutral Colors Section -->
+    <section class="py-16 sm:py-24 bg-hunter-green-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+        <h2 class="text-text-primary">Neutral Colors</h2>
+        <p class="text-lg text-text-secondary mb-12 max-w-3xl">
+          Neutral colors for text, backgrounds, and UI elements that complement
+          our primary palette.
+        </p>
+
+        <div class="space-y-12">
+          {/* Outer Space - Neutral */}
+          <div>
+            <div class="mb-4">
+              <h3 class="text-text-primary">{brandColors.neutral.name}</h3>
+              <p class="text-text-secondary">
+                {brandColors.neutral.description}
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2 items-start">
+              {/* Main color - fixed width, stays square */}
+              <div class="flex-none w-32 sm:w-40">
+                <div
+                  class="w-full aspect-square rounded-lg shadow-md relative group overflow-hidden cursor-pointer color-swatch"
+                  style={`background-color: ${brandColors.neutral.base.hex}`}
+                  data-color={brandColors.neutral.base.hex}
+                  title="Click to copy"
+                >
+                  <div
+                    class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200"
+                  >
+                  </div>
+                </div>
+                <div class="mt-2 text-center">
+                  <div class="text-sm font-medium text-text-primary">
+                    {brandColors.neutral.name}
+                  </div>
+                  <button
+                    class="text-xs text-text-secondary font-mono hover:text-primary transition-colors duration-200 cursor-pointer copy-hex"
+                    data-color={brandColors.neutral.base.hex}
+                    title="Click to copy"
+                  >
+                    {brandColors.neutral.base.hex}
+                  </button>
+                </div>
+              </div>
+
+              {/* Shades - dynamic width, squish on mobile */}
+              <div class="flex flex-wrap gap-2 flex-1 min-w-0">
+                {
+                  brandColors.neutral.shades.map((shade) => (
+                    <div class="flex-1 min-w-[60px] max-w-20">
+                      <div
+                        class="w-full aspect-square rounded-lg shadow-sm relative group overflow-hidden cursor-pointer color-swatch"
+                        style={`background-color: ${shade.hex}`}
+                        data-color={shade.hex}
+                        title="Click to copy"
+                      >
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200" />
+                      </div>
+                      <div class="mt-1 text-center">
+                        <div class="text-xs font-medium text-text-secondary">
+                          {shade.shade}
+                        </div>
+                        <button
+                          class="text-[10px] text-text-secondary font-mono leading-tight break-all hover:text-primary transition-colors duration-200 cursor-pointer copy-hex"
+                          data-color={shade.hex}
+                          title="Click to copy"
+                        >
+                          {shade.hex}
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Supporting Colors Section -->
+    <section class="py-16 sm:py-24">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+        <h2 class="text-text-primary">Supporting Colors</h2>
+        <p class="text-lg text-text-secondary mb-12 max-w-3xl">
+          Supporting colors that provide additional flexibility for backgrounds
+          and accents.
+        </p>
+
+        <div class="space-y-12">
+          {
+            brandColors.supporting.map((color) => (
+              <div>
+                <div class="mb-4">
+                  <h3 class="text-text-primary">{color.name}</h3>
+                  <p class="text-text-secondary">{color.description}</p>
+                </div>
+                <div class="flex flex-wrap gap-2 items-start">
+                  {/* Main color - fixed width, stays square */}
+                  <div class="flex-none w-32 sm:w-40">
+                    <div
+                      class="w-full aspect-square rounded-lg shadow-md relative group overflow-hidden cursor-pointer color-swatch"
+                      style={`background-color: ${color.base.hex}`}
+                      data-color={color.base.hex}
+                      title="Click to copy"
+                    >
+                      <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200" />
+                    </div>
+                    <div class="mt-2 text-center">
+                      <div class="text-sm font-medium text-text-primary">
+                        {color.name}
+                      </div>
+                      <button
+                        class="text-xs text-text-secondary font-mono hover:text-primary transition-colors duration-200 cursor-pointer copy-hex"
+                        data-color={color.base.hex}
+                        title="Click to copy"
+                      >
+                        {color.base.hex}
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Shades - dynamic width, squish on mobile */}
+                  <div class="flex flex-wrap gap-2 flex-1 min-w-0">
+                    {color.shades.map((shade) => (
+                      <div class="flex-1 min-w-[60px] max-w-20">
+                        <div
+                          class="w-full aspect-square rounded-lg shadow-sm relative group overflow-hidden cursor-pointer color-swatch"
+                          style={`background-color: ${shade.hex}`}
+                          data-color={shade.hex}
+                          title="Click to copy"
+                        >
+                          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200" />
+                        </div>
+                        <div class="mt-1 text-center">
+                          <div class="text-xs font-medium text-text-secondary">
+                            {shade.shade}
+                          </div>
+                          <button
+                            class="text-[10px] text-text-secondary font-mono leading-tight break-all hover:text-primary transition-colors duration-200 cursor-pointer copy-hex"
+                            data-color={shade.hex}
+                            title="Click to copy"
+                          >
+                            {shade.hex}
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Typography Section -->
+    <section id="typography" class="py-16 sm:py-24 bg-dutch-white-900">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+        <h2 class="text-text-primary">Typography</h2>
+        <p class="text-lg text-text-secondary mb-12 max-w-3xl">
+          Our typography combines the warmth of Lora for headings with the
+          clarity of Source Sans Pro for body text.
+        </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div
+            class="bg-white rounded-lg p-8 shadow-sm border border-hunter-green-200"
+          >
+            <div class="mb-6">
+              <h3 class="text-text-primary font-serif">Lora</h3>
+              <p class="text-text-secondary">Headings and display text</p>
+            </div>
+            <div class="space-y-4">
+              <p class="text-4xl font-serif font-bold text-text-primary">
+                Compassionate estate planning for families who care.
+              </p>
+              <p class="text-2xl font-serif font-semibold text-text-secondary">
+                Planning that feels human and meaningful.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="bg-white rounded-lg p-8 shadow-sm border border-hunter-green-200"
+          >
+            <div class="mb-6">
+              <h3 class="text-text-primary">Source Sans Pro</h3>
+              <p class="text-text-secondary">Body text and UI elements</p>
+            </div>
+            <div class="space-y-4">
+              <p class="text-lg text-text-primary">
+                At Small Planet Law, we believe estate planning should feel
+                human, meaningful, and good for the Earth.
+              </p>
+              <p class="text-base text-text-secondary">
+                We integrate environmental consciousness into both our
+                operations and client services, offering holistic estate
+                planning that aligns with your values.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Brand Voice Section -->
+    <section id="brand-voice" class="py-16 sm:py-24">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+        <h2 class="text-text-primary">Brand Voice</h2>
+        <p class="text-lg text-text-secondary mb-12 max-w-3xl">
+          Our brand voice is warm, conversational, reassuring, and
+          values-driven.
+        </p>
+
+        <!-- Brand Promise -->
+        <div class="bg-primary text-white rounded-lg p-8 mb-8">
+          <h3 class="text-white mb-3">Brand Promise</h3>
+          <p class="text-xl text-white/95">
+            Estate planning that feels human, meaningful, and good for the Earth.
+          </p>
+        </div>
+
+        <!-- Positioning, Audience, Messaging Pillars -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+          <div class="bg-hunter-green-50 rounded-lg p-8">
+            <h3 class="text-primary mb-3">Positioning</h3>
+            <p class="text-text-primary">
+              A Denver-based holistic estate planning firm that centers family, legacy, and environmental stewardship.
+            </p>
+          </div>
+
+          <div class="bg-olivine-50 rounded-lg p-8">
+            <h3 class="text-primary mb-3">Audience</h3>
+            <p class="text-text-primary">
+              Adults aged ~30–70, middle-class to mass-affluent, family-focused, values-driven, environmentally conscious.
+            </p>
+          </div>
+        </div>
+
+        <!-- Messaging Pillars -->
+        <div class="bg-white border border-hunter-green-200 rounded-lg p-8 mb-12">
+          <h3 class="text-text-primary mb-6">Messaging Pillars</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-semibold text-primary mb-2">Family-Centered</h4>
+              <p class="text-sm text-text-secondary">
+                Prioritize clarity and protection for loved ones.
+              </p>
+            </div>
+            <div>
+              <h4 class="font-semibold text-primary mb-2">Legacy & Values</h4>
+              <p class="text-sm text-text-secondary">
+                Emphasize passing on financial and environmental values.
+              </p>
+            </div>
+            <div>
+              <h4 class="font-semibold text-primary mb-2">Simplicity & Guidance</h4>
+              <p class="text-sm text-text-secondary">
+                Break complex legal topics into approachable steps.
+              </p>
+            </div>
+            <div>
+              <h4 class="font-semibold text-primary mb-2">Sustainability</h4>
+              <p class="text-sm text-text-secondary">
+                Practical green choices in estate planning and firm operations.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-hunter-green-50 rounded-lg p-8">
+            <h3 class="text-primary mb-4">We Are</h3>
+            <ul class="space-y-3 text-text-primary">
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-primary mr-3 mt-1 shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"></path>
+                </svg>
+                <span>Warm and approachable</span>
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-primary mr-3 mt-1 shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"></path>
+                </svg>
+                <span>Professional and trustworthy</span>
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-primary mr-3 mt-1 shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"></path>
+                </svg>
+                <span>Values-driven and authentic</span>
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-primary mr-3 mt-1 shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"></path>
+                </svg>
+                <span>Environmentally conscious</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-redwood-50 rounded-lg p-8">
+            <h3 class="text-accent mb-4">We Aren't</h3>
+            <ul class="space-y-3 text-text-primary">
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-accent mr-3 mt-1 shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                    clip-rule="evenodd"></path>
+                </svg>
+                <span>Stuffy or overly formal</span>
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-accent mr-3 mt-1 shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                    clip-rule="evenodd"></path>
+                </svg>
+                <span>Preachy about environmentalism</span>
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-accent mr-3 mt-1 shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                    clip-rule="evenodd"></path>
+                </svg>
+                <span>Impersonal or corporate</span>
+              </li>
+              <li class="flex items-start">
+                <svg
+                  class="w-5 h-5 text-accent mr-3 mt-1 shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                    clip-rule="evenodd"></path>
+                </svg>
+                <span>Fear-based or alarmist</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Image Treatment Section -->
+    <section id="image-treatment" class="py-16 sm:py-24 bg-dutch-white-900">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+        <h2 class="text-text-primary">Image Treatment</h2>
+        <p class="text-lg text-text-secondary mb-12 max-w-3xl">
+          Imagery should incorporate humanity and nature. We use brand colors and knock out images with a double exposure effect.
+        </p>
+
+        <div class="space-y-8">
+          <!-- Double Exposure Examples -->
+          <div class="bg-white rounded-lg border border-hunter-green-200 overflow-hidden">
+            <div class="aspect-21/9 overflow-hidden">
+              <img 
+                src="/src/assets/hero-family-leaf-wide.jpg" 
+                alt="Double exposure example - family and leaf"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-4">
+              <p class="text-sm text-text-secondary">Double exposure effect with brand colors</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg border border-hunter-green-200 overflow-hidden">
+            <div class="aspect-21/9 overflow-hidden">
+              <img 
+                src="/src/assets/hero-umbrella-wide.jpg" 
+                alt="Double exposure example - umbrella"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-4">
+              <p class="text-sm text-text-secondary">Double exposure effect with natural imagery</p>
+            </div>
+          </div>
+
+          <!-- Soft Light Overlay -->
+          <div class="bg-white rounded-lg border border-hunter-green-200 overflow-hidden">
+            <div class="aspect-21/9 overflow-hidden">
+              <img 
+                src="/src/assets/hero-mtn-flowers.jpg" 
+                alt="Soft light overlay example"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-4 flex items-start gap-3">
+              <p class="text-sm text-text-secondary flex-1">
+                Not all images need to be double exposure, this one has a simple <strong>Soft Light</strong> overlay effect using the <span class="w-4 h-4 inline-block align-middle rounded bg-celadon"></span> celadon color.
+              </p>
+            </div>
+          </div>
+
+          <!-- Color Mix Effect -->
+          <div class="bg-white rounded-lg border border-hunter-green-200 overflow-hidden">
+            <div class="aspect-21/9 overflow-hidden">
+              <img 
+                src="/src/assets/hero-mtn-sunset.jpg" 
+                alt="Color mix effect example"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-4">
+              <p class="text-sm text-text-secondary">
+                Note the use of <span class="w-4 h-4 inline-block align-middle rounded bg-dutch-white"></span> Dutch White as the background with the image overlaid on top. This is achieved using the solid color on top of the image with a <strong>color mix</strong> effect.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<script>
+  // Copy hex color to clipboard functionality
+  function copyToClipboard(text: string): Promise<void> {
+    return navigator.clipboard.writeText(text);
+  }
+
+  function showCopyFeedback(element: HTMLElement) {
+    const originalText = element.textContent;
+    element.textContent = "Copied!";
+    element.classList.add("text-primary");
+
+    setTimeout(() => {
+      element.textContent = originalText;
+      element.classList.remove("text-primary");
+    }, 1500);
+  }
+
+  // Handle clicks on color swatches
+  document.querySelectorAll(".color-swatch").forEach((swatch) => {
+    swatch.addEventListener("click", async (e) => {
+      const target = e.currentTarget as HTMLElement;
+      const color = target.getAttribute("data-color");
+
+      if (color) {
+        try {
+          await copyToClipboard(color);
+
+          // Find the hex text element within this color block
+          const hexButton = target
+            .closest(".flex-1, .flex-none")
+            ?.querySelector(".copy-hex") as HTMLElement;
+          if (hexButton) {
+            showCopyFeedback(hexButton);
+          }
+        } catch (err) {
+          console.error("Failed to copy:", err);
+        }
+      }
+    });
+  });
+
+  // Handle clicks on hex code buttons
+  document.querySelectorAll(".copy-hex").forEach((button) => {
+    button.addEventListener("click", async (e) => {
+      e.stopPropagation(); // Prevent triggering the swatch click
+      const target = e.currentTarget as HTMLElement;
+      const color = target.getAttribute("data-color");
+
+      if (color) {
+        try {
+          await copyToClipboard(color);
+          showCopyFeedback(target);
+        } catch (err) {
+          console.error("Failed to copy:", err);
+        }
+      }
+    });
+  });
+
+  // Logo download functionality
+  // Handle format selection changes to enable/disable size select
+  document.querySelectorAll(".format-select").forEach((select) => {
+    select.addEventListener("change", (e) => {
+      const formatSelect = e.currentTarget as HTMLSelectElement;
+      const assetId = formatSelect.getAttribute("data-asset-id");
+      const sizeSelect = document.querySelector(
+        `#size-${assetId}`
+      ) as HTMLSelectElement;
+
+      if (formatSelect.value === "svg") {
+        sizeSelect.disabled = true;
+        sizeSelect.classList.add("opacity-50", "cursor-not-allowed");
+      } else {
+        sizeSelect.disabled = false;
+        sizeSelect.classList.remove("opacity-50", "cursor-not-allowed");
+      }
+    });
+  });
+
+  // Handle download button clicks
+  document.querySelectorAll(".download-asset-btn").forEach((button) => {
+    button.addEventListener("click", async (e) => {
+      const btn = e.currentTarget as HTMLButtonElement;
+      const assetId = btn.getAttribute("data-asset-id");
+
+      if (!assetId) return;
+
+      const formatSelect = document.querySelector(
+        `#format-${assetId}`
+      ) as HTMLSelectElement;
+      const sizeSelect = document.querySelector(
+        `#size-${assetId}`
+      ) as HTMLSelectElement;
+
+      const format = formatSelect.value;
+      const size = parseInt(sizeSelect.value);
+
+      const svgContainer = document.querySelector(
+        `[data-svg-container="${assetId}"]`
+      );
+      const imgElement = svgContainer?.querySelector("img") as HTMLImageElement;
+
+      if (!imgElement) {
+        console.error("Image element not found");
+        return;
+      }
+
+      // Disable button during download
+      btn.disabled = true;
+      const originalText = btn.innerHTML;
+      btn.innerHTML = `
+        <svg class="w-5 h-5 mr-2 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+        Downloading...
+      `;
+
+      try {
+        if (format === "svg") {
+          await downloadSVG(imgElement, assetId);
+        } else {
+          await downloadRaster(imgElement, assetId, format, size);
+        }
+      } catch (err) {
+        console.error("Download failed:", err);
+        alert("Download failed. Please try again.");
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      }
+    });
+  });
+
+  async function downloadSVG(imgElement: HTMLImageElement, assetId: string) {
+    try {
+      const response = await fetch(imgElement.src);
+      const svgText = await response.text();
+      const blob = new Blob([svgText], {
+        type: "image/svg+xml;charset=utf-8",
+      });
+      const url = URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `small-planet-law-${assetId}.svg`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error("SVG download failed:", err);
+      throw err;
+    }
+  }
+
+  async function downloadRaster(
+    imgElement: HTMLImageElement,
+    assetId: string,
+    format: string,
+    size: number
+  ) {
+    return new Promise<void>(async (resolve, reject) => {
+      try {
+        // Fetch the SVG content
+        const response = await fetch(imgElement.src);
+        const svgText = await response.text();
+
+        // Create blob URL from SVG text
+        const svgBlob = new Blob([svgText], {
+          type: "image/svg+xml;charset=utf-8",
+        });
+        const url = URL.createObjectURL(svgBlob);
+
+        // Load SVG into image to get dimensions
+        const img = new Image();
+
+        img.onload = () => {
+          // Calculate height based on aspect ratio
+          const aspectRatio = img.height / img.width;
+          const width = size;
+          const height = Math.round(size * aspectRatio);
+
+          // Create canvas with calculated dimensions
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+
+          if (!ctx) {
+            URL.revokeObjectURL(url);
+            reject(new Error("Could not get canvas context"));
+            return;
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+
+          // For JPG, fill with white background
+          if (format === "jpg") {
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(0, 0, width, height);
+          }
+
+          // Draw image at calculated size
+          ctx.drawImage(img, 0, 0, width, height);
+          URL.revokeObjectURL(url);
+
+          canvas.toBlob(
+            (blob) => {
+              if (!blob) {
+                reject(new Error("Could not create blob"));
+                return;
+              }
+
+              const downloadUrl = URL.createObjectURL(blob);
+              const link = document.createElement("a");
+              link.href = downloadUrl;
+              link.download = `small-planet-law-${assetId}-${width}px.${format}`;
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+              URL.revokeObjectURL(downloadUrl);
+              resolve();
+            },
+            `image/${format === "jpg" ? "jpeg" : format}`
+          );
+        };
+
+        img.onerror = () => {
+          URL.revokeObjectURL(url);
+          reject(new Error("Failed to load SVG"));
+        };
+
+        img.src = url;
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+</script>
