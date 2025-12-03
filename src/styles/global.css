@@ -6,7 +6,7 @@
 
 @theme {
   /* Updated Color Palette - Small Planet Law Brand */
-  --color-hunter-green: #386641;
+  --color-hunter-green:     #386641;
   --color-hunter-green-100: #0b140d;
   --color-hunter-green-200: #16291a;
   --color-hunter-green-300: #223d27;
@@ -17,7 +17,7 @@
   --color-hunter-green-800: #a4cdac;
   --color-hunter-green-900: #d2e6d6;
 
-  --color-olivine: #90ba78;
+  --color-olivine:     #90ba78;
   --color-olivine-100: #1c2815;
   --color-olivine-200: #38512a;
   --color-olivine-300: #54793e;
@@ -28,7 +28,7 @@
   --color-olivine-800: #d3e3c9;
   --color-olivine-900: #e9f1e4;
 
-  --color-outer-space: #49575b;
+  --color-outer-space:     #49575b;
   --color-outer-space-100: #0f1112;
   --color-outer-space-200: #1d2324;
   --color-outer-space-300: #2c3436;
@@ -39,18 +39,20 @@
   --color-outer-space-800: #b2bec1;
   --color-outer-space-900: #d9dee0;
 
-  --color-honeydew: #daf5e1;
-  --color-honeydew-100: #144922;
-  --color-honeydew-200: #289244;
-  --color-honeydew-300: #49cd6c;
-  --color-honeydew-400: #92e1a7;
-  --color-honeydew-500: #daf5e1;
-  --color-honeydew-600: #e2f7e8;
-  --color-honeydew-700: #e9f9ee;
-  --color-honeydew-800: #f1fbf3;
-  --color-honeydew-900: #f8fdf9;
+  --color-celadon:     #B1CFA0;
+  --color-celadon-50:  #f1f6ee;
+  --color-celadon-100: #e3eedd;
+  --color-celadon-200: #c8ddbb;
+  --color-celadon-300: #accc99;
+  --color-celadon-400: #90bb77;
+  --color-celadon-500: #74aa55;
+  --color-celadon-600: #5d8844;
+  --color-celadon-700: #466633;
+  --color-celadon-800: #2f4422;
+  --color-celadon-900: #172211;
+  --color-celadon-950: #10180c;
 
-  --color-dutch-white: #ede0bf;
+  --color-dutch-white:     #ede0bf;
   --color-dutch-white-100: #433513;
   --color-dutch-white-200: #866a26;
   --color-dutch-white-300: #c79f3a;
@@ -61,7 +63,7 @@
   --color-dutch-white-800: #f8f3e6;
   --color-dutch-white-900: #fbf9f2;
 
-  --color-redwood: #b44143;
+  --color-redwood:     #b44143;
   --color-redwood-100: #240d0d;
   --color-redwood-200: #481a1b;
   --color-redwood-300: #6c2728;
@@ -80,7 +82,7 @@
   --color-light: var(--color-dutch-white);
   --color-neutral: var(--color-ash-gray);  
   --color-neutral-warm: var(--color-dutch-white);  
-  --color-neutral-cool: var(--color-honeydew);  
+  --color-neutral-cool: var(--color-celadon);  
 
   /* Additional semantic colors */
   --color-text-primary: var(--color-outer-space-200);
