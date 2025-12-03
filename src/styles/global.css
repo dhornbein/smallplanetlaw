@@ -7,40 +7,39 @@
 @theme {
   /* Updated Color Palette - Small Planet Law Brand */
   --color-hunter-green:     #386641;
-  --color-hunter-green-100: #0b140d;
-  --color-hunter-green-200: #16291a;
-  --color-hunter-green-300: #223d27;
-  --color-hunter-green-400: #2d5234;
+  --color-hunter-green-100: #d2e6d6;
+  --color-hunter-green-200: #a4cdac;
+  --color-hunter-green-300: #77b483;
+  --color-hunter-green-400: #51935e;
   --color-hunter-green-500: #386641;
-  --color-hunter-green-600: #51935e;
-  --color-hunter-green-700: #77b483;
-  --color-hunter-green-800: #a4cdac;
-  --color-hunter-green-900: #d2e6d6;
+  --color-hunter-green-600: #2d5234;
+  --color-hunter-green-700: #223d27;
+  --color-hunter-green-800: #16291a;
+  --color-hunter-green-900: #0b140d;
 
   --color-olivine:     #90ba78;
-  --color-olivine-100: #1c2815;
-  --color-olivine-200: #38512a;
-  --color-olivine-300: #54793e;
-  --color-olivine-400: #70a253;
+  --color-olivine-100: #e9f1e4;
+  --color-olivine-200: #d3e3c9;
+  --color-olivine-300: #bdd5ae;
+  --color-olivine-400: #a6c893;
   --color-olivine-500: #90ba78;
-  --color-olivine-600: #a6c893;
-  --color-olivine-700: #bdd5ae;
-  --color-olivine-800: #d3e3c9;
-  --color-olivine-900: #e9f1e4;
+  --color-olivine-600: #70a253;
+  --color-olivine-700: #54793e;
+  --color-olivine-800: #38512a;
+  --color-olivine-900: #1c2815;
 
   --color-outer-space:     #49575b;
-  --color-outer-space-100: #0f1112;
-  --color-outer-space-200: #1d2324;
-  --color-outer-space-300: #2c3436;
-  --color-outer-space-400: #3a4548;
+  --color-outer-space-100: #d9dee0;
+  --color-outer-space-200: #b2bec1;
+  --color-outer-space-300: #8c9da2;
+  --color-outer-space-400: #677c81;
   --color-outer-space-500: #49575b;
-  --color-outer-space-600: #677c81;
-  --color-outer-space-700: #8c9da2;
-  --color-outer-space-800: #b2bec1;
-  --color-outer-space-900: #d9dee0;
+  --color-outer-space-600: #3a4548;
+  --color-outer-space-700: #2c3436;
+  --color-outer-space-800: #1d2324;
+  --color-outer-space-900: #0f1112;
 
   --color-celadon:     #B1CFA0;
-  --color-celadon-50:  #f1f6ee;
   --color-celadon-100: #e3eedd;
   --color-celadon-200: #c8ddbb;
   --color-celadon-300: #accc99;
@@ -50,45 +49,44 @@
   --color-celadon-700: #466633;
   --color-celadon-800: #2f4422;
   --color-celadon-900: #172211;
-  --color-celadon-950: #10180c;
 
   --color-dutch-white:     #ede0bf;
-  --color-dutch-white-100: #433513;
-  --color-dutch-white-200: #866a26;
-  --color-dutch-white-300: #c79f3a;
-  --color-dutch-white-400: #dac07d;
+  --color-dutch-white-100: #fbf9f2;
+  --color-dutch-white-200: #f8f3e6;
+  --color-dutch-white-300: #f4ecd9;
+  --color-dutch-white-400: #f1e6cc;
   --color-dutch-white-500: #ede0bf;
-  --color-dutch-white-600: #f1e6cc;
-  --color-dutch-white-700: #f4ecd9;
-  --color-dutch-white-800: #f8f3e6;
-  --color-dutch-white-900: #fbf9f2;
+  --color-dutch-white-600: #dac07d;
+  --color-dutch-white-700: #c79f3a;
+  --color-dutch-white-800: #866a26;
+  --color-dutch-white-900: #433513;
 
   --color-redwood:     #b44143;
-  --color-redwood-100: #240d0d;
-  --color-redwood-200: #481a1b;
-  --color-redwood-300: #6c2728;
-  --color-redwood-400: #903435;
+  --color-redwood-100: #f1d8d8;
+  --color-redwood-200: #e3b1b2;
+  --color-redwood-300: #d58a8b;
+  --color-redwood-400: #c76365;
   --color-redwood-500: #b44143;
-  --color-redwood-600: #c76365;
-  --color-redwood-700: #d58a8b;
-  --color-redwood-800: #e3b1b2;
-  --color-redwood-900: #f1d8d8;
+  --color-redwood-600: #903435;
+  --color-redwood-700: #6c2728;
+  --color-redwood-800: #481a1b;
+  --color-redwood-900: #240d0d;
 
   /* Simplified color palette */
   --color-primary: var(--color-hunter-green);
   --color-secondary: var(--color-olivine);
   --color-accent: var(--color-redwood);
-  --color-dark: var(--color-outer-space-200);
+  --color-dark: var(--color-outer-space-800);
   --color-light: var(--color-dutch-white);
   --color-neutral: var(--color-ash-gray);  
   --color-neutral-warm: var(--color-dutch-white);  
   --color-neutral-cool: var(--color-celadon);  
 
   /* Additional semantic colors */
-  --color-text-primary: var(--color-outer-space-200);
-  --color-text-secondary: var(--color-outer-space-400);
-  --color-text-primary-inverse: var(--color-dutch-white-900);
-  --color-text-secondary-inverse: var(--color-dutch-white-700);
+  --color-text-primary: var(--color-outer-space-800);
+  --color-text-secondary: var(--color-outer-space-600);
+  --color-text-primary-inverse: var(--color-dutch-white-100);
+  --color-text-secondary-inverse: var(--color-dutch-white-300);
   
   /* Typography */
   --font-sans: "Source Sans 3 Variable", ui-sans-serif, system-ui, sans-serif;
