@@ -74,8 +74,10 @@
 
   /* Simplified color palette */
   --color-primary: var(--color-hunter-green);
+  --color-primary-variant: var(--color-hunter-green-700);
   --color-secondary: var(--color-olivine);
   --color-accent: var(--color-redwood);
+  --color-accent-variant: var(--color-redwood-700);
   --color-dark: var(--color-outer-space-800);
   --color-light: var(--color-dutch-white);
   --color-neutral: var(--color-ash-gray);  
