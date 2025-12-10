@@ -7,6 +7,7 @@ import Newsletter from "../components/sections/Newsletter.astro";
 import heroImg from "../assets/hero-mtn-sunset.jpg";
 import heroImgTall from "../assets/hero-mtn-sunset.jpg";
 import bobbieImg from "../assets/meet-bobbie.png";
+import bobbieSig from "../assets/signature.png";
 ---
 
 <Layout
@@ -15,10 +16,10 @@ import bobbieImg from "../assets/meet-bobbie.png";
 >
   <!-- Hero Section -->
   <section
-    class="hero-section show-header relative px-8 py-24 lg:py-28 min-h-[50vh] bg-cover bg-center bg-fixed bg-var"
+    class="hero-section show-header relative px-8 py-24 lg:py-28 min-h-[50vh] bg-cover bg-top bg-fixed bg-var"
     style={`--bg-img: url(${heroImgTall.src}); --bg-img-md: url(${heroImg.src});`}
   >
-    <div class="max-w-[--nav-width]">
+    <div class="max-w-4xl mx-auto">
       <h1 class="text-text-secondary">About Us</h1>
       <p class="text-xl leading-relaxed max-w-prose">
         Estate planning with heart, clarity, and care for the people you love —
@@ -61,11 +62,7 @@ import bobbieImg from "../assets/meet-bobbie.png";
     </div>
 
     <div class="text-center mt-8">
-      <Button
-        href="./contact"
-        variant="secondary"
-        size="xl"
-      >
+      <Button href="./contact" variant="secondary" size="xl">
         Book A Call
       </Button>
     </div>
@@ -92,38 +89,45 @@ import bobbieImg from "../assets/meet-bobbie.png";
               estate plan to reflect that same care. I help them do just that.
             </p>
             <p>
-              Whether you're planning for your children's future, supporting aging
-              parents, or simply wanting peace of mind, I offer a thoughtful,
-              holistic approach to estate planning that honors what matters most:
-              your people, your values, and your vision for a better world. My
-              practice includes green estate planning options for those who want
-              their legacy to support sustainability, from conservation-minded
-              choices to charitable giving aligned with environmental causes.
+              Whether you're planning for your children's future, supporting
+              aging parents, or simply wanting peace of mind, I offer a
+              thoughtful, holistic approach to estate planning that honors what
+              matters most: your people, your values, and your vision for a
+              better world. My practice includes green estate planning options
+              for those who want their legacy to support sustainability, from
+              conservation-minded choices to charitable giving aligned with
+              environmental causes.
             </p>
             <p>
               I grew up in the rolling hills of northern Vermont, where a deep
-              connection to nature and community shaped my lifelong commitment to
-              service. That path led me through years of public interest work in
-              government and nonprofits, always with a focus on care, justice, and
-              environmental stewardship. Founding Small Planet Law is my way of
-              bringing those values together to serve families in Colorado with
-              compassion, clarity, and integrity.
+              connection to nature and community shaped my lifelong commitment
+              to service. That path led me through years of public interest work
+              in government and nonprofits, always with a focus on care,
+              justice, and environmental stewardship. Founding Small Planet Law
+              is my way of bringing those values together to serve families in
+              Colorado with compassion, clarity, and integrity.
             </p>
             <p>
               Clients tell me they feel seen, supported, and empowered after
               working together. I bring not only legal expertise, but also a
-              grounding in leadership, grief care, and environmental ethics. It's
-              my honor to help you protect your life, your legacy, and our shared
-              future.
+              grounding in leadership, grief care, and environmental ethics.
+              It's my honor to help you protect your life, your legacy, and our
+              shared future.
             </p>
             <p>
               When I'm not working with clients, you'll find me enjoying
               Colorado's great outdoors with my husband Dennis and our two young
               sons, supporting local environmental initiatives, or helping
-              nonprofits craft powerful advocacy strategies. I'm passionate about
-              sustainability, community resilience, and making legal services feel
-              human, accessible, and deeply aligned with the values we hold dear.
+              nonprofits craft powerful advocacy strategies. I'm passionate
+              about sustainability, community resilience, and making legal
+              services feel human, accessible, and deeply aligned with the
+              values we hold dear.
             </p>
+            <img
+              src={bobbieSig.src}
+              alt="Bobbie Mooney's Signature"
+              class="block mx-auto mt-8 max-w-1/2"
+            />
           </div>
         </div>
       </div>

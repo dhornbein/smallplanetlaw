@@ -6,7 +6,6 @@ const navItems = [
   { name: "Home", href: "./" },
   { name: "About Us", href: "./about" },
   { name: "Our Services", href: "./services" },
-  { name: "Blog", href: "./blog" },
   { name: "Contact", href: "./contact" },
 ];
 
@@ -63,7 +62,7 @@ const { triggerSelector = ".show-header" } = Astro.props;
         <LogoMark size="sm" class="logo" />
         <div class="flex flex-col">
           <span class="text-xl font-serif font-semibold">Small Planet Law</span>
-          <span class="text-xs">Estate Planning • Denver, CO</span>
+          <span class="text-xs">Holistic Estate Planning</span>
         </div>
       </a>
 
@@ -177,7 +176,7 @@ const { triggerSelector = ".show-header" } = Astro.props;
         {
           threshold: 0,
           rootMargin: "0px",
-        }
+        },
       );
 
       observer.observe(triggerElement);
