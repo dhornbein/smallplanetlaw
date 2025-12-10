@@ -1,0 +1,135 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Button from "../components/ui/Button.astro";
+import CurvedEdge from "../components/ui/CurvedEdge.astro";
+import CTA from "../components/sections/CTA.astro";
+import Newsletter from "../components/sections/Newsletter.astro";
+import heroImg from "../assets/hero-mtn-sunset.jpg";
+import heroImgTall from "../assets/hero-mtn-sunset.jpg";
+import bobbieImg from "../assets/meet-bobbie.png";
+---
+
+<Layout
+  title="About Small Planet Law | Denver Estate Planning Attorney"
+  description="Meet Bobbie Mooney and learn about Small Planet Law's heart-centered, sustainable approach to estate planning in Denver, Colorado."
+>
+  <!-- Hero Section -->
+  <section
+    class="hero-section show-header relative px-8 py-24 lg:py-28 min-h-[50vh] bg-cover bg-center bg-fixed bg-var"
+    style={`--bg-img: url(${heroImgTall.src}); --bg-img-md: url(${heroImg.src});`}
+  >
+    <div class="max-w-[--nav-width]">
+      <h1 class="text-text-secondary">About Us</h1>
+      <p class="text-xl leading-relaxed max-w-prose">
+        Estate planning with heart, clarity, and care for the people you love —
+        and the planet we share.
+      </p>
+    </div>
+  </section>
+
+  <!-- Our Story -->
+  <section
+    class="relative bg-primary text-text-primary-inverse flex flex-col gap-8 px-4 sm:px-6 lg:px-8 pt-10 pb-30"
+  >
+    <CurvedEdge fillColor="fill-primary" />
+
+    <h2 class="text-secondary text-center">Our Story</h2>
+
+    <div class="text-xl leading-relaxed max-w-4xl mx-auto space-y-6">
+      <p>
+        We know estate planning isn't just about paperwork — it's about love,
+        legacy, and peace of mind. At Small Planet Law, we help Colorado
+        families create plans that keep them out of court and out of conflict,
+        while reflecting the values that matter most. Founded by attorney Bobbie
+        Mooney after over a decade in public service and a career in
+        environmental advocacy, our firm blends compassion, clarity, and
+        sustainability into everything that we do.
+      </p>
+      <p>
+        At Small Planet Law, our Life & Legacy Plans go far beyond traditional
+        estate planning by protecting children, equipping fiduciaries,
+        streamlining decisions, tracking assets, preserving stories and values,
+        and keeping every plan up to date so families stay out of court, out of
+        conflict, and deeply connected across generations.
+      </p>
+      <p>
+        We offer flat-fee, relationship-based estate planning services and
+        options to include sustainability in your legacy, make planning simple,
+        personal, and even inspiring. Because protecting your family and our one
+        small planet should feel like a gift, not a burden.
+      </p>
+    </div>
+
+    <div class="text-center mt-8">
+      <Button
+        href="./contact"
+        variant="secondary"
+        size="xl"
+      >
+        Book A Call
+      </Button>
+    </div>
+  </section>
+
+  <!-- Meet Bobbie Mooney Section -->
+  <section class="relative bg-neutral-warm">
+    <div class="">
+      <div
+        class="relative overflow-hidden bg-fixed bg-cover bg-top-left min-h-[600px] flex items-center justify-end p-12"
+        style={`background-image: url(${bobbieImg.src});`}
+      >
+        <!-- Text Content Box -->
+        <div class="flex justify-center w-1/2">
+          <div
+            class="max-w-prose bg-white/80 backdrop-blur-md rounded-lg p-12 space-y-6 text-lg leading-relaxed"
+          >
+            <h2 class="text-center mb-16">Meet Bobbie Mooney</h2>
+            <p>
+              At Small Planet Law, I serve conscientious Coloradans who care
+              deeply about their loved ones, their legacy, and the future of our
+              planet. My clients are the kind of people who show up for their
+              families, their communities, and the Earth. And they want their
+              estate plan to reflect that same care. I help them do just that.
+            </p>
+            <p>
+              Whether you're planning for your children's future, supporting aging
+              parents, or simply wanting peace of mind, I offer a thoughtful,
+              holistic approach to estate planning that honors what matters most:
+              your people, your values, and your vision for a better world. My
+              practice includes green estate planning options for those who want
+              their legacy to support sustainability, from conservation-minded
+              choices to charitable giving aligned with environmental causes.
+            </p>
+            <p>
+              I grew up in the rolling hills of northern Vermont, where a deep
+              connection to nature and community shaped my lifelong commitment to
+              service. That path led me through years of public interest work in
+              government and nonprofits, always with a focus on care, justice, and
+              environmental stewardship. Founding Small Planet Law is my way of
+              bringing those values together to serve families in Colorado with
+              compassion, clarity, and integrity.
+            </p>
+            <p>
+              Clients tell me they feel seen, supported, and empowered after
+              working together. I bring not only legal expertise, but also a
+              grounding in leadership, grief care, and environmental ethics. It's
+              my honor to help you protect your life, your legacy, and our shared
+              future.
+            </p>
+            <p>
+              When I'm not working with clients, you'll find me enjoying
+              Colorado's great outdoors with my husband Dennis and our two young
+              sons, supporting local environmental initiatives, or helping
+              nonprofits craft powerful advocacy strategies. I'm passionate about
+              sustainability, community resilience, and making legal services feel
+              human, accessible, and deeply aligned with the values we hold dear.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+  <Newsletter />
+</Layout>
