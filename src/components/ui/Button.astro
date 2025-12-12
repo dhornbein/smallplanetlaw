@@ -1,13 +1,15 @@
 ---
 interface Props {
   href?: string;
+  target?: string;
   variant?: 'primary' | 'secondary' | 'accent';
   size?: 'sm' | 'md' | 'lg' | 'xl';
   class?: string;
 }
 
 const { 
-  href, 
+  href,
+  target, 
   variant = 'primary', 
   size = 'md',
   class: className = '' 
@@ -49,6 +51,11 @@ const Element = href ? 'a' : 'button';
   }
 </style>
 
-<Element href={href} class={classes}>
+<Element 
+  href={href} 
+  target={target}
+  rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+  class={classes}
+>
   <slot />
 </Element>

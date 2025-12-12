@@ -72,7 +72,7 @@ const { triggerSelector = ".show-header" } = Astro.props;
             </a>
           ))
         }
-        <Button href={callToAction.href} size="sm">{callToAction.name}</Button>
+        <Button href={callToAction.href} target={callToAction.target} size="sm">{callToAction.name}</Button>
       </nav>
 
       <!-- Mobile Menu Button -->
@@ -115,7 +115,7 @@ const { triggerSelector = ".show-header" } = Astro.props;
           ))
         }
         <div class="pt-2">
-          <Button href={callToAction.href} size="lg" class="w-full">{callToAction.name}</Button>
+          <Button href={callToAction.href} target={callToAction.target} size="lg" class="w-full">{callToAction.name}</Button>
         </div>
       </div>
     </nav>
