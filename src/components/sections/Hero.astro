@@ -2,6 +2,7 @@
 import Button from "../ui/Button.astro";
 import heroImg from "../../assets/hero-mtn-flowers.jpg";
 import heroImgTall from "../../assets/hero-mtn-flowers.jpg";
+import { callToAction } from "../../utils/navigation";
 ---
 
 <section
@@ -17,8 +18,8 @@ import heroImgTall from "../../assets/hero-mtn-flowers.jpg";
         Small Planet Law helps families design estate plans that honor their
         loved ones and their values, including care for the planet.
       </p>
-      <Button href="./contact" size="xl" variant="primary" class="font-bold">
-        Start Your Plan
+      <Button href={callToAction.href} size="xl" variant="primary" class="font-bold">
+        {callToAction.name}
       </Button>
     </div>
   </div>

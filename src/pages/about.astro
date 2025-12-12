@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Button from "../components/ui/Button.astro";
 import CurvedEdge from "../components/ui/CurvedEdge.astro";
+import { callToAction } from "../utils/navigation";
 import CTA from "../components/sections/CTA.astro";
 import Newsletter from "../components/sections/Newsletter.astro";
 import heroImg from "../assets/hero-mtn-sunset.jpg";
@@ -62,8 +63,8 @@ import bobbieSig from "../assets/signature.png";
     </div>
 
     <div class="text-center mt-8">
-      <Button href="./contact" variant="secondary" size="xl">
-        Book A Call
+      <Button href={callToAction.href} variant="secondary" size="xl">
+        {callToAction.name}
       </Button>
     </div>
   </section>

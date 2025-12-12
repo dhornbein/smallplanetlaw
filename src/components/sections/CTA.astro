@@ -3,6 +3,7 @@ import Button from "../ui/Button.astro";
 import CurvedEdge from "../ui/CurvedEdge.astro";
 import portraitShadow from "../../assets/hero-shadow-wide.jpg";
 import portraitShadowTall from "../../assets/hero-shadow-tall.jpg";
+import { callToAction } from "../../utils/navigation";
 ---
 
 <section class="relative pb-40 bg-neutral-warm">
@@ -21,7 +22,7 @@ import portraitShadowTall from "../../assets/hero-shadow-tall.jpg";
       Schedule a warm, no-pressure consultation to discuss your goals and
       create a plan that feels right for you — and right for the Earth.
     </p>
-    <Button href="./book" size="lg" variant="accent">Book a Call</Button>
+    <Button href={callToAction.href} size="lg" variant="accent">{callToAction.name}</Button>
   </div>
   <CurvedEdge fillColor="fill-neutral-warm" position="bottom" />
 </section>

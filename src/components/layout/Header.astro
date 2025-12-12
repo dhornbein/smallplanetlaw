@@ -1,18 +1,7 @@
 ---
 import Button from "../ui/Button.astro";
 import LogoMark from "../ui/LogoMark.astro";
-
-const navItems = [
-  { name: "Home", href: "./" },
-  { name: "About Us", href: "./about" },
-  { name: "Our Services", href: "./services" },
-  { name: "Contact Us", href: "./contact" },
-];
-
-const callToAction = {
-  name: "Book A Call",
-  href: "./book",
-};
+import { navItems, callToAction } from "../../utils/navigation";
 
 // element that will trigger the sticky header when scrolled past
 const { triggerSelector = ".show-header" } = Astro.props;
