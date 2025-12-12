@@ -13,3 +13,6 @@ export const callToAction = {
 
 // Combined quick links for footer
 export const quickLinks = [...navItems, callToAction];
+
+// Export base path from astro config for use in scripts
+export const base = import.meta.env.BASE_URL;
