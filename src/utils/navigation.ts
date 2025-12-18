@@ -10,6 +10,7 @@ export const navItems: NavItem[] = [
   { name: "Home", href: "./" },
   { name: "About Us", href: "./about" },
   { name: "Our Services", href: "./services" },
+  { name: "FAQ", href: "./faq" },
   { name: "Contact Us", href: "./contact" },
 ];
 
