@@ -5,6 +5,41 @@ import { navItems, callToAction } from "../../utils/navigation";
 
 // element that will trigger the sticky header when scrolled past
 const { triggerSelector = ".show-header" } = Astro.props;
+
+// Get the base path from Astro config (works in both dev and prod)
+const base = import.meta.env.BASE_URL;
+
+// Get the current path for active nav highlighting
+const currentPath = new URL(Astro.request.url).pathname;
+
+// Function to check if a nav item is active
+const isActive = (href: string) => {
+  // Convert relative href to absolute path using base
+  let absoluteHref: string;
+  
+  if (href.startsWith('./')) {
+    // Handle relative paths like "./" or "./about"
+    const relativePath = href.substring(2); // Remove "./"
+    absoluteHref = base + relativePath;
+  } else if (href.startsWith('http')) {
+    // External link, never active
+    return false;
+  } else {
+    absoluteHref = href;
+  }
+  
+  // Normalize paths for comparison (remove trailing slashes for comparison)
+  const normalizedCurrent = currentPath.replace(/\/$/, '') || '/';
+  const normalizedHref = absoluteHref.replace(/\/$/, '') || '/';
+  
+  // For home page (empty relative path becomes just the base)
+  if (href === './' || href === '') {
+    return normalizedCurrent === base.replace(/\/$/, '');
+  }
+  
+  // Exact match for other pages
+  return normalizedCurrent === normalizedHref;
+};
 ---
 
 <style>
@@ -94,6 +129,46 @@ const { triggerSelector = ".show-header" } = Astro.props;
       display: none !important;
     }
   }
+
+  /* Desktop Navigation - Active indicator */
+  nav a.nav-link {
+    @apply relative;
+  }
+
+  nav a.nav-link::after {
+    content: '';
+    @apply absolute left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full;
+    @apply bg-primary opacity-0 transition-opacity duration-200;
+    bottom: -0.5rem;
+  }
+
+  nav a.nav-link:hover::after {
+    @apply opacity-30;
+  }
+
+  nav a.nav-link.active::after {
+    @apply opacity-100;
+  }
+
+  /* Mobile Navigation - Active indicator */
+  #mobile-menu a.nav-link {
+    @apply relative;
+  }
+
+  #mobile-menu a.nav-link::after {
+    content: '';
+    @apply absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full;
+    @apply bg-white opacity-0 transition-opacity duration-200;
+    left: -1rem;
+  }
+
+  #mobile-menu a.nav-link:hover::after {
+    @apply opacity-30;
+  }
+
+  #mobile-menu a.nav-link.active::after {
+    @apply opacity-100;
+  }
 </style>
 
 <header
@@ -101,10 +176,10 @@ const { triggerSelector = ".show-header" } = Astro.props;
   class="h-20 z-50 relative"
   data-trigger-selector={triggerSelector}
 >
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-[150]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-150">
     <div class="flex justify-between items-center py-4">
       <!-- Logo -->
-      <a href="/smallplanetlaw/" class="flex items-center space-x-3 group relative z-[150]">
+      <a href="/smallplanetlaw/" class="flex items-center space-x-3 group relative z-150">
         <LogoMark size="sm" class="logo" />
         <div class="flex flex-col">
           <span class="text-xl font-serif font-semibold">Small Planet Law</span>
@@ -118,7 +193,10 @@ const { triggerSelector = ".show-header" } = Astro.props;
           navItems.map((item) => (
             <a
               href={item.href}
-              class="transition-colors duration-200 font-medium"
+              class:list={[
+                "nav-link transition-colors duration-200 font-medium",
+                { active: isActive(item.href) }
+              ]}
             >
               {item.name}
             </a>
@@ -130,7 +208,7 @@ const { triggerSelector = ".show-header" } = Astro.props;
       <!-- Mobile Menu Button -->
       <button
         id="mobile-menu-button"
-        class="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-white/70 relative z-[150]"
+        class="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-white/70 relative z-150"
         aria-label="Toggle menu"
         aria-expanded="false"
       >
@@ -174,7 +252,10 @@ const { triggerSelector = ".show-header" } = Astro.props;
           navItems.map((item) => (
             <a
               href={item.href}
-              class="py-2 text-neutral-warm hover:text-white transition-colors duration-200 font-medium font-serif text-2xl"
+              class:list={[
+                "nav-link py-2 text-neutral-warm hover:text-white transition-colors duration-200 font-medium font-serif text-2xl",
+                { active: isActive(item.href) }
+              ]}
             >
               {item.name}
             </a>
