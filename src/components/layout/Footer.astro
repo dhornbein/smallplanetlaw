@@ -1,6 +1,7 @@
 ---
 import LogoMark from "../ui/LogoMark.astro";
 import { quickLinks } from "../../utils/navigation";
+import {PHONE_NUMBER, EMAIL_ADDRESS, BUSINESS_ADDRESS} from "../../utils/global.ts";
 
 const disclaimer =
   "The information contained on this website is deemed reliable, but not guaranteed. Nothing in this website shall be deemed legal advice and your use of this site or contact of Small Planet Law LLC does not create an attorney-client relationship. By using this website you agree to the terms and conditions set forth in this disclaimer.";
@@ -77,10 +78,10 @@ const currentYear = new Date().getFullYear();
               ></path>
             </svg>
             <a
-              href="tel:+13035354311"
+              href={PHONE_NUMBER.href}
               class="hover:text-secondary transition-colors duration-200"
             >
-              (303) 535-4311
+              {PHONE_NUMBER.display}
             </a>
           </li>
           <li class="flex items-start space-x-2">
@@ -98,10 +99,10 @@ const currentYear = new Date().getFullYear();
               ></path>
             </svg>
             <a
-              href="mailto:hello@smallplanetlaw.com"
+              href={EMAIL_ADDRESS.href}
               class="hover:text-secondary transition-colors duration-200"
             >
-              hello@smallplanetlaw.com
+              {EMAIL_ADDRESS.display}
             </a>
           </li>
           <li class="flex items-start space-x-2">
@@ -123,7 +124,7 @@ const currentYear = new Date().getFullYear();
                 stroke-width="2"
                 d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
             </svg>
-            <span>Lakewood, Colorado</span>
+            <span>{BUSINESS_ADDRESS.line1}, {BUSINESS_ADDRESS.line2}</span>
           </li>
         </ul>
 

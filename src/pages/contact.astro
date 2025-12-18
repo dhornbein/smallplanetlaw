@@ -4,6 +4,8 @@ import Button from "../components/ui/Button.astro";
 import CurvedEdge from "../components/ui/CurvedEdge.astro";
 import CTA from "../components/sections/CTA.astro";
 import Newsletter from "../components/sections/Newsletter.astro";
+import {PHONE_NUMBER, EMAIL_ADDRESS, BUSINESS_ADDRESS} from "../utils/global.ts";
+import { callToAction } from "../utils/navigation";
 ---
 
 <Layout
@@ -19,7 +21,7 @@ import Newsletter from "../components/sections/Newsletter.astro";
       Start with a 15-minute Discovery Call to learn about our services
     </p>
     <div class="mt-8">
-      <Button href="/book" variant="secondary" size="xl"
+      <Button href={callToAction.href} variant="secondary" size="xl" target={callToAction.target}
         >Book an Appointment</Button
       >
     </div>
@@ -31,15 +33,15 @@ import Newsletter from "../components/sections/Newsletter.astro";
     <div class="max-w-4xl mx-auto space-y-8">
       <h2 class="text-3xl font-bold text-center">Contact Information</h2>
       <ul class="text-lg space-y-4">
-        <li><strong>Phone:</strong> (303) 535-4311</li>
+        <li><strong>Phone:</strong> <a href={PHONE_NUMBER.href}>{PHONE_NUMBER.display}</a></li>
         <li>
           <strong>Email:</strong>
           <a
-            href="mailto:hello@smallplanetlaw.com"
-            class="text-secondary underline">hello@smallplanetlaw.com</a>
+            href={EMAIL_ADDRESS.href}
+            class="text-secondary underline">{EMAIL_ADDRESS.display}</a>
         </li>
         <li>
-          <strong>Location:</strong> 355 S. Teller St. Ste 200, Lakewood, CO 80226
+          <strong>Location:</strong> {BUSINESS_ADDRESS.line1}, {BUSINESS_ADDRESS.line2}
         </li>
         <li>Serving clients across Colorado</li>
       </ul>
