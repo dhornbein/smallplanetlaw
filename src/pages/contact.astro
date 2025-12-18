@@ -4,7 +4,11 @@ import Button from "../components/ui/Button.astro";
 import CurvedEdge from "../components/ui/CurvedEdge.astro";
 import CTA from "../components/sections/CTA.astro";
 import Newsletter from "../components/sections/Newsletter.astro";
-import {PHONE_NUMBER, EMAIL_ADDRESS, BUSINESS_ADDRESS} from "../utils/global.ts";
+import {
+  PHONE_NUMBER,
+  EMAIL_ADDRESS,
+  BUSINESS_ADDRESS,
+} from "../utils/global.ts";
 import { callToAction } from "../utils/navigation";
 ---
 
@@ -21,8 +25,11 @@ import { callToAction } from "../utils/navigation";
       Start with a 15-minute Discovery Call to learn about our services
     </p>
     <div class="mt-8">
-      <Button href={callToAction.href} variant="secondary" size="xl" target={callToAction.target}
-        >Book an Appointment</Button
+      <Button
+        href={callToAction.href}
+        variant="secondary"
+        size="xl"
+        target={callToAction.target}>Book an Appointment</Button
       >
     </div>
   </section>
@@ -33,24 +40,32 @@ import { callToAction } from "../utils/navigation";
     <div class="max-w-4xl mx-auto space-y-8">
       <h2 class="text-3xl font-bold text-center">Contact Information</h2>
       <ul class="text-lg space-y-4">
-        <li><strong>Phone:</strong> <a href={PHONE_NUMBER.href}>{PHONE_NUMBER.display}</a></li>
+        <li>
+          <strong>Phone:</strong>
+          <a href={PHONE_NUMBER.href}>{PHONE_NUMBER.display}</a>
+        </li>
         <li>
           <strong>Email:</strong>
           <a
             href={EMAIL_ADDRESS.href}
-            class="text-secondary underline">{EMAIL_ADDRESS.display}</a>
+            class="text-primary hover:text-primary-variant underline"
+            >{EMAIL_ADDRESS.display}</a
+          >
         </li>
         <li>
-          <strong>Location:</strong> {BUSINESS_ADDRESS.line1}, {BUSINESS_ADDRESS.line2}
+          <strong>Location:</strong>
+          {BUSINESS_ADDRESS.line1}, {BUSINESS_ADDRESS.line2}
         </li>
         <li>Serving clients across Colorado</li>
       </ul>
-      
+
       <div class="text-center mt-12 pt-8 border-t border-primary/20">
-        <p class="text-xl mb-4">
-          Have questions before booking?
-        </p>
-        <a href="./faq" class="text-primary hover:text-secondary underline font-semibold text-lg">Check out our Frequently Asked Questions →</a>
+        <p class="text-xl mb-4">Have questions before booking?</p>
+        <a
+          href="./faq"
+          class="text-primary hover:text-primary-variant underline font-semibold text-lg"
+          >Check out our Frequently Asked Questions →</a
+        >
       </div>
 
       <!-- Social Media Links -->
