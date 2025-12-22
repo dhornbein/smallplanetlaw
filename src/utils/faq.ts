@@ -12,7 +12,7 @@ export const faqItems: FAQItem[] = [
   {
     id: "life-legacy-planning",
     question: "What is Life & Legacy Planning?",
-    answer: `Life & Legacy Planning is more than estate planning — it's peace of mind for you and lasting connection for your family. At Small Planet Law, we provide a holistic planning process that:
+    answer: `Life & Legacy Planning is more than conventional estate planning — it's peace of mind for you and lasting connection for your family. At Small Planet Law, we provide a holistic planning process that:
 
 - **Keeps families out of court and out of conflict**
 - **Protects children and equips fiduciaries**
@@ -28,7 +28,7 @@ It's not just documents — it's a living plan that grows with you. One of the m
 
 - **Core Documents:** Wills, Trusts, Durable Powers of Attorney
 - **Health Protection:** Healthcare Directives (Living Will), Healthcare Agents, HIPAA Authorizations
-- **Kids Protection Plan:** Short and Long-term Guardians, Kids' Health Care Agents, Important Medical Information, and Instructions to Guardians and Caregivers
+- **Kids Protection Plan:** Short and Long-term Guardians, Kids' Health Care Agents, Important Medical Information and Comprehensive Instructions for Guardians and Caregivers
 - **Extras Clients Love:** Family Wealth Inventory, Fiduciary Letters for all roles, Full Color Estate Plan Diagram, Trust ID Cards, Legacy Interviews, Ongoing Support & Regular Plan Updates`,
   },
   {
@@ -62,7 +62,7 @@ Our Legacy Interviews are often the most cherished part of the whole process —
 
 **The Signing Ceremony:** About 4 weeks after design, we'll meet to sign all your documents and, for trust-based plans, we'll begin the process of transferring your assets into the trust.
 
-**Plan Delivery & Legacy Interview:** About 4 weeks after that, we'll meet again for your Legacy Interview and you'll receive your complete estate plan and owner's manual, including a full color diagram of your plan.
+**Plan Delivery & Legacy Interview:** About 4 weeks after that, we'll meet again for your Legacy Interview and you'll receive your complete estate plan with an owner's manual including a full color diagram of your plan. 
 
 **Regular Review:** Every three years, we'll get together again for a free plan review and another Legacy Interview to ensure your plan stays current and your intangible assets grow along with you and your family.`,
   },
@@ -75,7 +75,7 @@ Our Legacy Interviews are often the most cherished part of the whole process —
 - **50% at design, 50% at signing** — with flexible payment options if needed.
 - **Unlimited communication included** — call or email without worrying about extra charges.
 
-This approach empowers you to make confident choices and ensures you get the right plan for your family. Every level provides security, clarity, and peace of mind.`,
+This approach empowers you to make confident choices and ensures you get the right plan for your family. All of our planning levels provide security, clarity, and peace of mind.`,
   },
   {
     id: "green-estate-planning",
