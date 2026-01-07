@@ -1,7 +1,11 @@
 ---
 import LogoMark from "../ui/LogoMark.astro";
 import { quickLinks } from "../../utils/navigation";
-import {PHONE_NUMBER, EMAIL_ADDRESS, BUSINESS_ADDRESS} from "../../utils/global.ts";
+import {
+  PHONE_NUMBER,
+  EMAIL_ADDRESS,
+  BUSINESS_ADDRESS,
+} from "../../utils/global.ts";
 
 const disclaimer =
   "The information contained on this website is deemed reliable, but not guaranteed. Nothing in this website shall be deemed legal advice and your use of this site or contact of Small Planet Law LLC does not create an attorney-client relationship. By using this website you agree to the terms and conditions set forth in this disclaimer.";
@@ -48,7 +52,9 @@ const currentYear = new Date().getFullYear();
                 <a
                   href={link.href}
                   target={link.target}
-                  rel={link.target === '_blank' ? 'noopener noreferrer' : undefined}
+                  rel={
+                    link.target === "_blank" ? "noopener noreferrer" : undefined
+                  }
                   class="text-gray-300 hover:text-secondary transition-colors duration-200"
                 >
                   {link.name}
@@ -172,8 +178,14 @@ const currentYear = new Date().getFullYear();
       <div
         class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0"
       >
-        <p class="text-sm text-gray-400">
+        <p class="text-sm text-gray-400 group">
           © {currentYear} Small Planet Law LLC. All rights reserved.
+          <br />
+          Built with <span class="group-hover:text-[#e11d48]">❤</span> by <a
+            class="group-hover:underline decoration-wavy underline-offset-4 hover:text-[#e11d48]"
+            href="http://dhornbein.com"
+            target="_blank">Drew Hornbein</a
+          >
         </p>
         <div class="hidden space-x-6 text-sm">
           <a
