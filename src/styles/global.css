@@ -128,3 +128,10 @@ p {
 /* Generic variable-driven background helpers */
 .bg-var { background-image: var(--bg-img); }
 @media (min-width: 48rem) { .bg-var { background-image: var(--bg-img-md); } }
+
+/* This targets iOS Safari specifically */
+@supports (-webkit-touch-callout: none) {
+   .bg-fixed {
+      background-attachment: scroll !important;
+   }
+}
