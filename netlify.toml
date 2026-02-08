@@ -1,11 +1,9 @@
 [build]
   command = "npm run build"
   publish = "dist"
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-[functions]
-  directory = "src/pages/api"
+  
+[build.environment]
+  MAILCHIMP_API_KEY = ""
+  MAILCHIMP_SERVER_PREFIX = ""
+  MAILCHIMP_LIST_ID = ""
+  MAILCHIMP_USER_ID = ""
