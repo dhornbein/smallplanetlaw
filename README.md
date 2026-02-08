@@ -105,6 +105,40 @@ Access via Tailwind classes: `text-hunter-green`, `bg-olivine-300`, etc.
 | `npm run deploy`   | Build and deploy to GitHub Pages            |
 | `npm run astro`    | Run Astro CLI commands                      |
 
+## Deployment to Netlify
+
+**⚠️ Important**: This site uses server-side rendering for the newsletter API and **cannot be deployed to GitHub Pages**. Use Netlify instead.
+
+### Initial Setup
+
+1. **Create Netlify account** at [netlify.com](https://netlify.com)
+
+2. **Import repository**
+   - Click "Add new site" → "Import an existing project"
+   - Connect to GitHub and select this repository
+   - Netlify auto-detects Astro settings ✅
+
+3. **Add Environment Variables**
+   
+   In Netlify: Site settings → Environment variables → Add variable
+   
+   ```
+   MAILCHIMP_API_KEY=your_api_key
+   MAILCHIMP_SERVER_PREFIX=us21
+   MAILCHIMP_LIST_ID=your_list_id  
+   MAILCHIMP_USER_ID=your_user_id
+   ```
+   
+   **Get credentials:**
+   - API Key: Mailchimp → Account → Extras → API keys
+   - Server Prefix: Part after dash in API key (e.g., "us21")
+   - List ID: Audience → Settings → Audience ID
+   - User ID: In Mailchimp account URL or archive links
+
+4. **Deploy**
+   - Push to `main` branch = automatic deployment
+   - Set custom domain in Netlify: Domain management → `smallplanetlaw.com`
+
 ## Development Notes
 
 - **Zero JavaScript by default** - Astro ships no JS unless you use `client:*` directives
