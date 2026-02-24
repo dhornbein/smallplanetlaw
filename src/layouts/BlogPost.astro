@@ -1,0 +1,129 @@
+---
+import Layout from "./Layout.astro";
+import Button from "../components/ui/Button.astro";
+import CurvedEdge from "../components/ui/CurvedEdge.astro";
+import { Image } from "astro:assets";
+import bobbiePortrait from "../assets/bobbie-portrait-cropped.jpg";
+import { callToAction } from "../utils/navigation";
+
+interface Props {
+  title: string;
+  description?: string;
+  date: Date;
+  updated?: Date;
+  tags?: string[];
+  image?: string;
+}
+
+const { title, description, date, updated, tags = [], image } = Astro.props;
+
+const formattedDate = date.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
+const formattedUpdated = updated?.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<Layout title={`${title} | Small Planet Law Blog`} description={description}>
+  <article class="blog-post bg-dutch-white-200">
+    <!-- Header -->
+    <header
+      class="bg-primary-variant text-white show-header relative px-8 py-24 lg:py-28"
+    >
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        {
+          tags.length > 0 && (
+            <div class="flex flex-wrap gap-2 mb-4">
+              {tags.map((tag) => (
+                <span class="text-xs font-sans uppercase tracking-wider bg-white/15 rounded-full px-3 py-1">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )
+        }
+        <h1 class="text-white">{title}</h1>
+        <div class="flex items-center gap-4 text-olivine-100 text-sm font-sans mt-4">
+          <div class="flex items-center gap-2">
+            <Image
+              src={bobbiePortrait}
+              alt="Photo of Bobbie Mooney, founder of Small Planet Law. Outside on a crisp fall day, wearing stylish glasses and a warm smile."
+              width={32}
+              height={32}
+              class="rounded-full object-cover w-8 h-8 ring-2 ring-white/30"
+            />
+            <span class="font-semibold text-white">Bobbie Mooney</span>
+          </div>
+          <span class="opacity-50">·</span>
+          <time datetime={date.toISOString()}>{formattedDate}</time>
+          {
+            formattedUpdated && (
+              <span>
+                · Updated{" "}
+                <time datetime={updated!.toISOString()}>
+                  {formattedUpdated}
+                </time>
+              </span>
+            )
+          }
+        </div>
+      </div>
+    </header>
+
+    <div class="relative">
+      <CurvedEdge fillColor="fill-dutch-white-200" />
+    </div>
+    <!-- Content -->
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <div class="blog-content prose">
+        <slot />
+      </div>
+
+      <!-- CTA -->
+      <aside class="mt-12 p-8 bg-honeydew rounded-xl border border-olivine-200">
+        <h3 class="text-hunter-green-500 mt-0">Ready to Start Planning?</h3>
+        <p class="text-outer-space-600 mb-6">
+          Take the first step toward protecting your loved ones and leaving a
+          legacy that reflects your values.
+        </p>
+        <Button
+          href={callToAction.href}
+          target={callToAction.target}
+          variant="primary"
+          size="lg"
+        >
+          {callToAction.name}
+        </Button>
+      </aside>
+
+      <!-- Back to blog -->
+      <div class="mt-8">
+        <a
+          href="./blog"
+          class="text-hunter-green-500 hover:text-hunter-green-600 font-semibold transition-colors duration-200 inline-flex items-center gap-2"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"></path>
+          </svg>
+          Back to all articles
+        </a>
+      </div>
+    </div>
+  </article>
+</Layout>
+

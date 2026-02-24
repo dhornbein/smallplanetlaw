@@ -1,0 +1,103 @@
+---
+import { Image } from "astro:assets";
+import bobbiePortrait from "../../assets/bobbie-portrait-cropped.jpg";
+/**
+ * PostExcerpt - A card component for displaying a blog post preview.
+ * Shows title, date, summary, tags, and a "Read more" link.
+ */
+interface Props {
+  title: string;
+  summary: string;
+  date: Date;
+  slug: string;
+  tags?: string[];
+  pinned?: boolean;
+}
+
+const { title, summary, date, slug, tags = [], pinned = false } = Astro.props;
+
+const formattedDate = date.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<article
+  class:list={[
+    "post-excerpt md:max-w-md group rounded-xl border p-6 sm:p-8 transition-shadow duration-300 hover:shadow-lg flex flex-col justify-between",
+    pinned
+      ? "border-primary bg-celadon-100"
+      : "border-neutral-cool bg-dutch-white-200",
+  ]}
+>
+  <div>
+    {
+      pinned && (
+        <span class="inline-flex items-center gap-1 text-xs font-sans font-semibold uppercase tracking-wider text-hunter-green-500 mb-3">
+          <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9.049 2.927c.3-.916 1.603-.916 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.916-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.176 0l-3.37 2.448c-.784.57-1.838-.202-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.063 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69L9.05 2.927z" />
+          </svg>
+          Featured
+        </span>
+      )
+    }
+
+    <h3 class="mb-2">
+      <a
+        href={`./blog/${slug}`}
+        class="text-outer-space-800 group-hover:text-hunter-green-500 transition-colors duration-200 no-underline"
+      >
+        {title}
+      </a>
+    </h3>
+    <div class="flex items-center gap-2 mb-3">
+      <Image
+        src={bobbiePortrait}
+        alt="Bobbie Dodd"
+        width={24}
+        height={24}
+        class="rounded-full object-cover w-6 h-6 ring-1 ring-celadon-300"
+      />
+      <time
+        datetime={date.toISOString()}
+        class="text-sm text-outer-space-400 font-sans"
+      >
+        {formattedDate}
+      </time>
+    </div>
+    <p class="text-outer-space-600 mb-4">{summary}</p>
+  </div>
+  <div>
+    {
+      tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mb-4">
+          {tags.map((tag) => (
+            <span class="text-xs bg-celadon-200 text-hunter-green-600 rounded-full px-3 py-1 font-sans">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )
+    }
+
+    <a
+      href={`./blog/${slug}`}
+      class="inline-flex items-center gap-1 text-hunter-green-500 font-semibold hover:text-hunter-green-600 transition-colors duration-200 text-sm"
+    >
+      Read more
+      <svg
+        class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M9 5l7 7-7 7"></path>
+      </svg>
+    </a>
+  </div>
+</article>

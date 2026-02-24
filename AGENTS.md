@@ -6,6 +6,13 @@
 
 **Brand Promise**: Estate planning that feels human, meaningful, and good for the Earth.
 
+## Issues
+
+- header should indicate that the blog is selected when on a single post page
+- add a next a previous post navigation section at the bottom of each blog post page
+- between the mobile breakpoint and ~868px the header wraps many of the links and breaks
+- blog post should have a nice print style
+
 ## Key Features
 
 ### Core Pages (Phase 1 - Launch)
