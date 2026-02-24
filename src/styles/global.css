@@ -3,6 +3,7 @@
 @import "@fontsource-variable/source-sans-3";
 
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
   /* Updated Color Palette - Small Planet Law Brand */
