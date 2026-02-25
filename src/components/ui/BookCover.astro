@@ -1,0 +1,132 @@
+---
+/**
+ * BookCover - Renders a cover image as a 3D booklet using pure CSS.
+ * Reusable anywhere you need a book/PDF mockup presentation.
+ *
+ * Usage:
+ *   <BookCover src={myImage} alt="Guide title" />
+ *   <BookCover src={myImage} alt="Guide title" size="lg" />
+ */
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  size?: "sm" | "md" | "lg";
+  class?: string;
+}
+
+const {
+  src,
+  alt,
+  size = "md",
+  class: className = "",
+} = Astro.props;
+
+const sizeMap = {
+  sm: { width: 140, cssWidth: "140px" },
+  md: { width: 200, cssWidth: "200px" },
+  lg: { width: 280, cssWidth: "280px" },
+};
+
+const { width, cssWidth } = sizeMap[size];
+---
+
+<style is:global>
+  @reference "../../styles/global.css";
+
+  .book {
+    --book-width: 200px;
+    perspective: 800px;
+    display: inline-block;
+  }
+
+  .book__inner {
+    position: relative;
+    width: var(--book-width);
+    transform-style: preserve-3d;
+    transform: rotateY(18deg);
+    transition: transform 0.4s ease;
+  }
+
+  .book:hover .book__inner {
+    transform: rotateY(-8deg);
+  }
+
+  /* Front cover */
+  .book__cover {
+    position: relative;
+    display: block;
+    border-radius: 2px 6px 6px 2px;
+    box-shadow:
+      6px 6px 18px -2px rgba(0, 0, 0, 0.3),
+      24px 28px 40px -6px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+  }
+
+  .book__cover img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Spine edge highlight */
+  .book__cover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.15) 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 100%
+    );
+    z-index: 1;
+  }
+
+  /* Glossy overlay */
+  .book__cover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      transparent 40%,
+      transparent 60%,
+      rgba(255, 255, 255, 0.04) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Spine (left side, 3D depth) */
+  .book__spine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 16px;
+    transform: rotateY(90deg) translateX(-8px);
+    transform-origin: left center;
+    @apply bg-outer-space-600;
+  }
+</style>
+
+<div class:list={["book", className]} style={`--book-width: ${cssWidth}`}>
+  <div class="book__inner">
+    <div class="book__spine"></div>
+    <div class="book__cover">
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        quality={85}
+      />
+    </div>
+  </div>
+</div>

@@ -2,6 +2,8 @@
 import Layout from "./Layout.astro";
 import Button from "../components/ui/Button.astro";
 import CurvedEdge from "../components/ui/CurvedEdge.astro";
+import CTA from "../components/sections/CTA.astro";
+import Newsletter from "../components/sections/Newsletter.astro";
 import { Image } from "astro:assets";
 import bobbiePortrait from "../assets/bobbie-portrait-cropped.jpg";
 import { callToAction } from "../utils/navigation";
@@ -49,7 +51,9 @@ const formattedUpdated = updated?.toLocaleDateString("en-US", {
           )
         }
         <h1 class="text-white">{title}</h1>
-        <div class="flex items-center gap-4 text-olivine-100 text-sm font-sans mt-4">
+        <div
+          class="flex items-center gap-4 text-olivine-100 text-sm font-sans mt-4"
+        >
           <div class="flex items-center gap-2">
             <Image
               src={bobbiePortrait}
@@ -125,5 +129,7 @@ const formattedUpdated = updated?.toLocaleDateString("en-US", {
       </div>
     </div>
   </article>
-</Layout>
 
+  <CTA />
+  <Newsletter />
+</Layout>

@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 // @ts-expect-error - No type definitions available for @mailchimp/mailchimp_marketing
 import mailchimp from '@mailchimp/mailchimp_marketing';
+import { createHash } from 'crypto';
 
 // Mark this endpoint as server-rendered
 export const prerender = false;
@@ -15,6 +16,13 @@ if (apiKey && serverPrefix) {
     apiKey: apiKey,
     server: serverPrefix,
   });
+}
+
+/**
+ * Generate MD5 hash of lowercase email for Mailchimp subscriber hash
+ */
+function subscriberHash(email: string): string {
+  return createHash('md5').update(email.toLowerCase()).digest('hex');
 }
 
 export const POST: APIRoute = async ({ request }) => {
@@ -40,6 +48,7 @@ export const POST: APIRoute = async ({ request }) => {
     const formData = await request.formData();
     const email = formData.get('email')?.toString();
     const firstName = formData.get('firstName')?.toString();
+    const tags = formData.get('tags')?.toString(); // Comma-separated tag names
 
     // Validate email
     if (!email || !email.includes('@')) {
@@ -57,14 +66,28 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // Add subscriber to Mailchimp
-    const response = await mailchimp.lists.addListMember(listId, {
+    const hash = subscriberHash(email);
+
+    // Use setListMember (PUT/upsert) instead of addListMember (POST)
+    // This gracefully handles existing subscribers, previously unsubscribed,
+    // and cleaned contacts — avoiding "Member Exists" errors.
+    await mailchimp.lists.setListMember(listId, hash, {
       email_address: email,
-      status: 'pending', // Double opt-in
+      status_if_new: 'pending', // Double opt-in for new subscribers
       merge_fields: {
         FNAME: firstName || '',
       },
     });
+
+    // Add tags if provided
+    if (tags) {
+      const tagList = tags.split(',').map((t: string) => t.trim()).filter(Boolean);
+      if (tagList.length > 0) {
+        await mailchimp.lists.updateListMemberTags(listId, hash, {
+          tags: tagList.map((name: string) => ({ name, status: 'active' })),
+        });
+      }
+    }
 
     return new Response(
       JSON.stringify({
