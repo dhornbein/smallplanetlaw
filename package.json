@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "small-planet-law",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -10,16 +10,19 @@
     "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
-    "@astrojs/netlify": "^6.6.4",
     "@astropub/md": "^1.0.0",
     "@fontsource-variable/lora": "^5.2.8",
     "@fontsource-variable/source-sans-3": "^5.2.9",
-    "@mailchimp/mailchimp_marketing": "^3.0.80",
-    "@tailwindcss/vite": "^4.1.17",
-    "astro": "^5.16.4",
-    "tailwindcss": "^4.1.17"
+    "@mailchimp/mailchimp_marketing": "^3.0.80"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.19"
+    "@astrojs/netlify": "^6.6.4",
+    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "^4.2.1",
+    "astro": "^5.18.0",
+    "hast-util-find-and-replace": "^5.0.1",
+    "hastscript": "^9.0.1",
+    "tailwindcss": "^4.2.1",
+    "vite": "^6.4.1"
   }
 }
