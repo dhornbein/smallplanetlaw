@@ -22,7 +22,7 @@ const coverImages: Record<string, ImageMetadata> = {
 };
 ---
 
-<section id="free" class="relative pb-40 bg-neutral-warm">
+<section id="lead" class="relative pb-40 bg-neutral-warm">
   <lead-generator class="block" data-forced-variant={variant ?? ""}>
     {LEAD_MAGNETS.map((magnet, index) => (
       <div
@@ -32,17 +32,17 @@ const coverImages: Record<string, ImageMetadata> = {
       >
         <!-- Hero image with overlaid title -->
         <div
-          class="relative shadow-lg mb-8 bg-var min-h-[50vh] bg-cover bg-center"
+          class="relative shadow-lg mb-8 bg-var bg-cover bg-center"
           style={`--bg-img: url(${portraitShadowTall.src}); --bg-img-md: url(${portraitShadow.src});`}
         >
-          <div class="absolute inset-0 bg-outer-space-900/60 flex items-center justify-center">
+          <div class=" bg-outer-space-900/60 flex items-center justify-center">
             <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12 px-4 sm:px-6 max-w-4xl">
               {coverImages[magnet.id] && (
-                <a href="#free" class="shrink-0 -mb-4 md:mb-0">
+                <a href="#free" class="shrink-0 -mt-6 md:mt-0">
                   <BookCover
                     src={coverImages[magnet.id]}
                     alt={`${magnet.title} cover`}
-                    size="md"
+                    size="lg"
                   />
                 </a>
               )}

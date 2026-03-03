@@ -84,4 +84,4 @@ This post is just the beginning. Small Planet Law has created a **free Green Est
 - What to expect when working with a Personal Family Lawyer®
 - How to get started on your own Green Estate Plan
 
-You can get your copy here — [I'll send it right to your inbox.](#free)
+You can get your copy here — [I'll send it right to your inbox.](#lead)
