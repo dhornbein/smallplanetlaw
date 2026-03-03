@@ -1,7 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import PostList from "../../components/sections/PostList.astro";
-import CTA from "../../components/sections/CTA.astro";
 import CurvedEdge from "../../components/ui/CurvedEdge.astro";
 import Newsletter from "../../components/sections/Newsletter.astro";
 import { getCollection } from "astro:content";
@@ -27,11 +26,11 @@ const posts = await getCollection("blog");
   </header>
 
   <!-- Post List -->
-  <section class="py-12 lg:py-16 relative bg-light">
+  <section class="py-16 lg:py-20 relative bg-light">
     <CurvedEdge fillColor="fill-light" />
     <PostList posts={posts} />
+    <CurvedEdge fillColor="fill-light" position="bottom" />
   </section>
 
-  <CTA />
   <Newsletter />
 </Layout>
