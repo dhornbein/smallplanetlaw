@@ -7,12 +7,12 @@ export interface NavItem {
 
 // Global navigation configuration
 export const navItems: NavItem[] = [
-  { name: "Home", href: "./" },
-  { name: "About Us", href: "./about" },
-  { name: "Our Services", href: "./services" },
-  { name: "Blog", href: "./blog" },
-  { name: "FAQ", href: "./faq" },
-  { name: "Contact Us", href: "./contact" },
+  { name: "Home", href: "/" },
+  { name: "About Us", href: "/about" },
+  { name: "Our Services", href: "/services" },
+  { name: "Blog", href: "/blog" },
+  { name: "FAQ", href: "/faq" },
+  { name: "Contact Us", href: "/contact" },
 ];
 
 export const callToAction: NavItem = {

@@ -6,38 +6,22 @@ import { navItems, callToAction } from "../../utils/navigation";
 // element that will trigger the sticky header when scrolled past
 const { triggerSelector = ".show-header" } = Astro.props;
 
-// Get the base path from Astro config (works in both dev and prod)
-const base = import.meta.env.BASE_URL;
-
 // Get the current path for active nav highlighting
 const currentPath = new URL(Astro.request.url).pathname;
 
 // Function to check if a nav item is active
 const isActive = (href: string) => {
-  // Convert relative href to absolute path using base
-  let absoluteHref: string;
-  
-  if (href.startsWith('./')) {
-    // Handle relative paths like "./" or "./about"
-    const relativePath = href.substring(2); // Remove "./"
-    absoluteHref = base + relativePath;
-  } else if (href.startsWith('http')) {
-    // External link, never active
+  if (href.startsWith("http")) {
     return false;
-  } else {
-    absoluteHref = href;
   }
-  
-  // Normalize paths for comparison (remove trailing slashes for comparison)
+
   const normalizedCurrent = currentPath.replace(/\/$/, '') || '/';
-  const normalizedHref = absoluteHref.replace(/\/$/, '') || '/';
-  
-  // For home page (empty relative path becomes just the base)
-  if (href === './' || href === '') {
-    return normalizedCurrent === base.replace(/\/$/, '');
+  const normalizedHref = href.replace(/\/$/, '') || '/';
+
+  if (normalizedHref === '/blog') {
+    return normalizedCurrent === '/blog' || normalizedCurrent.startsWith('/blog/');
   }
-  
-  // Exact match for other pages
+
   return normalizedCurrent === normalizedHref;
 };
 ---
