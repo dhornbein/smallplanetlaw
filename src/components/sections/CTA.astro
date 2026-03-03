@@ -1,6 +1,12 @@
 ---
 import LeadGenerator from "./LeadGenerator.astro";
+
+interface Props {
+  variant?: string;
+}
+
+const { variant } = Astro.props;
 ---
 
-<LeadGenerator />
+<LeadGenerator variant={variant} />
 

@@ -15,9 +15,11 @@ interface Props {
   updated?: Date;
   tags?: string[];
   image?: string;
+  /** Lead magnet variant id to force (e.g. "green-ep-guide"). Omit for random A/B. */
+  cta?: string;
 }
 
-const { title, description, date, updated, tags = [], image } = Astro.props;
+const { title, description, date, updated, tags = [], image, cta } = Astro.props;
 
 const formattedDate = date.toLocaleDateString("en-US", {
   year: "numeric",
@@ -89,12 +91,13 @@ const formattedUpdated = updated?.toLocaleDateString("en-US", {
         <slot />
       </div>
 
-      <!-- CTA -->
+      <!-- Book a Discovery Call -->
       <aside class="mt-12 p-8 bg-honeydew rounded-xl border border-olivine-200">
         <h3 class="text-hunter-green-500 mt-0">Ready to Start Planning?</h3>
         <p class="text-outer-space-600 mb-6">
           Take the first step toward protecting your loved ones and leaving a
-          legacy that reflects your values.
+          legacy that reflects your values. Book a complimentary 15-minute
+          Discovery Call — no pressure, just clarity.
         </p>
         <Button
           href={callToAction.href}
@@ -102,9 +105,25 @@ const formattedUpdated = updated?.toLocaleDateString("en-US", {
           variant="primary"
           size="lg"
         >
-          {callToAction.name}
+          Book Your Free Discovery Call
         </Button>
       </aside>
+
+      <!-- Disclaimer -->
+      <div class="mt-8 p-4 rounded-lg bg-dutch-white-300/50 border border-dutch-white-400">
+        <p class="text-xs text-outer-space-500 leading-relaxed m-0">
+          <em>
+            This article is a service of Small Planet Law, a Personal Family
+            Lawyer<sup>®</sup>irm. We don't just draft documents; we ensure you make
+            informed and empowered decisions about life and death, for yourself
+            and the people you love. This material was created for educational
+            and informational purposes only and is not intended as ERISA, tax,
+            legal, or investment advice. If you are seeking legal advice
+            specific to your needs, such advice services must be obtained on
+            your own, separate from this educational material.
+          </em>
+        </p>
+      </div>
 
       <!-- Back to blog -->
       <div class="mt-8">
@@ -130,6 +149,6 @@ const formattedUpdated = updated?.toLocaleDateString("en-US", {
     </div>
   </article>
 
-  <CTA />
+  <CTA variant={cta} />
   <Newsletter />
 </Layout>

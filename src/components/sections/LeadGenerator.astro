@@ -7,6 +7,13 @@ import coverGreenEP from "../../assets/cover-green-ep-guide.jpg";
 import cover6Mistakes from "../../assets/cover-6-mistakes-guide.jpg";
 import { LEAD_MAGNETS } from "../../utils/global";
 
+interface Props {
+  /** Force a specific lead magnet variant by its id (e.g. "green-ep-guide"). Omit for random A/B selection. */
+  variant?: string;
+}
+
+const { variant } = Astro.props;
+
 // Map cover images by lead magnet ID
 const coverImages: Record<string, ImageMetadata> = {
   "green-ep-guide": coverGreenEP,
@@ -15,7 +22,7 @@ const coverImages: Record<string, ImageMetadata> = {
 ---
 
 <section class="relative pb-40 bg-neutral-warm">
-  <lead-generator class="block">
+  <lead-generator class="block" data-forced-variant={variant ?? ""}>
     {LEAD_MAGNETS.map((magnet, index) => (
       <div
         class="lead-variant hidden"
@@ -134,13 +141,19 @@ const coverImages: Record<string, ImageMetadata> = {
 <script>
   class LeadGeneratorElement extends HTMLElement {
     connectedCallback() {
-      // A/B test: randomly pick a variant (50/50)
       const variants = this.querySelectorAll('.lead-variant');
       if (variants.length === 0) return;
 
-      const chosenIndex = Math.random() < 0.5 ? 0 : 1;
-      const chosen = variants[chosenIndex] || variants[0];
-      chosen.classList.remove('hidden');
+      // Use forced variant if provided via data attribute, otherwise A/B test
+      const forcedVariant = this.dataset.forcedVariant?.trim();
+      let chosen: Element | null = null;
+      if (forcedVariant) {
+        chosen = this.querySelector(`.lead-variant[data-variant="${forcedVariant}"]`) ?? variants[0];
+      } else {
+        const chosenIndex = Math.random() < 0.5 ? 0 : 1;
+        chosen = variants[chosenIndex] || variants[0];
+      }
+      (chosen as HTMLElement).classList.remove('hidden');
 
       // Set up form submission
       const form = chosen.querySelector('.lead-form') as HTMLFormElement | null;
