@@ -1,9 +1,10 @@
 ---
 title: "Green Estate Planning: A Fresh Approach for Colorado Families"
 summary: "Discover how Green Estate Planning weaves together clarity, values, and care for the earth and your loved ones."
-date: 2026-02-01
+date: 2026-02-16
 pinned: true
 tags: ["green estate planning", "sustainability", "colorado", "values-based planning"]
+cta: "green-ep-guide"
 ---
 
 When most people hear the phrase *estate planning*, they think of paperwork, legal jargon, and maybe a dusty binder on a shelf. But estate planning can be something much more meaningful. When approached with intention, estate planning is a way to care for the people you love, express your values, and leave the world a little better than you found it.
@@ -51,15 +52,15 @@ You can support the land, water, and wildlife you love through charitable gifts 
 
 ### Green Burial and Natural Funeral Options
 
-Colorado has become a leader in natural burial, body composting, and other low‑impact choices. Your estate plan can make your wishes clear so your family doesn't have to guess.
+Colorado has become a leader in natural burial, water cremation, natural organic reduction (body composting), and other low‑impact choices. Your estate plan can make your wishes clear so your family doesn't have to guess.
 
 ### Low‑Waste Planning Practices
 
-At Small Planet Law, we use digital-first processes, minimal printing, and streamlined workflows to reduce waste and keep your plan simple and accessible. We vet our vendors, supplies, and partners for alignment with our commitment to sustainability. And for every estate plan we write, Small Planet Law makes a donation to one of our featured environmental nonprofits — chosen by you!
+At Small Planet Law, we use digital-first processes, minimal printing, and streamlined workflows to reduce waste and keep your plan simple and accessible. We vet our vendors, supplies, and partners for alignment with our commitment to sustainability. And for every estate plan we write, Small Planet Law makes a donation to your choice of one of our featured environmental nonprofits. It's one more way your plan can give back to our Earth.
 
 ### Passing On Your Values
 
-Your legacy is so much more than financial assets — it includes the stories, principles, and experiences that shape your love for your community and the natural world. Through the Small Planet Law planning process, you can create a lasting record of the values and commitments that mean the most to you, offer guidance for future generations, and encourage your family to stay connected to the places and ecosystems you cherish.
+Your legacy is so much more than financial assets — it includes the stories, principles, and experiences that shape your love for your community and the natural world. Through the Small Planet Law planning process, you can create a lasting record of the values and commitments that mean the most to you, offer guidance for future generations, and encourage your family to stay connected to the places, wildlife, and ecosystems you cherish.
 
 ## Why Work With a Personal Family Lawyer®?
 
@@ -67,7 +68,7 @@ Small Planet Law is proud to be a member firm of the Personal Family Lawyer® ne
 
 Most traditional estate planning focuses on one-off transactions and one-size-fits-all documents. But families deserve more than paperwork. You deserve a lawyer who takes the time to understand your goals, your relationships, and the principles that guide your life.
 
-As a Personal Family Lawyer® trained and certified firm, Small Planet Law offers a relationship‑based approach designed to support you long‑term, not just at the moment your documents are signed. That means a warm, accessible process with clear flat fees up front so you always know what to expect, support with asset alignment so your plan actually works, and regular plan review and updates as your life and the law evolve.
+As a Personal Family Lawyer® trained and certified firm, Small Planet Law offers a relationship‑based approach designed to support you long‑term, not just at the moment your documents are signed. That means a warm, accessible process with clear flat fees up front so you always know what to expect, plus customized support with asset alignment so your plan actually works, and regular plan review and updates as your life and the law evolve.
 
 Estate planning requires nuance. No matter what aspects of green planning resonate, you will benefit from working with someone who is rigorously trained and certified in estate planning and can help you navigate your choices with clarity and confidence.
 
@@ -83,15 +84,4 @@ This post is just the beginning. Small Planet Law has created a **free Green Est
 - What to expect when working with a Personal Family Lawyer®
 - How to get started on your own Green Estate Plan
 
-You can get your copy here — I'll send it right to your inbox.
-
-## Let's Get Connected!
-
-- Ready to explore starting your own green estate plan? [Book a call here!](https://smallplanetlaw.cliogrow.com/book/173de2aea8b3decac6684b3d007f2d15)
-- Stay in the know: Sign up for the Small Planet Law newsletter for estate planning tips, environmental insights, monthly offers, and day-in-the-life updates from Small Planet Law's founding attorney Bobbie Mooney.
-
----
-
-*This article is a service of Small Planet Law, a Personal Family Lawyer Firm. We don't just draft documents; we ensure you make informed and empowered decisions about life and death, for yourself and the people you love. That's why we offer a Life & Legacy Planning Session, during which you will get more financially organized than you've ever been before and make all the best choices for the people you love. You can begin by contacting our office today to schedule a Life & Legacy Planning Session.*
-
-*This material was created for educational and informational purposes only and is not intended as ERISA, tax, legal, or investment advice. If you are seeking legal advice specific to your needs, such advice services must be obtained on your own, separate from this educational material.*
+You can get your copy here — [I'll send it right to your inbox.](#free)

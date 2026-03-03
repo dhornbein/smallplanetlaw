@@ -1,8 +1,8 @@
 ---
 title: "Why Planning Is the Greatest Gift You Can Give Your Loved Ones"
 summary: "Learn why thoughtful, well-designed estate planning is the greatest gift you can give your loved ones."
-date: 2026-01-15
-tags: ["estate planning", "family protection", "life & legacy planning"]
+date: 2026-02-16
+tags: ["estate planning", "family protection", "life & legacy planning", "guardians"]
 ---
 
 For many people, the term estate planning brings to mind stacks of legal documents, a will, a trust, a healthcare directive, or powers of attorney. But estate planning isn't just about creating documents. It's about making sure the people you love are protected and supported when they need it most. It's ultimately about love, protection, and peace of mind.
@@ -54,11 +54,3 @@ Small Planet Law makes it easy to take the step that too many people put off ent
 If you already have a plan, let's make sure it's up to date and truly reflects your life today. If you don't, now is the perfect time to begin.
 
 As your Personal Family Lawyer® Firm, we can help you create a Life & Legacy Plan that organizes your finances, protects your loved ones, and ensures your plan works exactly as you intend. You'll walk away knowing your loved ones will have a trusted advisor to turn to when you no longer can. Life & Legacy Planning gives you peace of mind now, and gives your loved ones peace of mind for the future.
-
-[Schedule your complimentary 15-minute Discovery Call](https://smallplanetlaw.cliogrow.com/book/173de2aea8b3decac6684b3d007f2d15) today to get started now.
-
----
-
-*This article is a service of Small Planet Law, a Personal Family Lawyer Firm. We don't just draft documents; we ensure you make informed and empowered decisions about life and death, for yourself and the people you love. That's why we offer a Life & Legacy Planning Session, during which you will get more financially organized than you've ever been before and make all the best choices for the people you love. You can begin by contacting our office today to schedule a Life & Legacy Planning Session.*
-
-*The content is sourced from Personal Family Lawyer® for use by Personal Family Lawyer firms, a source believed to be providing accurate information. This material was created for educational and informational purposes only and is not intended as ERISA, tax, legal, or investment advice. If you are seeking legal advice specific to your needs, such advice services must be obtained on your own, separate from this educational material.*

@@ -1,11 +1,11 @@
 ---
 title: "Minor Children in your Family? Protect them with a Kids Protection Plan®"
 summary: "Learn how and why a Kids Protection Plan is such a powerful tool for young families."
-date: 2026-01-01
-tags: ["kids protection plan", "guardianship", "family protection", "minor children"]
+date: 2026-02-16
+tags: ["kids protection plan", "guardians", "family protection", "minor children"]
 ---
 
-Even if you have named legal guardians for your children (or your siblings have done it for their kids, or your kids have done it for your grandchildren), most people … even lawyers! … make 1 of 6 common mistakes when naming legal guardians. And, if you (or your siblings or your children) haven't named legal guardians for minors you care about, make it a priority to take care of the littles in your life before the end of the school year.
+Even if you have named legal guardians for your children (or your siblings have done it for their kids, or your kids have done it for your grandchildren), most people … even lawyers! … make 1 of 6 common mistakes when naming legal guardians. And, if you (or your siblings or your children) haven't named legal guardians for minors you care about, make it a priority to take care of the littles in your life before the end of this school year.
 
 It can be hard to think about a future where you couldn't be there for the people you care about the most, but having a plan in place will ensure the little ones you love stay in the care of the people they know and trust in the event you become incapacitated or die. If you do not take action, the decisions about their care could be left up to chance, or to whichever judge is overseeing the family court at the time something happens.
 
@@ -44,11 +44,3 @@ While nominating permanent legal guardians is fundamental, it might not suffice 
 If you're ready to create a Kids Protection Plan® before the end of this school year, the first step is to schedule your Life & Legacy Planning Session™. During the Session, we'll guide you through our unique, heart-centered process to tailor a plan that reflects your wishes, secures your family's future, and includes a Kids Protection Plan®.
 
 And unlike other resolutions that may be hard to stick to, we're here to guide and support you through every step to ensure your Kids Protection Plan® offers the best protection for the people you love — both now and for years to come.
-
-[Schedule your complimentary 15-minute Discovery Call](https://smallplanetlaw.cliogrow.com/book/173de2aea8b3decac6684b3d007f2d15) today to get started now.
-
----
-
-*This article is a service of Small Planet Law, a Personal Family Lawyer Firm. We don't just draft documents; we ensure you make informed and empowered decisions about life and death, for yourself and the people you love. That's why we offer a Life & Legacy Planning Session, during which you will get more financially organized than you've ever been before and make all the best choices for the people you love. You can begin by contacting our office today to schedule a Life & Legacy Planning Session.*
-
-*The content is sourced from Personal Family Lawyer® for use by Personal Family Lawyer firms, a source believed to be providing accurate information. This material was created for educational and informational purposes only and is not intended as ERISA, tax, legal, or investment advice. If you are seeking legal advice specific to your needs, such advice services must be obtained on your own, separate from this educational material.*

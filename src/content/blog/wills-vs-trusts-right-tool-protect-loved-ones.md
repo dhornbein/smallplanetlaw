@@ -1,7 +1,7 @@
 ---
 title: "Wills vs. Trusts: How to Choose the Right Tool to Protect the People You Love"
 summary: "Choosing between a will and a trust can shape your family's future. Learn what to consider so your plan truly works."
-date: 2025-12-15
+date: 2026-02-16
 tags: ["wills", "trusts", "estate planning", "probate"]
 ---
 
@@ -17,7 +17,7 @@ A will must go through probate, which is a court process that becomes public rec
 
 Importantly, a will also has no authority while you are living. If you become incapacitated, your loved ones will still need additional legal tools to manage your medical decisions, financial matters, and personal care. Without a plan that addresses incapacity, your loved ones may face court involvement, delays, and unnecessary stress during an already emotional time.
 
-And, yes, if you have a power of attorney that does operate while you are living, BUT your power of attorney stops operating at the time of your death. I know, it can be confusing. That's why we always begin with clear education so you understand what you are doing, and why, and then support you to choose the right plan (and fee) for you.
+And, yes, if you have a power of attorney, that does operate while you are living, BUT your power of attorney stops operating at the time of your death. I know, it can be confusing. That's why we always begin with clear education so you understand what you are doing, and why, and then support you to choose the right plan (and fee) for you.
 
 Because of the limitations of wills and powers of attorney alone, many people look to trusts for greater protection and privacy.
 
@@ -62,11 +62,3 @@ No matter which tool you choose, what matters most is that your plan works when 
 As a trusted advisor to you and your loved ones, my objective is not just to help you choose between a will and a trust. I'm here to help you create a comprehensive estate plan, called a Life & Legacy Plan, that protects the people you love, keeps them out of court and conflict, and ensures your wishes are honored. I also have systems to review your plan over time, ensuring your plan will work when the people you love need it, and that our firm will be there for them, when you can't be.
 
 If this all sounds expensive, I can assure you that it's a lot less costly than the loss of your assets to avoidable court costs, conflict, or your loved ones simply not knowing what to do or what you have. Let's start with a 15-minute discovery call during which we can guide you to your next best steps in identifying the most affordable and effective plan for yourself and the people you love.
-
-[Schedule your complimentary 15-minute Discovery Call](https://smallplanetlaw.cliogrow.com/book/173de2aea8b3decac6684b3d007f2d15) today to get started now.
-
----
-
-*This article is a service of Small Planet Law, a Personal Family Lawyer Firm. We don't just draft documents; we ensure you make informed and empowered decisions about life and death, for yourself and the people you love. That's why we offer a Life & Legacy Planning Session, during which you will get more financially organized than you've ever been before and make all the best choices for the people you love. You can begin by contacting our office today to schedule a Life & Legacy Planning Session.*
-
-*The content is sourced from Personal Family Lawyer® for use by Personal Family Lawyer firms, a source believed to be providing accurate information. This material was created for educational and informational purposes only and is not intended as ERISA, tax, legal, or investment advice. If you are seeking legal advice specific to your needs, such advice services must be obtained on your own, separate from this educational material.*
