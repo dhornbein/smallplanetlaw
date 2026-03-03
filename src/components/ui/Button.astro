@@ -2,28 +2,38 @@
 interface Props {
   href?: string;
   target?: string;
-  variant?: 'primary' | 'secondary' | 'accent';
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  type?: 'button' | 'submit' | 'reset';
+  variant?: 'primary' | 'secondary' | 'accent' | 'unstyled';
+  size?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
   class?: string;
+  disabled?: boolean;
+  [key: string]: any;
 }
 
 const { 
   href,
   target, 
+  type = 'button',
   variant = 'primary', 
   size = 'md',
-  class: className = '' 
+  class: className = '',
+  disabled,
+  ...rest
 } = Astro.props;
 
-const baseClasses = 'inline-flex items-center justify-center transition-colors duration-200 rounded-md';
+const baseClasses = variant === 'unstyled'
+  ? ''
+  : 'inline-flex items-center justify-center transition-colors duration-200 rounded-md cursor-pointer';
 
 const variantClasses = {
   primary: 'btn-primary',
   secondary: 'btn-secondary',
-  accent: 'btn-accent'
+  accent: 'btn-accent',
+  unstyled: ''
 };
 
 const sizeClasses = {
+  none: '',
   sm: 'px-4 py-2 text-sm',
   md: 'px-6 py-3 text-base',
   lg: 'px-8 py-4 text-lg',
@@ -54,8 +64,11 @@ const Element = href ? 'a' : 'button';
 <Element 
   href={href} 
   target={target}
+  type={!href ? type : undefined}
+  disabled={!href ? disabled : undefined}
   rel={target === '_blank' ? 'noopener noreferrer' : undefined}
   class={classes}
+  {...rest}
 >
   <slot />
 </Element>

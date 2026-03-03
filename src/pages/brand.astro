@@ -282,15 +282,18 @@ const brandAssets = [
                   </div>
                 </div>
 
-                <button
-                  class="download-asset-btn w-full inline-flex items-center justify-center px-4 py-2.5 bg-primary text-white rounded-md hover:bg-hunter-green-600 transition-colors duration-200 font-medium text-sm"
+                <Button
+                  type="button"
+                  variant="unstyled"
+                  size="none"
+                  class="download-asset-btn cursor-pointer w-full inline-flex items-center justify-center px-4 py-2.5 bg-primary text-white rounded-md hover:bg-hunter-green-600 transition-colors duration-200 font-medium text-sm"
                   data-asset-id={asset.id}
                 >
                   <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                   </svg>
                   Download
-                </button>
+                </Button>
               </div>
             </div>
           ))}
@@ -310,7 +313,10 @@ const brandAssets = [
         <!-- Base Colors Row -->
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
           <!-- Hunter Green -->
-          <button
+          <Button
+            type="button"
+            variant="unstyled"
+            size="none"
             class="color-swatch cursor-pointer group"
             data-color={brandColors.primary.base.hex}
             title="Click to copy"
@@ -328,10 +334,13 @@ const brandAssets = [
                 </span>
               </div>
             </div>
-          </button>
+          </Button>
 
           <!-- Olivine -->
-          <button
+          <Button
+            type="button"
+            variant="unstyled"
+            size="none"
             class="color-swatch cursor-pointer group"
             data-color={brandColors.secondary.base.hex}
             title="Click to copy"
@@ -349,10 +358,13 @@ const brandAssets = [
                 </span>
               </div>
             </div>
-          </button>
+          </Button>
 
           <!-- Redwood -->
-          <button
+          <Button
+            type="button"
+            variant="unstyled"
+            size="none"
             class="color-swatch cursor-pointer group"
             data-color={brandColors.accent.base.hex}
             title="Click to copy"
@@ -370,10 +382,13 @@ const brandAssets = [
                 </span>
               </div>
             </div>
-          </button>
+          </Button>
 
           <!-- Outer Space -->
-          <button
+          <Button
+            type="button"
+            variant="unstyled"
+            size="none"
             class="color-swatch cursor-pointer group"
             data-color={brandColors.neutral.base.hex}
             title="Click to copy"
@@ -391,10 +406,13 @@ const brandAssets = [
                 </span>
               </div>
             </div>
-          </button>
+          </Button>
 
           <!-- Celadon -->
-          <button
+          <Button
+            type="button"
+            variant="unstyled"
+            size="none"
             class="color-swatch cursor-pointer group"
             data-color={brandColors.supporting[0].base.hex}
             title="Click to copy"
@@ -412,10 +430,13 @@ const brandAssets = [
                 </span>
               </div>
             </div>
-          </button>
+          </Button>
 
           <!-- Dutch White -->
-          <button
+          <Button
+            type="button"
+            variant="unstyled"
+            size="none"
             class="color-swatch cursor-pointer group"
             data-color={brandColors.supporting[1].base.hex}
             title="Click to copy"
@@ -433,7 +454,7 @@ const brandAssets = [
                 </span>
               </div>
             </div>
-          </button>
+          </Button>
         </div>
 
         <div class="space-y-12">
@@ -463,13 +484,16 @@ const brandAssets = [
                   <div class="text-sm font-medium text-text-primary">
                     {brandColors.primary.name}
                   </div>
-                  <button
+                  <Button
+                    type="button"
+                    variant="unstyled"
+                    size="none"
                     class="text-xs text-text-secondary font-mono hover:text-primary transition-colors duration-200 cursor-pointer copy-hex"
                     data-color={brandColors.primary.base.hex}
                     title="Click to copy"
                   >
                     {brandColors.primary.base.hex}
-                  </button>
+                  </Button>
                 </div>
               </div>
 
@@ -490,13 +514,16 @@ const brandAssets = [
                         <div class="text-xs font-medium text-text-secondary">
                           {shade.shade}
                         </div>
-                        <button
+                        <Button
+                          type="button"
+                          variant="unstyled"
+                          size="none"
                           class="text-[10px] text-text-secondary font-mono leading-tight break-all hover:text-primary transition-colors duration-200 cursor-pointer copy-hex"
                           data-color={shade.hex}
                           title="Click to copy"
                         >
                           {shade.hex}
-                        </button>
+                        </Button>
                       </div>
                     </div>
                   ))
@@ -531,13 +558,16 @@ const brandAssets = [
                   <div class="text-sm font-medium text-text-primary">
                     {brandColors.secondary.name}
                   </div>
-                  <button
+                  <Button
+                    type="button"
+                    variant="unstyled"
+                    size="none"
                     class="text-xs text-text-secondary font-mono hover:text-primary transition-colors duration-200 cursor-pointer copy-hex"
                     data-color={brandColors.secondary.base.hex}
                     title="Click to copy"
                   >
                     {brandColors.secondary.base.hex}
-                  </button>
+                  </Button>
                 </div>
               </div>
 
@@ -558,13 +588,16 @@ const brandAssets = [
                         <div class="text-xs font-medium text-text-secondary">
                           {shade.shade}
                         </div>
-                        <button
+                        <Button
+                          type="button"
+                          variant="unstyled"
+                          size="none"
                           class="text-[10px] text-text-secondary font-mono leading-tight break-all hover:text-primary transition-colors duration-200 cursor-pointer copy-hex"
                           data-color={shade.hex}
                           title="Click to copy"
                         >
                           {shade.hex}
-                        </button>
+                        </Button>
                       </div>
                     </div>
                   ))
@@ -599,13 +632,16 @@ const brandAssets = [
                   <div class="text-sm font-medium text-text-primary">
                     {brandColors.accent.name}
                   </div>
-                  <button
+                  <Button
+                    type="button"
+                    variant="unstyled"
+                    size="none"
                     class="text-xs text-text-secondary font-mono hover:text-primary transition-colors duration-200 cursor-pointer copy-hex"
                     data-color={brandColors.accent.base.hex}
                     title="Click to copy"
                   >
                     {brandColors.accent.base.hex}
-                  </button>
+                  </Button>
                 </div>
               </div>
 
@@ -626,13 +662,16 @@ const brandAssets = [
                         <div class="text-xs font-medium text-text-secondary">
                           {shade.shade}
                         </div>
-                        <button
+                        <Button
+                          type="button"
+                          variant="unstyled"
+                          size="none"
                           class="text-[10px] text-text-secondary font-mono leading-tight break-all hover:text-primary transition-colors duration-200 cursor-pointer copy-hex"
                           data-color={shade.hex}
                           title="Click to copy"
                         >
                           {shade.hex}
-                        </button>
+                        </Button>
                       </div>
                     </div>
                   ))
@@ -680,13 +719,16 @@ const brandAssets = [
                   <div class="text-sm font-medium text-text-primary">
                     {brandColors.neutral.name}
                   </div>
-                  <button
+                  <Button
+                    type="button"
+                    variant="unstyled"
+                    size="none"
                     class="text-xs text-text-secondary font-mono hover:text-primary transition-colors duration-200 cursor-pointer copy-hex"
                     data-color={brandColors.neutral.base.hex}
                     title="Click to copy"
                   >
                     {brandColors.neutral.base.hex}
-                  </button>
+                  </Button>
                 </div>
               </div>
 
@@ -707,13 +749,16 @@ const brandAssets = [
                         <div class="text-xs font-medium text-text-secondary">
                           {shade.shade}
                         </div>
-                        <button
+                        <Button
+                          type="button"
+                          variant="unstyled"
+                          size="none"
                           class="text-[10px] text-text-secondary font-mono leading-tight break-all hover:text-primary transition-colors duration-200 cursor-pointer copy-hex"
                           data-color={shade.hex}
                           title="Click to copy"
                         >
                           {shade.hex}
-                        </button>
+                        </Button>
                       </div>
                     </div>
                   ))
@@ -757,13 +802,16 @@ const brandAssets = [
                       <div class="text-sm font-medium text-text-primary">
                         {color.name}
                       </div>
-                      <button
+                      <Button
+                        type="button"
+                        variant="unstyled"
+                        size="none"
                         class="text-xs text-text-secondary font-mono hover:text-primary transition-colors duration-200 cursor-pointer copy-hex"
                         data-color={color.base.hex}
                         title="Click to copy"
                       >
                         {color.base.hex}
-                      </button>
+                      </Button>
                     </div>
                   </div>
 
@@ -783,13 +831,16 @@ const brandAssets = [
                           <div class="text-xs font-medium text-text-secondary">
                             {shade.shade}
                           </div>
-                          <button
+                          <Button
+                            type="button"
+                            variant="unstyled"
+                            size="none"
                             class="text-[10px] text-text-secondary font-mono leading-tight break-all hover:text-primary transition-colors duration-200 cursor-pointer copy-hex"
                             data-color={shade.hex}
                             title="Click to copy"
                           >
                             {shade.hex}
-                          </button>
+                          </Button>
                         </div>
                       </div>
                     ))}
