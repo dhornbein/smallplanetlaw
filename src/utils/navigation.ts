@@ -17,7 +17,7 @@ export const navItems: NavItem[] = [
 
 export const callToAction: NavItem = {
   name: "Book A Call",
-  href: "https://smallplanetlaw.cliogrow.com/book/173de2aea8b3decac6684b3d007f2d15",
+  href: "https://calendar.app.google/d8bg1cWxR3cSqnfi9",
   target: "_blank",
 };
 
