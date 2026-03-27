@@ -60,9 +60,10 @@ import { markdown } from "@astropub/md";
                 </svg>
               </summary>
               <div class="faq-answer p-6">
-                <div class="answer-content text-lg leading-relaxed space-y-4">
-                  {await markdown(item.answer)}
-                </div>
+                <div
+                  class="answer-content text-lg leading-relaxed space-y-4"
+                  set:html={await markdown(item.answer)}
+                />
               </div>
             </details>
           ))
