@@ -14,7 +14,9 @@ export const BUSINESS_ADDRESS = {
 };
 
 export const MAILCHIMP = {
-  archiveUrl: "https://us15.campaign-archive.com/home/?u=b2ed0278c26bf5e76a2955428&id=e33f95f2fe"
+  archiveUrl: `https://us15.campaign-archive.com/home/?u=${import.meta.env.MAILCHIMP_USER_ID}&id=${import.meta.env.MAILCHIMP_LIST_ID}`,
+  userId: import.meta.env.MAILCHIMP_USER_ID,
+  listId: import.meta.env.MAILCHIMP_LIST_ID,
 };
 
 // Lead magnet definitions for A/B testing
