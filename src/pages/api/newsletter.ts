@@ -6,18 +6,6 @@ import { createHash } from 'crypto';
 // Mark this endpoint as server-rendered
 export const prerender = false;
 
-// Configure Mailchimp
-const apiKey = import.meta.env.MAILCHIMP_API_KEY;
-const serverPrefix = import.meta.env.MAILCHIMP_SERVER_PREFIX;
-const listId = import.meta.env.MAILCHIMP_LIST_ID;
-
-if (apiKey && serverPrefix) {
-  mailchimp.setConfig({
-    apiKey: apiKey,
-    server: serverPrefix,
-  });
-}
-
 /**
  * Generate MD5 hash of lowercase email for Mailchimp subscriber hash
  */
@@ -27,6 +15,11 @@ function subscriberHash(email: string): string {
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    // Read env vars at runtime (process.env for Netlify SSR, not import.meta.env)
+    const apiKey = process.env.MAILCHIMP_API_KEY;
+    const serverPrefix = process.env.MAILCHIMP_SERVER_PREFIX;
+    const listId = process.env.MAILCHIMP_LIST_ID;
+
     // Validate environment variables
     if (!apiKey || !serverPrefix || !listId) {
       console.error('Missing Mailchimp configuration');
@@ -43,6 +36,12 @@ export const POST: APIRoute = async ({ request }) => {
         }
       );
     }
+
+    // Configure Mailchimp per-request
+    mailchimp.setConfig({
+      apiKey: apiKey,
+      server: serverPrefix,
+    });
 
     // Parse form data
     const formData = await request.formData();
