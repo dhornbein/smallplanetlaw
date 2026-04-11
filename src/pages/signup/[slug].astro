@@ -1,0 +1,12 @@
+---
+import { MAILCHIMP_SIGNUP_LINKS } from "../../utils/global";
+
+const { slug } = Astro.params;
+const link = slug ? MAILCHIMP_SIGNUP_LINKS[slug] : undefined;
+
+if (!link) {
+  return Astro.redirect("/404", 301);
+}
+
+return Astro.redirect(link.href, 301);
+---
