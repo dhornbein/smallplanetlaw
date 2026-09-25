@@ -170,3 +170,10 @@ src/
 - Scheduling via Lawmatics (link in `src/utils/navigation.ts`)
 - Analytics implementation
 - Social media integration (minimal, professional focus)
+
+## Lawmatics
+
+The firm uses Lawmatics, a SaaS, for forms, events, workflows, and email. Use embeds only: paste the embed code Lawmatics generates for a form or event into the page, or link to the Lawmatics event landing page. Don't build our own forms, API proxies, or serverless functions for Lawmatics data. Don't put API credentials in the repo.
+
+- Help / embed guides: https://help.lawmatics.com
+- API docs (reference only): https://docs.lawmatics.com/
