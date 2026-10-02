@@ -1,0 +1,15 @@
+seo:
+  title: Contact Us
+  description: >-
+    Get in touch with Small Planet Law LLC to book your Discovery Call and learn
+    about our estate planning services.
+hero:
+  heading: Book an Appointment
+  intro: Start with a 15-minute Discovery Call to learn about our services
+buttonLabel: Book an Appointment
+infoHeading: Contact Information
+serviceArea: Serving clients across Colorado
+faqPrompt: Have questions before booking?
+faqLink:
+  label: Check out our Frequently Asked Questions →
+  href: /faq

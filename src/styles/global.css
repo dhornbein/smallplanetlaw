@@ -82,48 +82,51 @@
   --color-accent-variant: var(--color-redwood-700);
   --color-dark: var(--color-outer-space-800);
   --color-light: var(--color-dutch-white);
-  --color-neutral: var(--color-ash-gray);  
-  --color-neutral-warm: var(--color-dutch-white);  
-  --color-neutral-cool: var(--color-celadon);  
+  --color-neutral: var(--color-ash-gray);
+  --color-neutral-warm: var(--color-dutch-white);
+  --color-neutral-cool: var(--color-celadon);
 
   /* Additional semantic colors */
   --color-text-primary: var(--color-outer-space-800);
   --color-text-secondary: var(--color-outer-space-600);
   --color-text-primary-inverse: var(--color-dutch-white-100);
   --color-text-secondary-inverse: var(--color-dutch-white-300);
-  
+
   /* Typography */
   --font-sans: "Source Sans 3 Variable", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Lora Variable", ui-serif, Georgia, serif;
-  
+
   /* Spacing scale adjustments */
   --spacing-section: 4rem;
-  
+
   /* Breakpoints */
   --breakpoint-3xl: 1920px;
 }
 
 
 /* Typography Styles */
-h1 {
-  @apply text-4xl sm:text-5xl lg:text-6xl font-serif font-bold mb-6 leading-tight;
-}
+/* In the base layer so inline utility classes can override them */
+@layer base {
+  h1 {
+    @apply text-4xl sm:text-5xl lg:text-6xl font-serif font-bold mb-6 leading-tight;
+  }
 
-h2 {
-  @apply text-3xl sm:text-4xl lg:text-5xl font-serif font-bold mb-5 leading-tight;
-}
+  h2 {
+    @apply text-3xl sm:text-4xl lg:text-5xl font-serif font-bold mb-5 leading-tight;
+  }
 
-h3 {
-  @apply text-2xl sm:text-3xl font-serif font-semibold mb-4 leading-snug;
-}
+  h3 {
+    @apply text-2xl sm:text-3xl font-serif font-semibold mb-4 leading-snug;
+  }
 
-h4 {
-  @apply text-xl sm:text-2xl font-serif font-semibold mb-3 leading-snug;
-}
+  h4 {
+    @apply text-xl sm:text-2xl font-serif font-semibold mb-3 leading-snug;
+  }
 
-/* Body text defaults */
-p {
-  @apply leading-relaxed;
+  /* Body text defaults */
+  p {
+    @apply leading-relaxed;
+  }
 }
 
 /* Generic variable-driven background helpers */

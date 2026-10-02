@@ -1,3 +1,35 @@
 [build]
   command = "npm run build"
   publish = "dist"
+
+# Resource PDFs moved to /resources/<slug>/file.pdf when they became a Keystatic
+# collection. Keep the old links (emails, shared links) working.
+[[redirects]]
+  from = "/resources/6 Mistakes Families Make When Choosing An Estate Planning Attorney.pdf"
+  to = "/resources/6-mistakes-families-make.pdf"
+  status = 301
+
+[[redirects]]
+  from = "/resources/6%20Mistakes%20Families%20Make%20When%20Choosing%20An%20Estate%20Planning%20Attorney.pdf"
+  to = "/resources/6-mistakes-families-make.pdf"
+  status = 301
+
+[[redirects]]
+  from = "/resources/Body-Talk-Article.pdf"
+  to = "/resources/body-talk-article.pdf"
+  status = 301
+
+[[redirects]]
+  from = "/resources/For-the-Love-of-This-Place-A-Colorado-Guide-to_environmental-Legacy-Giving.pdf"
+  to = "/resources/for-the-love-of-this-place.pdf"
+  status = 301
+
+[[redirects]]
+  from = "/resources/Green Estate Planning Guide.pdf"
+  to = "/resources/green-estate-planning-guide.pdf"
+  status = 301
+
+[[redirects]]
+  from = "/resources/Green%20Estate%20Planning%20Guide.pdf"
+  to = "/resources/green-estate-planning-guide.pdf"
+  status = 301

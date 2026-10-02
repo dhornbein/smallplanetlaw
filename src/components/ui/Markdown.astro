@@ -1,0 +1,13 @@
+---
+import { markdown } from "@astropub/md";
+
+// Renders a markdown string from a Keystatic text field (e.g. a section body).
+interface Props {
+  content: string;
+  class?: string;
+}
+
+const { content, class: className } = Astro.props;
+---
+
+<div class={className} set:html={await markdown(content)} />

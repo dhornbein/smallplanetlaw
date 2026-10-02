@@ -1,23 +1,29 @@
 ---
+import Markdown from "../ui/Markdown.astro";
 import Button from "../ui/Button.astro";
-import heroImg from "../../assets/hero-mtn-flowers.jpg";
-import heroImgTall from "../../assets/hero-mtn-flowers.jpg";
-import { callToAction } from "../../utils/navigation";
+import { bgVarStyle, getSettings } from "../../utils/content";
+
+interface Props {
+  heading: string;
+  intro: string;
+  image?: ImageMetadata | null;
+  imageTall?: ImageMetadata | null;
+}
+
+const { heading, intro, image, imageTall } = Astro.props;
+const { callToAction } = await getSettings();
 ---
 
 <section
   class="hero-section show-header relative py-24 lg:py-28 min-h-dvh -mt-20 flex items-center justify-start bg-cover bg-center bg-fixed bg-var"
-  style={`--bg-img: url(${heroImgTall.src}); --bg-img-md: url(${heroImg.src});`}
+  style={bgVarStyle(image, imageTall)}
 >
   <div
     class="w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex text-text-primary text-shadow-sm md:text-shadow-none"
   >
     <div>
-      <h1>Protect What Matters Most</h1>
-      <p class="text-xl lg:text-2xl mb-8 leading-relaxed max-w-prose">
-        Small Planet Law helps families design estate plans that honor their
-        loved ones and their values, including care for the planet.
-      </p>
+      <h1>{heading}</h1>
+      <Markdown content={intro} class="text-xl lg:text-2xl mb-8 leading-relaxed max-w-prose" />
       <Button href={callToAction.href} target={callToAction.target} size="xl" variant="primary" class="font-bold">
         {callToAction.name}
       </Button>

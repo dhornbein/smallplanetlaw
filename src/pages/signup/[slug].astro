@@ -1,12 +1,15 @@
 ---
-import { MAILCHIMP_SIGNUP_LINKS } from "../../utils/global";
+import { getEntry } from "astro:content";
+
+// Rendered on demand so the short link answers with a real 301 redirect.
+export const prerender = false;
 
 const { slug } = Astro.params;
-const link = slug ? MAILCHIMP_SIGNUP_LINKS[slug] : undefined;
+const link = slug ? await getEntry("signupLinks", slug) : undefined;
 
 if (!link) {
   return Astro.redirect("/404", 301);
 }
 
-return Astro.redirect(link.href, 301);
+return Astro.redirect(link.data.href, 301);
 ---

@@ -4,32 +4,27 @@ import Button from "../components/ui/Button.astro";
 import CurvedEdge from "../components/ui/CurvedEdge.astro";
 import CTA from "../components/sections/CTA.astro";
 import Newsletter from "../components/sections/Newsletter.astro";
-import {
-  PHONE_NUMBER,
-  EMAIL_ADDRESS,
-  BUSINESS_ADDRESS,
-} from "../utils/global.ts";
-import { callToAction } from "../utils/navigation";
+import Markdown from "../components/ui/Markdown.astro";
+import { getSettings, getSingleton } from "../utils/content";
+
+const { seo, hero, buttonLabel, infoHeading, serviceArea, faqPrompt, faqLink } =
+  await getSingleton("contactPage");
+const { phone, email, address, callToAction } = await getSettings();
 ---
 
-<Layout
-  title="Contact Small Planet Law | Denver Estate Planning Attorney"
-  description="Get in touch with Small Planet Law LLC to book your Discovery Call and learn about our estate planning services."
->
+<Layout title={seo.title} description={seo.description}>
   <!-- Hero Section -->
   <section
     class="hero-section px-8 py-24 lg:py-28 bg-primary text-text-primary-inverse text-center"
   >
-    <h1 class="text-4xl font-bold">Book an Appointment</h1>
-    <p class="text-xl mt-4">
-      Start with a 15-minute Discovery Call to learn about our services
-    </p>
+    <h1 class="text-4xl font-bold">{hero.heading}</h1>
+    <Markdown content={hero.intro} class="text-xl mt-4" />
     <div class="mt-8">
       <Button
         href={callToAction.href}
         variant="secondary"
         size="xl"
-        target={callToAction.target}>Book an Appointment</Button
+        target={callToAction.target}>{buttonLabel}</Button
       >
     </div>
   </section>
@@ -38,33 +33,33 @@ import { callToAction } from "../utils/navigation";
   <section class="bg-neutral-warm text-text-primary py-16 px-8 relative">
     <CurvedEdge fillColor="fill-neutral-warm" />
     <div class="max-w-4xl mx-auto space-y-8">
-      <h2 class="text-3xl font-bold text-center">Contact Information</h2>
+      <h2 class="text-3xl font-bold text-center">{infoHeading}</h2>
       <ul class="text-lg space-y-4">
         <li>
           <strong>Phone:</strong>
-          <a href={PHONE_NUMBER.href}>{PHONE_NUMBER.display}</a>
+          <a href={phone.href}>{phone.display}</a>
         </li>
         <li>
           <strong>Email:</strong>
           <a
-            href={EMAIL_ADDRESS.href}
+            href={email.href}
             class="text-primary hover:text-primary-variant underline"
-            >{EMAIL_ADDRESS.display}</a
+            >{email.display}</a
           >
         </li>
         <li>
           <strong>Location:</strong>
-          {BUSINESS_ADDRESS.line1}, {BUSINESS_ADDRESS.line2}
+          {address.line1}, {address.line2}
         </li>
-        <li>Serving clients across Colorado</li>
+        <li>{serviceArea}</li>
       </ul>
 
       <div class="text-center mt-12 pt-8 border-t border-primary/20">
-        <p class="text-xl mb-4">Have questions before booking?</p>
+        <p class="text-xl mb-4">{faqPrompt}</p>
         <a
-          href="/faq"
+          href={faqLink.href}
           class="text-primary hover:text-primary-variant underline font-semibold text-lg"
-          >Check out our Frequently Asked Questions →</a
+          >{faqLink.label}</a
         >
       </div>
 

@@ -4,9 +4,7 @@ import BookCover from "../ui/BookCover.astro";
 import Button from "../ui/Button.astro";
 import portraitShadow from "../../assets/hero-shadow-wide.jpg";
 import portraitShadowTall from "../../assets/hero-shadow-tall.jpg";
-import coverGreenEP from "../../assets/cover-green-ep-guide.jpg";
-import cover6Mistakes from "../../assets/cover-6-mistakes-guide.jpg";
-import { LEAD_MAGNETS } from "../../utils/global";
+import { getCollection } from "astro:content";
 
 interface Props {
   /** Force a specific lead magnet variant by its id (e.g. "green-ep-guide"). Omit for random A/B selection. */
@@ -15,16 +13,15 @@ interface Props {
 
 const { variant } = Astro.props;
 
-// Map cover images by lead magnet ID
-const coverImages: Record<string, ImageMetadata> = {
-  "green-ep-guide": coverGreenEP,
-  "6-mistakes-guide": cover6Mistakes,
-};
+const leadMagnets = (await getCollection("leadMagnets")).map((entry) => ({
+  id: entry.id,
+  ...entry.data,
+}));
 ---
 
 <section id="lead" class="relative pb-40 bg-neutral-warm">
   <lead-generator class="block" data-forced-variant={variant ?? ""}>
-    {LEAD_MAGNETS.map((magnet, index) => (
+    {leadMagnets.map((magnet, index) => (
       <div
         class="lead-variant hidden"
         data-variant={magnet.id}
@@ -37,10 +34,10 @@ const coverImages: Record<string, ImageMetadata> = {
         >
           <div class=" bg-outer-space-900/60 flex items-center justify-center">
             <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12 px-4 sm:px-6 max-w-4xl">
-              {coverImages[magnet.id] && (
+              {magnet.cover && (
                 <a href={`#free-${magnet.id}`} class="shrink-0 -mt-6 md:mt-0">
                   <BookCover
-                    src={coverImages[magnet.id]}
+                    src={magnet.cover}
                     alt={`${magnet.title} cover`}
                     size="lg"
                   />
@@ -153,8 +150,7 @@ const coverImages: Record<string, ImageMetadata> = {
       if (forcedVariant) {
         chosen = this.querySelector(`.lead-variant[data-variant="${forcedVariant}"]`) ?? variants[0];
       } else {
-        const chosenIndex = Math.random() < 0.5 ? 0 : 1;
-        chosen = variants[chosenIndex] || variants[0];
+        chosen = variants[Math.floor(Math.random() * variants.length)];
       }
       if (!chosen) return;
 

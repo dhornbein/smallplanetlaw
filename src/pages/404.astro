@@ -1,0 +1,68 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Markdown from "../components/ui/Markdown.astro";
+import { bgVarStyle, getSingleton } from "../utils/content";
+
+const home = await getSingleton("homePage");
+const { hero } = home;
+
+const [about, services, faq, blog, events, contact] = await Promise.all([
+  getSingleton("aboutPage"),
+  getSingleton("servicesPage"),
+  getSingleton("faqPage"),
+  getSingleton("blogPage"),
+  getSingleton("eventsPage"),
+  getSingleton("contactPage"),
+]);
+
+// Each card reuses the target page's own hero heading and intro.
+const links = [
+  { href: "/about", ...about.hero },
+  { href: "/services", ...services.hero },
+  { href: "/faq", ...faq.hero },
+  { href: "/blog", ...blog.hero },
+  { href: "/events", ...events.hero },
+  { href: "/contact", ...contact.hero },
+];
+---
+
+<Layout title="Page not found" description="We couldn't find that page.">
+  <section
+    class="show-header relative py-24 lg:py-28 min-h-dvh -mt-20 flex items-center bg-cover bg-center bg-fixed bg-var"
+    style={bgVarStyle(hero.image, hero.imageTall)}
+  >
+    <div class="max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-16 text-text-primary text-center text-shadow-sm md:text-shadow-none">
+      <h1>404 page not found</h1>
+      <p class="text-xl lg:text-2xl mb-10">
+        We couldn't find <code class="not-found-path break-all font-semibold">that page</code>.
+        Try these instead:
+      </p>
+
+      <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 list-none p-0">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="block h-full rounded-lg bg-primary text-text-primary-inverse p-6 no-underline shadow-md transition hover:bg-primary-variant hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2"
+              >
+                <h2 class="text-2xl mb-2">{link.heading}</h2>
+                <Markdown content={link.intro} class="leading-relaxed" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  function showPath() {
+    document.querySelectorAll(".not-found-path").forEach((el) => {
+      el.textContent = window.location.pathname;
+    });
+  }
+  showPath();
+  document.addEventListener("astro:page-load", showPath);
+</script>

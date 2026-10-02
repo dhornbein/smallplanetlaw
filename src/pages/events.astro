@@ -2,54 +2,87 @@
 import Layout from "../layouts/Layout.astro";
 import CurvedEdge from "../components/ui/CurvedEdge.astro";
 import Newsletter from "../components/sections/Newsletter.astro";
+import Button from "../components/ui/Button.astro";
+import Markdown from "../components/ui/Markdown.astro";
+import { getCollection, render } from "astro:content";
+import { getSingleton } from "../utils/content";
+
+const { seo, hero, comingSoon } = await getSingleton("eventsPage");
+
+// The site is static, so "upcoming" is relative to the last build (to within a few hours,
+// since event times are wall-clock times stored as UTC — see content.config.ts).
+const now = new Date();
+const events = await Promise.all(
+  (await getCollection("events", (event) => event.data.date >= now))
+    .sort((a, b) => a.data.date.getTime() - b.data.date.getTime())
+    .map(async (event) => ({ ...event.data, Content: (await render(event)).Content })),
+);
 ---
 
-<Layout
-  title="Events | Small Planet Law"
-  description="Join Small Planet Law for upcoming workshops and community events on estate planning and green legacy giving in Denver, Colorado. Coming soon."
->
+<Layout title={seo.title} description={seo.description}>
   <!-- Hero Section -->
   <section
     class="bg-secondary text-primary-variant show-header relative px-8 py-24 lg:py-28"
   >
     <div class="max-w-4xl mx-auto">
-      <h1>Events</h1>
-      <p class="text-xl leading-relaxed max-w-prose">
-        Workshops, community gatherings, and educational events on estate
-        planning and green legacy giving are on the way.
-      </p>
+      <h1>{hero.heading}</h1>
+      <Markdown content={hero.intro} class="text-xl leading-relaxed max-w-prose" />
     </div>
   </section>
 
-  <!-- Coming Soon Content -->
   <section
     class="relative bg-primary text-text-primary-inverse px-4 sm:px-6 lg:px-8 pt-10 pb-30"
   >
     <CurvedEdge fillColor="fill-primary" />
 
-    <div class="max-w-2xl mx-auto w-full text-center">
-      <svg
-        class="w-14 h-14 mx-auto mb-6 text-secondary"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-        ></path>
-      </svg>
-      <h2>Coming Soon</h2>
-      <p class="text-xl leading-relaxed mb-10">
-        We're planning workshops and community events to help you feel
-        informed and empowered about estate planning and green legacy
-        options. Check back soon, or sign up below and we'll let you know as
-        soon as events are scheduled.
-      </p>
-    </div>
+    {
+      events.length > 0 ? (
+        <ul class="max-w-3xl mx-auto w-full space-y-8">
+          {events.map((event) => (
+            <li class="bg-white/10 rounded-lg p-8">
+              <h2 class="text-secondary">{event.title}</h2>
+              <p class="text-lg font-semibold mb-4">
+                {event.date.toLocaleString("en-US", {
+                  dateStyle: "full",
+                  timeStyle: "short",
+                  timeZone: "UTC",
+                })}
+                {event.location && <span class="block font-normal opacity-90">{event.location}</span>}
+              </p>
+              <div class="text-lg leading-relaxed space-y-4">
+                <event.Content />
+              </div>
+              {event.registrationUrl && (
+                <div class="mt-6">
+                  <Button href={event.registrationUrl} target="_blank" variant="secondary" size="lg">
+                    Register
+                  </Button>
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div class="max-w-2xl mx-auto w-full text-center">
+          <svg
+            class="w-14 h-14 mx-auto mb-6 text-secondary"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+            ></path>
+          </svg>
+          <h2>{comingSoon.heading}</h2>
+          <Markdown content={comingSoon.body} class="text-xl leading-relaxed mb-10" />
+        </div>
+      )
+    }
 
     <CurvedEdge fillColor="fill-primary" position="bottom" />
   </section>

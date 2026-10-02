@@ -10,15 +10,23 @@
     "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
+    "@astrojs/react": "^6.0.6",
     "@astropub/md": "^1.0.0",
     "@fontsource-variable/lora": "^5.2.8",
     "@fontsource-variable/source-sans-3": "^5.2.9",
-    "@mailchimp/mailchimp_marketing": "^3.0.80"
+    "@keystatic/astro": "^6.0.0",
+    "@keystatic/core": "^0.6.9",
+    "@mailchimp/mailchimp_marketing": "^3.0.80",
+    "pdfjs-dist": "^6.3.289",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
   },
   "devDependencies": {
     "@astrojs/netlify": "^7.0.5",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "astro": "^6.1.1",
     "hast-util-find-and-replace": "^5.0.1",
     "hastscript": "^9.0.1",

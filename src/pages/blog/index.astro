@@ -1,27 +1,22 @@
 ---
+import Markdown from "../../components/ui/Markdown.astro";
 import Layout from "../../layouts/Layout.astro";
 import PostList from "../../components/sections/PostList.astro";
 import CurvedEdge from "../../components/ui/CurvedEdge.astro";
 import Newsletter from "../../components/sections/Newsletter.astro";
 import { getCollection } from "astro:content";
+import { getSingleton } from "../../utils/content";
 
-export const prerender = true;
-
+const { seo, hero } = await getSingleton("blogPage");
 const posts = await getCollection("blog");
 ---
 
-<Layout
-  title="Blog | Small Planet Law"
-  description="Estate planning insights, green legacy tips, and family protection guidance from Small Planet Law in Colorado."
->
+<Layout title={seo.title} description={seo.description}>
   <!-- Page Header -->
   <header class="bg-primary-variant text-white show-header relative px-8 py-24 lg:py-28">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-white">Blog</h1>
-      <p class="text-lg lg:text-xl text-olivine-100 max-w-prose">
-        Insights on estate planning, family protection, and building a legacy
-        that's good for your loved ones and the planet.
-      </p>
+      <h1 class="text-white">{hero.heading}</h1>
+      <Markdown content={hero.intro} class="text-lg lg:text-xl text-olivine-100 max-w-prose" />
     </div>
   </header>
 

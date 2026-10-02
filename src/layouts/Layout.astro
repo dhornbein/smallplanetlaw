@@ -2,6 +2,8 @@
 import "../styles/global.css";
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
+import { formatTitle, getSettings } from "../utils/content";
+import { SITE } from "../utils/site";
 
 interface Props {
   title?: string;
@@ -9,11 +11,13 @@ interface Props {
   image?: string;
 }
 
-const {
-  title = "Small Planet Law - Wills, Trusts & Green Estate Planning in Colorado",
-  description = "Small Planet Law LLC offers personalized estate planning in Colorado, including wills, trusts, powers of attorney, and green legacy options. Clear guidance, sustainable choices, and expert legal support that puts people and the planet first.",
-  image = "/og-image.jpg",
-} = Astro.props;
+const { image = SITE.defaultOgImage } = Astro.props;
+const { phone, email, titleSuffix, defaultDescription } = await getSettings();
+// Empty strings from unfilled Keystatic SEO fields fall back to the site defaults.
+const description = Astro.props.description || defaultDescription;
+// `title` is just the page-specific part; the site-wide suffix is added here.
+const title = formatTitle(Astro.props.title, titleSuffix);
+const siteUrl = (Astro.site ?? new URL(Astro.url.origin)).origin;
 
 const canonicalURL = Astro.site
   ? new URL(Astro.url.pathname, Astro.site)
@@ -31,15 +35,15 @@ const fullImageURL = Astro.site ? new URL(image, Astro.site).toString() : image;
     <script
       is:inline
       async
-      src="https://www.googletagmanager.com/gtag/js?id=G-F3T143T823"></script>
-    <script is:inline>
+      src={`https://www.googletagmanager.com/gtag/js?id=${SITE.analyticsId}`}></script>
+    <script is:inline define:vars={{ analyticsId: SITE.analyticsId }}>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
 
-      gtag("config", "G-F3T143T823");
+      gtag("config", analyticsId);
     </script>
 
     <link
@@ -70,29 +74,30 @@ const fullImageURL = Astro.site ? new URL(image, Astro.site).toString() : image;
     <meta property="twitter:image" content={fullImageURL} />
 
     <!-- Local Business Schema -->
-    <script type="application/ld+json">
-      {
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "LegalService",
-        "name": "Small Planet Law LLC",
-        "description": "Wills, Trusts & Green Estate Planning in Colorado",
-        "url": "https://smallplanetlaw.com",
-        "logo": "https://smallplanetlaw.com/logo.png",
-        "image": "https://smallplanetlaw.com/og-image.jpg",
-        "address": {
+        name: SITE.name,
+        description: SITE.schema.description,
+        url: siteUrl,
+        logo: `${siteUrl}${SITE.logo}`,
+        image: `${siteUrl}${SITE.defaultOgImage}`,
+        address: {
           "@type": "PostalAddress",
-          "addressRegion": "CO",
-          "addressCountry": "US"
+          addressRegion: SITE.schema.addressRegion,
+          addressCountry: SITE.schema.addressCountry,
         },
-        "priceRange": "$$",
-        "telephone": "+13035354311",
-        "email": "hello@smallplanetlaw.com",
-        "areaServed": {
+        priceRange: SITE.schema.priceRange,
+        telephone: phone.href.replace(/^tel:/, ""),
+        email: email.display,
+        areaServed: {
           "@type": "State",
-          "name": "Colorado"
-        }
-      }
-    </script>
+          name: SITE.schema.areaServed,
+        },
+      })}
+    ></script>
   </head>
   <body class="bg-background text-text-primary font-sans">
     <Header />

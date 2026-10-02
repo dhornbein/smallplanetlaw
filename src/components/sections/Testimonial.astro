@@ -1,5 +1,13 @@
 ---
 import CurvedEdge from "../ui/CurvedEdge.astro";
+
+interface Props {
+  quote: string;
+  name: string;
+  role: string;
+}
+
+const { quote, name, role } = Astro.props;
 ---
 
 <section class="relative py-20 bg-secondary text-text-primary">
@@ -12,13 +20,13 @@ import CurvedEdge from "../ui/CurvedEdge.astro";
       
       <blockquote class="mb-8">
         <p class="text-2xl sm:text-3xl font-serif text-deep-slate leading-relaxed mb-6">
-          "Our clients are thoughtful, caring people who want their estate plans to reflect who they are,  their love for their families, and their stewardship of the planet."
+          "{quote}"
         </p>
         <footer class="text-lg text-text-secondary">
           <cite class="not-italic">
-            <span class="font-semibold text-earth-green">Roberta “Bobbie” Mooney</span>
+            <span class="font-semibold text-earth-green">{name}</span>
             <br />
-            Founder, Small Planet Law
+            {role}
           </cite>
         </footer>
       </blockquote>

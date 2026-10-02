@@ -1,14 +1,9 @@
 ---
 import LogoMark from "../ui/LogoMark.astro";
-import { quickLinks } from "../../utils/navigation";
-import {
-  PHONE_NUMBER,
-  EMAIL_ADDRESS,
-  BUSINESS_ADDRESS,
-} from "../../utils/global.ts";
+import Markdown from "../ui/Markdown.astro";
+import { getSettings } from "../../utils/content";
 
-const disclaimer =
-  "The information contained on this website is deemed reliable, but not guaranteed. Nothing in this website shall be deemed legal advice and your use of this site or contact of Small Planet Law LLC does not create an attorney-client relationship. By using this website you agree to the terms and conditions set forth in this disclaimer.";
+const { quickLinks, phone, email, address, tagline, footerAffiliations, footerDisclaimer } = await getSettings();
 
 const currentYear = new Date().getFullYear();
 ---
@@ -28,18 +23,10 @@ const currentYear = new Date().getFullYear();
             <span class="text-lg font-serif font-semibold"
               >Small Planet Law</span
             >
-            <p class="text-sm text-gray-300 mb-0">Protect What Matters Most</p>
+            <p class="text-sm text-gray-300 mb-0">{tagline}</p>
           </div>
         </div>
-        <p class="text-sm text-gray-400">
-          Colorado Bar Association, Trust & Estates Section Member
-        </p>
-        <p class="text-sm text-gray-400">
-          Colorado Green Business Network (CGBN) Certified Business Applicant
-        </p>
-        <p class="text-sm text-gray-400">
-          Serving Colorado Families with Care and Conscience.
-        </p>
+        <Markdown content={footerAffiliations} class="space-y-4 text-sm text-gray-400" />
       </div>
 
       <!-- Quick Links -->
@@ -84,10 +71,10 @@ const currentYear = new Date().getFullYear();
               ></path>
             </svg>
             <a
-              href={PHONE_NUMBER.href}
+              href={phone.href}
               class="hover:text-secondary transition-colors duration-200"
             >
-              {PHONE_NUMBER.display}
+              {phone.display}
             </a>
           </li>
           <li class="flex items-start space-x-2">
@@ -105,10 +92,10 @@ const currentYear = new Date().getFullYear();
               ></path>
             </svg>
             <a
-              href={EMAIL_ADDRESS.href}
+              href={email.href}
               class="hover:text-secondary transition-colors duration-200"
             >
-              {EMAIL_ADDRESS.display}
+              {email.display}
             </a>
           </li>
           <li class="flex items-start space-x-2">
@@ -130,7 +117,7 @@ const currentYear = new Date().getFullYear();
                 stroke-width="2"
                 d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
             </svg>
-            <span>{BUSINESS_ADDRESS.line2}</span>
+            <span>{address.line2}</span>
           </li>
         </ul>
 
@@ -203,7 +190,7 @@ const currentYear = new Date().getFullYear();
         </div>
       </div>
       <div class="flex justify-between items-end mt-6">
-        <p class="text-xs text-gray-500 mt-4 max-w-prose">{disclaimer}</p>
+        <p class="text-xs text-gray-500 mt-4 max-w-prose">{footerDisclaimer}</p>
         <LogoMark
           size="lg"
           fillColor="transparent"

@@ -4,7 +4,8 @@ Holistic estate planning website for Small Planet Law LLC, built with Astro and 
 
 ## Tech Stack
 
-- **[Astro 5.x](https://astro.build)** - Static site generator with zero-JS by default
+- **[Astro 6.x](https://astro.build)** - Static site generator with zero-JS by default
+- **[Keystatic](https://keystatic.com)** - Git-based CMS for editing content (`/keystatic`)
 - **[Tailwind CSS v4](https://tailwindcss.com)** - Utility-first CSS framework via Vite plugin
 - **TypeScript** - Type safety throughout the project
 - **Variable Fonts** - Lora (headings) and Source Sans 3 (body)
@@ -38,10 +39,17 @@ Holistic estate planning website for Small Planet Law LLC, built with Astro and 
 │   │   └── brand.astro             # Brand guidelines (/brand)
 │   ├── styles/
 │   │   └── global.css              # Global styles & Tailwind config
+│   ├── content/                     # Editable content (managed with Keystatic)
+│   │   ├── pages/*.yaml            # One file per page (hero, sections, cards…)
+│   │   ├── settings.yaml           # Phone, email, address, booking link, nav
+│   │   ├── blog/ faq/ events/      # Markdown collections
+│   │   └── resources/ lead-magnets/ signup-links/  # YAML collections
+│   ├── keystatic/fields.ts          # Shared Keystatic field groups
+│   ├── content.config.ts            # Astro collections (mirror keystatic.config.ts)
 │   └── utils/                       # Utility functions & data
-│       ├── navigation.ts           # Navigation menu configuration
-│       ├── faq.ts                  # FAQ data and types
-│       └── global.ts               # Global utilities
+│       ├── content.ts              # getSingleton() / getSettings() helpers
+│       └── site.ts                 # Site constants + Mailchimp config
+├── keystatic.config.ts  # Keystatic admin schema (/keystatic)
 ├── astro.config.mjs     # Astro configuration
 ├── tsconfig.json        # TypeScript configuration
 ├── package.json         # Dependencies & scripts
@@ -67,11 +75,28 @@ Holistic estate planning website for Small Planet Law LLC, built with Astro and 
 
 All `.astro` files in `src/pages/` become routes automatically (file-based routing).
 
-### Data & Utils
+### Content & Utils
 
-- **`src/utils/navigation.ts`** - Site navigation menu, CTA buttons, quick links
-- **`src/utils/faq.ts`** - FAQ content with TypeScript types
-- **`src/utils/global.ts`** - Shared utility functions
+- **`src/content/`** - All editable copy. Page layout and design stay in the `.astro` files; the words, images and links come from these files.
+- **`src/utils/content.ts`** - `getSingleton("homePage")` reads a page file; `getSettings()` returns contact details, navigation and the booking CTA
+- **`src/utils/site.ts`** - Site constants (name, analytics ID, structured data) and Mailchimp config (from env vars)
+
+## Editing Content (Keystatic)
+
+The site owner edits content at **`/keystatic`**. Each page is a guided form ("Pages"), with blog posts, FAQs, events, resources and lead magnets under "Content", and contact details / navigation / signup short links under "Settings".
+
+- **Locally** (`npm run dev`), Keystatic reads and writes the files in `src/content/` directly — edit at `http://localhost:4321/keystatic` and commit as usual.
+- **In production**, Keystatic Cloud commits to GitHub; Netlify rebuilds the (static) site on every commit. Editors don't need GitHub accounts.
+- **Schema changes** go in two places: `keystatic.config.ts` (the editor form) and `src/content.config.ts` (the Zod schema Astro validates against).
+- **Images** uploaded in Keystatic land in `src/assets/content/…` so Astro still optimises them. Resource PDFs land in `public/resources/<slug>/file.pdf` and are served to visitors at `/resources/<slug>.pdf` (`src/pages/resources/[slug].pdf.ts`) so downloads keep a real file name.
+- FAQ file names are the `/faq#anchor` ids — renaming one breaks links to it.
+
+### Keystatic Cloud setup
+
+1. Create a team + project at [keystatic.cloud](https://keystatic.cloud) and connect the GitHub repo.
+2. Put the `<team>/<project>` value in `cloud.project` in `keystatic.config.ts`.
+3. Invite editors (free tier: 3 users).
+4. Make sure Netlify builds the branch Keystatic commits to.
 
 ## Styling with Tailwind v4
 
@@ -107,7 +132,7 @@ Access via Tailwind classes: `text-hunter-green`, `bg-olivine-300`, etc.
 
 ## Deployment to Netlify
 
-**⚠️ Important**: This site uses server-side rendering for the newsletter API and **cannot be deployed to GitHub Pages**. Use Netlify instead.
+**⚠️ Important**: Pages are prerendered, but the newsletter API, `/signup/*` short links and the Keystatic admin run as Netlify functions, so the site **cannot be deployed to GitHub Pages**. Use Netlify instead.
 
 ### Initial Setup
 

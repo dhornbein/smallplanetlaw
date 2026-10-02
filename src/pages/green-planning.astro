@@ -2,41 +2,35 @@
 import Layout from "../layouts/Layout.astro";
 import Button from "../components/ui/Button.astro";
 import CurvedEdge from "../components/ui/CurvedEdge.astro";
-import { callToAction } from "../utils/navigation";
 import Icon from "../components/ui/Icon.astro";
 import CTA from "../components/sections/CTA.astro";
 import Newsletter from "../components/sections/Newsletter.astro";
 import leaf from "../assets/leaf.jpg";
 import { Image } from "astro:assets";
+import Markdown from "../components/ui/Markdown.astro";
+import { getSettings, getSingleton } from "../utils/content";
+
+const { seo, intro, callout, leadIn, faqLink, features, buttonLabel } =
+  await getSingleton("greenPlanningPage");
+const { callToAction } = await getSettings();
 ---
 
-<Layout
-  title="Green Estate Planning | Small Planet Law, Denver CO"
-  description="Eco-conscious estate planning that aligns with your values. ESG investing guidance, sustainable memorial options, and legacy-driven giving in Colorado."
->
+<Layout title={seo.title} description={seo.description}>
   <section>
     <div class="p-8 bg-neutral-cool">
       <div class="max-w-7xl mx-auto">
         <Image src={leaf} alt="Leaf" class="mx-auto max-h-80 w-auto" />
 
-        <h1 class="text-text-secondary">Green Estate Planning with Purpose</h1>
+        <h1 class="text-text-secondary">{intro.heading}</h1>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center my-20">
-          <p class="text-xl mb-6 leading-relaxed pt-8">
-            At Small Planet Law, we believe your legacy should reflect your
-            values. As an eco-conscious Colorado law firm, sustainability is at
-            the heart of everything we do—from our paperless practices to the
-            partners we recommend. Our green estate planning services are
-            designed to help you protect what matters most while honoring the
-            planet we share.
-          </p>
+          <Markdown
+            content={intro.body}
+            class="text-xl mb-6 leading-relaxed pt-8"
+          />
           <div class="bg-honeydew-600 rounded-lg p-8 self-stretch shadow-lg">
-            <h3>Your Values, Your Legacy</h3>
-            <p class="text-lg leading-relaxed">
-              From sustainable investments to eco-conscious memorial planning,
-              we help you create an estate plan that honors both your loved ones
-              and the Earth.
-            </p>
+            <h3>{callout.heading}</h3>
+            <Markdown content={callout.body} class="text-lg leading-relaxed" />
           </div>
         </div>
       </div>
@@ -48,78 +42,33 @@ import { Image } from "astro:assets";
       <CurvedEdge fillColor="fill-primary" />
 
       <p class="text-lg text-center -mt-8 mb-4 leading-relaxed mx-auto">
-        Here's how we make that happen:
+        {leadIn}
       </p>
       <p class="text-lg text-center mb-16">
-        <a href="/faq#green-estate-planning" class="text-secondary hover:underline font-semibold">Learn more in our FAQ →</a>
+        <a href={faqLink.href} class="text-secondary hover:underline font-semibold">{faqLink.label}</a>
       </p>
 
       <!-- Service Features -->
       <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="bg-white/10 rounded-lg p-8">
-          <div class="flex items-start space-x-4">
-            <Icon name="dollar" size="lg" class="text-secondary" />
-            <div>
-              <h3>Ethical Financial Guidance</h3>
-              <p class="opacity-90 leading-relaxed">
-                We connect interested clients with trusted Colorado-based
-                financial advisors who specialize in ESG (Environmental, Social,
-                and Governance) investing—so your financial future can align
-                with your environmental and social values.
-              </p>
+        {
+          features.map((feature) => (
+            <div class="bg-white/10 rounded-lg p-8">
+              <div class="flex items-start space-x-4">
+                <Icon name={feature.icon} size="lg" class="text-secondary" />
+                <div>
+                  <h3>{feature.title}</h3>
+                  <Markdown content={feature.description} class="opacity-90 leading-relaxed" />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-
-        <div class="bg-white/10 rounded-lg p-8">
-          <div class="flex items-start space-x-4">
-            <Icon name="heart" size="lg" class="text-secondary" />
-            <div>
-              <h3>Legacy-Driven Giving</h3>
-              <p class="opacity-90 leading-relaxed">
-                Whether your estate is modest or substantial, we help you
-                incorporate the causes you care about into your plan. A gift of
-                any size can make a bold, lasting statement about your hopes for
-                the future—and we'll help you craft it with intention.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white/10 rounded-lg p-8">
-          <div class="flex items-start space-x-4">
-            <Icon name="globe" size="lg" class="text-secondary" />
-            <div>
-              <h3>Sustainable Farewells</h3>
-              <p class="opacity-90 leading-relaxed">
-                We offer expert guidance on green burial and eco-conscious
-                memorial options, connecting you with Colorado providers who
-                share your commitment to sustainability and dignity.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white/10 rounded-lg p-8">
-          <div class="flex items-start space-x-4">
-            <Icon name="planet" size="lg" class="text-secondary" />
-            <div>
-              <h3>Giving Back, Together</h3>
-              <p class="opacity-90 leading-relaxed">
-                For every estate plan we complete, Small Planet Law makes a
-                donation to one of three featured environmental
-                nonprofits—chosen by you. It's one more way your plan can give
-                back to our Earth.
-              </p>
-            </div>
-          </div>
-        </div>
+          ))
+        }
       </div>
 
       <!-- Call to Action -->
       <div class="mt-16 text-center">
         <Button href={callToAction.href} target={callToAction.target} size="xl" variant="secondary" class="bg-secondary hover:bg-secondary/80 text-text-primary">
-          Start Your Green Estate Plan
+          {buttonLabel}
         </Button>
       </div>
     </div>

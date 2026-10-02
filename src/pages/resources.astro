@@ -1,34 +1,25 @@
 ---
+import Markdown from "../components/ui/Markdown.astro";
 import Layout from "../layouts/Layout.astro";
 import CurvedEdge from "../components/ui/CurvedEdge.astro";
 import Newsletter from "../components/sections/Newsletter.astro";
-import fs from "node:fs";
-import path from "node:path";
+import { getCollection } from "astro:content";
+import { getSingleton, resourcePdfPath } from "../utils/content";
 
-const resourcesDir = path.join(process.cwd(), "public/resources");
-const resources = fs
-  .readdirSync(resourcesDir)
-  .filter((f) => f.endsWith(".pdf"))
-  .map((filename) => ({
-    title: filename.replace(/\.pdf$/i, "").replace(/-/g, " "),
-    file: `/resources/${filename}`,
-  }));
+const { seo, hero } = await getSingleton("resourcesPage");
+const resources = (await getCollection("resources"))
+  .map((entry) => ({ ...entry.data, url: resourcePdfPath(entry.id) }))
+  .sort((a, b) => a.title.localeCompare(b.title));
 ---
 
-<Layout
-  title="Free Resources | Small Planet Law"
-  description="Download free estate planning guides and resources from Small Planet Law, including tips on choosing an estate planning attorney and green estate planning options."
->
+<Layout title={seo.title} description={seo.description}>
   <!-- Hero Section -->
   <section
     class="bg-secondary text-primary-variant show-header relative px-8 py-24 lg:py-28"
   >
     <div class="max-w-4xl mx-auto">
-      <h1>Free Resources</h1>
-      <p class="text-xl leading-relaxed max-w-prose">
-        Download our guides to help you feel informed and empowered as you plan
-        for the people and planet you love.
-      </p>
+      <h1>{hero.heading}</h1>
+      <Markdown content={hero.intro} class="text-xl leading-relaxed max-w-prose" />
     </div>
   </section>
 
@@ -44,7 +35,7 @@ const resources = fs
           resources.map((resource) => (
             <li class="flex items-center gap-2 border-b border-white/20 last:border-0">
               <a
-                href={resource.file}
+                href={resource.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="group flex items-center gap-3 flex-1 min-w-0 py-5 hover:text-secondary transition-colors duration-200"
@@ -63,7 +54,7 @@ const resources = fs
               </a>
               <button
                 class="copy-url-btn cursor-pointer shrink-0 text-sm text-white/60 hover:text-secondary transition-colors duration-200 flex items-center gap-1 py-5"
-                data-url={resource.file}
+                data-url={resource.url}
                 aria-label={`Copy link to ${resource.title}`}
               >
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">

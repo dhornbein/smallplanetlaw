@@ -2,8 +2,6 @@
 import BlogPost from "../../layouts/BlogPost.astro";
 import { getCollection, render } from "astro:content";
 
-export const prerender = true;
-
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
   return posts.map((post) => ({
@@ -20,10 +18,10 @@ const { Content } = await render(post);
   title={post.data.title}
   description={post.data.summary}
   date={post.data.date}
-  updated={post.data.updated}
+  updated={post.data.updated ?? undefined}
   tags={post.data.tags}
   image={post.data.image}
-  cta={post.data.cta}
+  cta={post.data.cta ?? undefined}
 >
   <Content />
 </BlogPost>

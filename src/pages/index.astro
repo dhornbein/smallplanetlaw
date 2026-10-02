@@ -7,14 +7,17 @@ import GreenApproach from '../components/sections/GreenApproach.astro';
 import Testimonial from '../components/sections/Testimonial.astro';
 import CTA from '../components/sections/CTA.astro';
 import Newsletter from '../components/sections/Newsletter.astro';
+import { getSingleton } from '../utils/content';
+
+const page = await getSingleton('homePage');
 ---
 
-<Layout>
-	<Hero />
-	<Difference />
-	<Services />
-	<GreenApproach />
-	<Testimonial />
+<Layout title={page.seo.title || undefined} description={page.seo.description || undefined}>
+	<Hero {...page.hero} />
+	<Difference {...page.difference} />
+	<Services {...page.services} />
+	<GreenApproach {...page.green} />
+	<Testimonial {...page.testimonial} />
 	<CTA />
 	<Newsletter />
 </Layout>

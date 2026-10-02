@@ -1,29 +1,36 @@
 ---
+import Markdown from "../components/ui/Markdown.astro";
 import Layout from "../layouts/Layout.astro";
 import Button from "../components/ui/Button.astro";
 import CurvedEdge from "../components/ui/CurvedEdge.astro";
-import { callToAction } from "../utils/navigation";
-import { faqItems } from "../utils/faq";
 import CTA from "../components/sections/CTA.astro";
 import Newsletter from "../components/sections/Newsletter.astro";
-import { markdown } from "@astropub/md";
+import { getCollection, render } from "astro:content";
+import { getSettings, getSingleton } from "../utils/content";
+
+const { seo, hero, closingText, buttonLabel } = await getSingleton("faqPage");
+const { callToAction } = await getSettings();
+
+// Entry ids (file names) double as the #anchor for each question.
+const faqItems = await Promise.all(
+  (await getCollection("faq"))
+    .sort((a, b) => a.data.order - b.data.order || a.data.question.localeCompare(b.data.question))
+    .map(async (entry) => ({
+      id: entry.id,
+      question: entry.data.question,
+      Content: (await render(entry)).Content,
+    })),
+);
 ---
 
-<Layout
-  title="Frequently Asked Questions | Small Planet Law"
-  description="Find answers to common questions about estate planning, Life & Legacy Planning, green estate planning, and Small Planet Law's holistic approach to protecting your family and the planet."
->
+<Layout title={seo.title} description={seo.description}>
   <!-- Hero Section -->
   <section
     class="bg-secondary text-primary-variant show-header relative px-8 py-24 lg:py-28"
   >
     <div class="max-w-4xl mx-auto">
-      <h1>Frequently Asked Questions</h1>
-      <p class="text-xl leading-relaxed max-w-prose">
-        Find answers to common questions about our Life & Legacy Planning
-        process, what's included, and how we can help protect what matters most
-        to you.
-      </p>
+      <h1>{hero.heading}</h1>
+      <Markdown content={hero.intro} class="text-xl leading-relaxed max-w-prose" />
     </div>
   </section>
 
@@ -36,7 +43,7 @@ import { markdown } from "@astropub/md";
     <div class="max-w-4xl mx-auto w-full">
       <div class="faq-container space-y-4">
         {
-          faqItems.map(async (item) => (
+          faqItems.map((item) => (
             <details
               class="faq-item bg-white/10 backdrop-blur-sm rounded-lg overflow-hidden group"
               id={item.id}
@@ -60,10 +67,9 @@ import { markdown } from "@astropub/md";
                 </svg>
               </summary>
               <div class="faq-answer p-6">
-                <div
-                  class="answer-content text-lg leading-relaxed space-y-4"
-                  set:html={await markdown(item.answer)}
-                />
+                <div class="answer-content text-lg leading-relaxed space-y-4">
+                  <item.Content />
+                </div>
               </div>
             </details>
           ))
@@ -72,7 +78,7 @@ import { markdown } from "@astropub/md";
 
       <div class="text-center mt-12 pt-8 border-t border-white/20">
         <p class="text-xl mb-6">
-          Ready to explore your own Life & Legacy Plan?
+          {closingText}
         </p>
         <Button
           href={callToAction.href}
@@ -80,7 +86,7 @@ import { markdown } from "@astropub/md";
           variant="secondary"
           size="xl"
         >
-          Book A Discovery Call
+          {buttonLabel}
         </Button>
       </div>
     </div>

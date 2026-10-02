@@ -12,6 +12,8 @@
 - add a next a previous post navigation section at the bottom of each blog post page
 - between the mobile breakpoint and ~868px the header wraps many of the links and breaks
 - blog post should have a nice print style
+- featured items on the homepage (standard 3) need to center any wrapped items in the grid
+- render all Keystatic-uploaded images through Astro's `<Image>` / `getImage()` (about portrait + signature, hero and section backgrounds currently use the raw file via `.src`) so uploads are resized and compressed; blog post `image` is accepted but not rendered yet
 
 ## Key Features
 

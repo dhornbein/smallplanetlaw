@@ -2,26 +2,17 @@
 import LogoMark from "../ui/LogoMark.astro";
 import CurvedEdge from "../ui/CurvedEdge.astro";
 import Icon from "../ui/Icon.astro";
-const features = [
-  {
-    icon: "heart" as const,
-    title: "Holistic & Relationship-Based",
-    description:
-      "We guide you through every step with care and clarity, ensuring your plan truly works when needed.",
-  },
-  {
-    icon: "globe" as const,
-    title: "Environmentally Conscious",
-    description:
-      "Sustainable practices are woven into every aspect of our operations and your planning options.",
-  },
-  {
-    icon: "users" as const,
-    title: "Here for You and Your Family for Life",
-    description:
-      "We serve as trusted advisors for life, adapting your plan as your circumstances evolve.",
-  },
-];
+import Markdown from "../ui/Markdown.astro";
+import type { IconName } from "../ui/icons";
+
+interface Props {
+  heading: string;
+  subheading: string;
+  body: string;
+  features: { icon: IconName; title: string; description: string }[];
+}
+
+const { heading, subheading, body, features } = Astro.props;
 ---
 
 <section class="relative py-20 lg:py-40 bg-neutral-warm text-text-primary">
@@ -30,16 +21,11 @@ const features = [
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <div class="max-w-3xl mx-auto text-center mb-16">
       <LogoMark size="xl" class="mx-auto mb-6" fillColor="none" />
-      <h2>The Small Planet Difference</h2>
+      <h2>{heading}</h2>
       <p class="text-xl leading-relaxed">
-        Estate Planning That Feels Human and Aligned With Your Values.
+        {subheading}
       </p>
-      <p class="text-lg mt-4 leading-relaxed">
-        We believe estate planning should feel like peace of mind, not
-        paperwork. At Small Planet Law, we combine professional excellence with
-        genuine care — guiding you to create a plan that truly works when it
-        matters most.
-      </p>
+      <Markdown content={body} class="text-lg mt-4 leading-relaxed" />
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
@@ -50,7 +36,7 @@ const features = [
               <Icon name={feature.icon} size="xl" class="text-primary" />
             </div>
             <h3>{feature.title}</h3>
-            <p class="leading-relaxed">{feature.description}</p>
+            <Markdown content={feature.description} class="leading-relaxed" />
           </div>
         ))
       }
