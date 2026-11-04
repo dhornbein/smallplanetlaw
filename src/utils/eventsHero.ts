@@ -31,6 +31,15 @@ function when(event: PublicEvent, status: EventsPageContent["status"]): string {
   return fillTemplate(status.onDate, { date: event.shortDate });
 }
 
+/** Hero sentence split around the event name so the name can be styled */
+export interface HeroLede {
+  before: string;
+  eventName?: string;
+  after?: string;
+}
+
+const EVENT_PLACEHOLDER = "{event}";
+
 /**
  * Intro line for the events page, describing only events people can still
  * join. `null` events means the lookup failed.
@@ -38,20 +47,27 @@ function when(event: PublicEvent, status: EventsPageContent["status"]): string {
 export function getHeroLede(
   events: PublicEvent[] | null,
   { hero, status }: Pick<EventsPageContent, "hero" | "status">,
-): string {
-  if (events === null) return hero.intro;
-  if (events.length === 0) return status.noEvents;
+): HeroLede {
+  if (events === null) return { before: hero.intro };
+  if (events.length === 0) return { before: status.noEvents };
 
   const open = events.filter((event) => !event.isFull);
-  if (open.length === 0) return status.allFull;
+  if (open.length === 0) return { before: status.allFull };
 
   const [next] = open;
   const template = open.length === 1 ? status.oneEvent : status.manyEvents;
-  return capitalize(
+  const text = capitalize(
     fillTemplate(template, {
       count: NUMBER_WORDS[open.length] ?? String(open.length),
       when: when(next, status),
-      event: next.name,
     }),
   );
+
+  const index = text.indexOf(EVENT_PLACEHOLDER);
+  if (index === -1) return { before: text };
+  return {
+    before: text.slice(0, index),
+    eventName: next.name,
+    after: text.slice(index + EVENT_PLACEHOLDER.length),
+  };
 }

@@ -45,7 +45,7 @@ interface FormData {
   };
 }
 
-export interface RawEvent {
+interface RawEvent {
   id: string;
   name: string;
   description: string | null;
@@ -155,7 +155,7 @@ function calendarDay(date: Date, timeZone: string): number {
   return Date.UTC(year, month - 1, day) / 86_400_000;
 }
 
-export function toPublicEvent(event: RawEvent): PublicEvent {
+function toPublicEvent(event: RawEvent): PublicEvent {
   const timeZone = event.timeZone ?? DEFAULT_TIME_ZONE;
   const start = new Date(event.startDate);
   const end = event.endDate ? new Date(event.endDate) : start;

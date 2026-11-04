@@ -3,21 +3,19 @@ import Layout from "../layouts/Layout.astro";
 import CurvedEdge from "../components/ui/CurvedEdge.astro";
 import EventCard from "../components/sections/EventCard.astro";
 import EventRegistrationForm from "../components/sections/EventRegistrationForm.astro";
-import EventsPreviewBar from "../components/sections/EventsPreviewBar.astro";
 import Newsletter from "../components/sections/Newsletter.astro";
 import { eventsPage } from "../utils/eventsContent";
 import { getHeroLede } from "../utils/eventsHero";
-import { applyPreview } from "../utils/eventsPreview";
 import { getUpcomingEvents } from "../utils/lawmatics";
 import { eventRegistrationForm } from "../utils/navigation";
 
 const { seo, hero, status, card, registration } = eventsPage;
 
 // Live event details enhance the page; without them the embedded form still works
-const liveEvents = await getUpcomingEvents(eventRegistrationForm.id);
+const events = await getUpcomingEvents(eventRegistrationForm.id);
 
 // Only cache successful lookups so a Lawmatics outage clears on the next request
-if (liveEvents !== null) {
+if (events !== null) {
   Astro.response.headers.set(
     "Cache-Control",
     "public, max-age=0, must-revalidate",
@@ -28,15 +26,10 @@ if (liveEvents !== null) {
   );
 }
 
-// TEMP: ?preview= only applies on the dev server
-const isDev = import.meta.env.DEV;
-const events = isDev
-  ? applyPreview(Astro.url.searchParams.get("preview"), liveEvents)
-  : liveEvents;
-
 const hasEvents = events !== null && events.length > 0;
 // A failed lookup keeps the form: we can't tell that registration is closed
 const showForm = events === null || events.some((event) => !event.isFull);
+const lede = getHeroLede(events, { hero, status });
 ---
 
 <Layout title={`${seo.title} | Small Planet Law`} description={seo.description}>
@@ -47,7 +40,7 @@ const showForm = events === null || events.some((event) => !event.isFull);
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
       <h1>{hero.heading}</h1>
       <p class="text-lg lg:text-xl text-olivine-100 max-w-prose">
-        {getHeroLede(events, { hero, status })}
+        {lede.before}{lede.eventName && <span class="font-serif italic">{lede.eventName}</span>}{lede.after}
       </p>
     </div>
     {
@@ -97,6 +90,4 @@ const showForm = events === null || events.some((event) => !event.isFull);
   }
 
   <Newsletter />
-
-  {isDev && <EventsPreviewBar />}
 </Layout>
