@@ -1,0 +1,67 @@
+---
+import Button from "../ui/Button.astro";
+import type { PublicEvent } from "../../utils/lawmatics";
+
+interface Props {
+  event: PublicEvent;
+}
+
+const { event } = Astro.props;
+---
+
+<article class="event-card">
+  {event.type && <p class="event-card__type">{event.type}</p>}
+  <h3 class="event-card__title">{event.name}</h3>
+  <p class="event-card__when">
+    <time datetime={event.startDate}>{event.dateLabel}</time>
+    <br />
+    {event.timeLabel}
+  </p>
+  {event.location && <p class="event-card__location">{event.location}</p>}
+  {
+    event.description && (
+      <p class="event-card__description">{event.description}</p>
+    )
+  }
+  {
+    event.isFull ? (
+      <p class="event-card__full">This event is full</p>
+    ) : (
+      <Button href="#register" aria-label={`Register for ${event.name}`}>
+        Register
+      </Button>
+    )
+  }
+</article>
+
+<style>
+  @reference "../../styles/global.css";
+
+  .event-card {
+    @apply bg-white text-text-primary rounded-lg p-6 sm:p-8;
+  }
+
+  .event-card__type {
+    @apply text-sm font-semibold uppercase tracking-wide mb-2;
+  }
+
+  .event-card__title {
+    @apply mb-3;
+  }
+
+  .event-card__when {
+    @apply font-semibold mb-3;
+  }
+
+  .event-card__location {
+    @apply mb-3;
+  }
+
+  .event-card__description {
+    @apply leading-relaxed mb-6 whitespace-pre-line;
+  }
+
+  .event-card__full {
+    @apply font-semibold;
+  }
+</style>

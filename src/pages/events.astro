@@ -1,8 +1,27 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import CurvedEdge from "../components/ui/CurvedEdge.astro";
+import EventCard from "../components/sections/EventCard.astro";
 import EventRegistrationForm from "../components/sections/EventRegistrationForm.astro";
 import Newsletter from "../components/sections/Newsletter.astro";
+import { getUpcomingEvents } from "../utils/lawmatics";
+import { eventRegistrationForm } from "../utils/navigation";
+
+// Live event details enhance the page; without them the embedded form still works
+const events = await getUpcomingEvents(eventRegistrationForm.id);
+const hasEvents = events !== null && events.length > 0;
+
+// Only cache successful lookups so a Lawmatics outage clears on the next request
+if (events !== null) {
+  Astro.response.headers.set(
+    "Cache-Control",
+    "public, max-age=0, must-revalidate",
+  );
+  Astro.response.headers.set(
+    "Netlify-CDN-Cache-Control",
+    "public, durable, s-maxage=300, stale-while-revalidate=3600",
+  );
+}
 ---
 
 <Layout
@@ -29,7 +48,24 @@ import Newsletter from "../components/sections/Newsletter.astro";
     <CurvedEdge fillColor="fill-primary" />
 
     <div class="max-w-2xl mx-auto w-full">
-      <h2 class="text-center">Upcoming Events</h2>
+      {
+        hasEvents && (
+          <>
+            <h2 class="text-center">Upcoming Events</h2>
+            <ul class="space-y-6 mb-16">
+              {events.map((event) => (
+                <li>
+                  <EventCard event={event} />
+                </li>
+              ))}
+            </ul>
+          </>
+        )
+      }
+      <!-- Margin clears the header, which also drops out of the page flow as it sticks -->
+      <h2 id="register" class="text-center scroll-mt-48">
+        {hasEvents ? "Register" : "Upcoming Events"}
+      </h2>
       <p class="text-xl leading-relaxed mb-10 text-center">
         Choose an event below and share your details to save your spot.
       </p>
