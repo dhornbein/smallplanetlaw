@@ -1,6 +1,12 @@
 ---
+import type { EventsPageContent } from "../../utils/eventsContent";
 import { eventRegistrationForm } from "../../utils/navigation";
 
+interface Props {
+  content: EventsPageContent["registration"];
+}
+
+const { content } = Astro.props;
 const { id: formId, shareUrl } = eventRegistrationForm;
 ---
 
@@ -10,14 +16,14 @@ const { id: formId, shareUrl } = eventRegistrationForm;
     <div id="lm-embedded-container"></div>
     <noscript>
       <p class="event-form__noscript">
-        <a href={shareUrl}>Open the event registration form</a>
+        <a href={shareUrl}>{content.noScriptLink}</a>
       </p>
     </noscript>
   </div>
   <p class="event-form__fallback">
-    Form not loading?
+    {content.formFallback}
     <a href={shareUrl} target="_blank" rel="noopener noreferrer">
-      Register on our secure form page
+      {content.formFallbackLink}
     </a>.
   </p>
 </div>

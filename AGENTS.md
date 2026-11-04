@@ -186,5 +186,7 @@ All event management happens in Lawmatics. To publish an event, create it and at
 
 Only request fields we display, and never request `meetingLink`.
 
+All page text lives in `src/utils/eventsContent.ts`, shaped for a Keystatic singleton. Don't hardcode text in the page or its components.
+
 - Help / embed guides: https://help.lawmatics.com
 - API docs (reference only): https://docs.lawmatics.com/

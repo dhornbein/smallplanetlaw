@@ -30,6 +30,7 @@ const EVENTS_QUERY = `query events($ids: [ID], $shareUuid: ID) {
     maximumRegistrants
     address { street street2 city state zipcode }
     eventType { name }
+    hosts { id name profilePic }
   }
 }`;
 
@@ -44,7 +45,7 @@ interface FormData {
   };
 }
 
-interface RawEvent {
+export interface RawEvent {
   id: string;
   name: string;
   description: string | null;
@@ -61,6 +62,14 @@ interface RawEvent {
     zipcode: string | null;
   } | null;
   eventType: { name: string } | null;
+  hosts: EventHost[] | null;
+}
+
+export interface EventHost {
+  id: string;
+  name: string;
+  /** Signed link that expires after a few days, so never store it */
+  profilePic: string | null;
 }
 
 export interface PublicEvent {
@@ -71,8 +80,13 @@ export interface PublicEvent {
   /** ISO date for the <time> element */
   startDate: string;
   dateLabel: string;
+  /** Compact date for running text, e.g. "Nov 23rd" */
+  shortDate: string;
   timeLabel: string;
+  /** Calendar days until the event in its own time zone; 0 means today */
+  startsInDays: number;
   location: string | null;
+  hosts: EventHost[];
   isFull: boolean;
 }
 
@@ -108,7 +122,40 @@ function formatLocation(address: RawEvent["address"]): string | null {
   return parts.length > 0 ? parts.join(", ") : null;
 }
 
-function toPublicEvent(event: RawEvent): PublicEvent {
+const ORDINAL_SUFFIXES: Record<string, string> = {
+  one: "st",
+  two: "nd",
+  few: "rd",
+  other: "th",
+};
+
+function formatShortDate(date: Date, timeZone: string): string {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    timeZone,
+  }).formatToParts(date);
+  const month = parts.find((part) => part.type === "month")?.value;
+  const day = Number(parts.find((part) => part.type === "day")?.value);
+  const rule = new Intl.PluralRules("en-US", { type: "ordinal" }).select(day);
+  return `${month} ${day}${ORDINAL_SUFFIXES[rule]}`;
+}
+
+/** Whole-day number for a moment as seen on the calendar in a time zone */
+function calendarDay(date: Date, timeZone: string): number {
+  const [year, month, day] = new Intl.DateTimeFormat("en-CA", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    timeZone,
+  })
+    .format(date)
+    .split("-")
+    .map(Number);
+  return Date.UTC(year, month - 1, day) / 86_400_000;
+}
+
+export function toPublicEvent(event: RawEvent): PublicEvent {
   const timeZone = event.timeZone ?? DEFAULT_TIME_ZONE;
   const start = new Date(event.startDate);
   const end = event.endDate ? new Date(event.endDate) : start;
@@ -124,6 +171,11 @@ function toPublicEvent(event: RawEvent): PublicEvent {
       dateStyle: "full",
       timeZone,
     }).format(start),
+    shortDate: formatShortDate(start, timeZone),
+    startsInDays: Math.max(
+      0,
+      calendarDay(start, timeZone) - calendarDay(new Date(), timeZone),
+    ),
     timeLabel: new Intl.DateTimeFormat("en-US", {
       hour: "numeric",
       minute: "2-digit",
@@ -131,6 +183,7 @@ function toPublicEvent(event: RawEvent): PublicEvent {
       timeZoneName: "short",
     }).formatRange(start, end),
     location: formatLocation(event.address),
+    hosts: event.hosts ?? [],
     isFull:
       maximumRegistrants != null &&
       (registrantCount ?? 0) >= maximumRegistrants,

@@ -3,16 +3,21 @@ import Layout from "../layouts/Layout.astro";
 import CurvedEdge from "../components/ui/CurvedEdge.astro";
 import EventCard from "../components/sections/EventCard.astro";
 import EventRegistrationForm from "../components/sections/EventRegistrationForm.astro";
+import EventsPreviewBar from "../components/sections/EventsPreviewBar.astro";
 import Newsletter from "../components/sections/Newsletter.astro";
+import { eventsPage } from "../utils/eventsContent";
+import { getHeroLede } from "../utils/eventsHero";
+import { applyPreview } from "../utils/eventsPreview";
 import { getUpcomingEvents } from "../utils/lawmatics";
 import { eventRegistrationForm } from "../utils/navigation";
 
+const { seo, hero, status, card, registration } = eventsPage;
+
 // Live event details enhance the page; without them the embedded form still works
-const events = await getUpcomingEvents(eventRegistrationForm.id);
-const hasEvents = events !== null && events.length > 0;
+const liveEvents = await getUpcomingEvents(eventRegistrationForm.id);
 
 // Only cache successful lookups so a Lawmatics outage clears on the next request
-if (events !== null) {
+if (liveEvents !== null) {
   Astro.response.headers.set(
     "Cache-Control",
     "public, max-age=0, must-revalidate",
@@ -22,58 +27,76 @@ if (events !== null) {
     "public, durable, s-maxage=300, stale-while-revalidate=3600",
   );
 }
+
+// TEMP: ?preview= only applies on the dev server
+const isDev = import.meta.env.DEV;
+const events = isDev
+  ? applyPreview(Astro.url.searchParams.get("preview"), liveEvents)
+  : liveEvents;
+
+const hasEvents = events !== null && events.length > 0;
+// A failed lookup keeps the form: we can't tell that registration is closed
+const showForm = events === null || events.some((event) => !event.isFull);
 ---
 
-<Layout
-  title="Events | Small Planet Law"
-  description="Join Small Planet Law for upcoming workshops and community events on estate planning and green legacy giving in Colorado. See what's coming up and register online."
->
-  <!-- Hero Section -->
-  <section
-    class="bg-secondary text-primary-variant show-header relative px-8 py-24 lg:py-28"
+<Layout title={`${seo.title} | Small Planet Law`} description={seo.description}>
+  <!-- Page Header -->
+  <header
+    class="bg-outer-space text-white show-header relative px-8 py-24 lg:py-28"
   >
-    <div class="max-w-4xl mx-auto">
-      <h1>Events</h1>
-      <p class="text-xl leading-relaxed max-w-prose">
-        Workshops, community gatherings, and educational events on estate
-        planning and green legacy giving.
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1>{hero.heading}</h1>
+      <p class="text-lg lg:text-xl text-olivine-100 max-w-prose">
+        {getHeroLede(events, { hero, status })}
       </p>
     </div>
-  </section>
+    {
+      !hasEvents && !showForm && (
+        <CurvedEdge fillColor="fill-outer-space" position="bottom" />
+      )
+    }
+  </header>
+
+  <!-- Event List -->
+  {
+    hasEvents && (
+      <section class="py-16 lg:py-20 relative bg-light">
+        <CurvedEdge fillColor="fill-light" />
+        <ul class="flex flex-wrap gap-6 sm:gap-8 px-6 md:px-16 justify-center">
+          {events.map((event) => (
+            <li class="w-full md:max-w-md">
+              <EventCard event={event} content={card} />
+            </li>
+          ))}
+        </ul>
+        <CurvedEdge fillColor="fill-light" position="bottom" />
+      </section>
+    )
+  }
 
   <!-- Registration -->
-  <section
-    class="relative bg-primary text-text-primary-inverse px-4 sm:px-6 lg:px-8 pt-10 pb-30"
-  >
-    <CurvedEdge fillColor="fill-primary" />
+  {
+    showForm && (
+      <section class="relative bg-primary text-text-primary-inverse px-4 sm:px-6 lg:px-8 pt-10 pb-30">
+        {!hasEvents && <CurvedEdge fillColor="fill-primary" />}
 
-    <div class="max-w-2xl mx-auto w-full">
-      {
-        hasEvents && (
-          <>
-            <h2 class="text-center">Upcoming Events</h2>
-            <ul class="space-y-6 mb-16">
-              {events.map((event) => (
-                <li>
-                  <EventCard event={event} />
-                </li>
-              ))}
-            </ul>
-          </>
-        )
-      }
-      <!-- Margin clears the header, which also drops out of the page flow as it sticks -->
-      <h2 id="register" class="text-center scroll-mt-48">
-        {hasEvents ? "Register" : "Upcoming Events"}
-      </h2>
-      <p class="text-xl leading-relaxed mb-10 text-center">
-        Choose an event below and share your details to save your spot.
-      </p>
-      <EventRegistrationForm />
-    </div>
+        <div class="max-w-2xl mx-auto w-full">
+          <!-- Margin clears the header, which also drops out of the page flow as it sticks -->
+          <h2 id="register" class="text-center scroll-mt-48">
+            {registration.heading}
+          </h2>
+          <p class="text-xl leading-relaxed mb-10 text-center">
+            {registration.body}
+          </p>
+          <EventRegistrationForm content={registration} />
+        </div>
 
-    <CurvedEdge fillColor="fill-primary" position="bottom" />
-  </section>
+        <CurvedEdge fillColor="fill-primary" position="bottom" />
+      </section>
+    )
+  }
 
   <Newsletter />
+
+  {isDev && <EventsPreviewBar />}
 </Layout>
