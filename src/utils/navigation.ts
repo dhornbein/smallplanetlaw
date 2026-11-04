@@ -22,6 +22,13 @@ export const callToAction: NavItem = {
   target: "_blank",
 };
 
+// Lawmatics custom form that visitors use to register for events
+export const eventRegistrationForm = {
+  id: "4ef00b99-129a-44d6-b43b-9b14ddd7b36e",
+  shareUrl:
+    "https://app.lawmatics.com/forms/share/4ef00b99-129a-44d6-b43b-9b14ddd7b36e",
+};
+
 // Combined quick links for footer
 export const quickLinks: NavItem[] = [...navItems, callToAction];
 

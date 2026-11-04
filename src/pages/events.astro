@@ -1,12 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import CurvedEdge from "../components/ui/CurvedEdge.astro";
+import EventRegistrationForm from "../components/sections/EventRegistrationForm.astro";
 import Newsletter from "../components/sections/Newsletter.astro";
 ---
 
 <Layout
   title="Events | Small Planet Law"
-  description="Join Small Planet Law for upcoming workshops and community events on estate planning and green legacy giving in Denver, Colorado. Coming soon."
+  description="Join Small Planet Law for upcoming workshops and community events on estate planning and green legacy giving in Colorado. See what's coming up and register online."
 >
   <!-- Hero Section -->
   <section
@@ -16,39 +17,23 @@ import Newsletter from "../components/sections/Newsletter.astro";
       <h1>Events</h1>
       <p class="text-xl leading-relaxed max-w-prose">
         Workshops, community gatherings, and educational events on estate
-        planning and green legacy giving are on the way.
+        planning and green legacy giving.
       </p>
     </div>
   </section>
 
-  <!-- Coming Soon Content -->
+  <!-- Registration -->
   <section
     class="relative bg-primary text-text-primary-inverse px-4 sm:px-6 lg:px-8 pt-10 pb-30"
   >
     <CurvedEdge fillColor="fill-primary" />
 
-    <div class="max-w-2xl mx-auto w-full text-center">
-      <svg
-        class="w-14 h-14 mx-auto mb-6 text-secondary"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-        ></path>
-      </svg>
-      <h2>Coming Soon</h2>
-      <p class="text-xl leading-relaxed mb-10">
-        We're planning workshops and community events to help you feel
-        informed and empowered about estate planning and green legacy
-        options. Check back soon, or sign up below and we'll let you know as
-        soon as events are scheduled.
+    <div class="max-w-2xl mx-auto w-full">
+      <h2 class="text-center">Upcoming Events</h2>
+      <p class="text-xl leading-relaxed mb-10 text-center">
+        Choose an event below and share your details to save your spot.
       </p>
+      <EventRegistrationForm />
     </div>
 
     <CurvedEdge fillColor="fill-primary" position="bottom" />

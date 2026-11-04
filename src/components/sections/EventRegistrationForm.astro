@@ -1,0 +1,61 @@
+---
+import { eventRegistrationForm } from "../../utils/navigation";
+
+const { id: formId, shareUrl } = eventRegistrationForm;
+---
+
+<div class="event-form">
+  <div class="event-form__embed">
+    <!-- Lawmatics inserts its auto-sizing iframe just before this element -->
+    <div id="lm-embedded-container"></div>
+    <noscript>
+      <p class="event-form__noscript">
+        <a href={shareUrl}>Open the event registration form</a>
+      </p>
+    </noscript>
+  </div>
+  <p class="event-form__fallback">
+    Form not loading?
+    <a href={shareUrl} target="_blank" rel="noopener noreferrer">
+      Register on our secure form page
+    </a>.
+  </p>
+</div>
+
+<!-- Lawmatics embed snippet, using the container fix from their Safari/Firefox guide -->
+<script is:inline define:vars={{ formId }}>
+  const lmIntake = function () {
+    lmIntake.process
+      ? lmIntake.process.apply(lmIntake, arguments)
+      : lmIntake.queue.push(arguments);
+  };
+  lmIntake.queue = [];
+  window.lm_intake = lmIntake;
+
+  const script = document.createElement("script");
+  script.async = true;
+  script.src = "https://navi.lawmatics.com/intake.min.js";
+  document.head.appendChild(script);
+
+  window.lm_intake(formId, "lm-embedded-container", {});
+</script>
+
+<style>
+  @reference "../../styles/global.css";
+
+  .event-form__embed {
+    @apply bg-white text-text-primary rounded-lg p-4 sm:p-6 min-h-[32rem];
+  }
+
+  .event-form__noscript a {
+    @apply underline;
+  }
+
+  .event-form__fallback {
+    @apply mt-4 text-center;
+
+    a {
+      @apply underline;
+    }
+  }
+</style>
