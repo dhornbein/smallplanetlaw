@@ -30,7 +30,7 @@
 - Contact forms throughout site
 - Content collections for blog/content management
 - Built-in SEO optimization for Denver estate planning market
-- Scheduling system integration with cal.com
+- Scheduling via Lawmatics booking form (URL set in `callToAction` in `src/utils/navigation.ts`)
 - View transitions for smooth page navigation
 - Optimized image handling with Astro's built-in `<Image />` component
 - Pull Wordpress blog posts via REST API, on content update a webhook triggers a rebuild of the Astro site to keep blog content in sync
@@ -167,6 +167,6 @@ src/
 ### Integration Requirements
 - Newsletter signup (platform TBD)
 - Contact forms with proper validation
-- Scheduling system integration
+- Scheduling via Lawmatics (link in `src/utils/navigation.ts`)
 - Analytics implementation
 - Social media integration (minimal, professional focus)
