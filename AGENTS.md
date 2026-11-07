@@ -170,3 +170,23 @@ src/
 - Scheduling via Lawmatics (link in `src/utils/navigation.ts`)
 - Analytics implementation
 - Social media integration (minimal, professional focus)
+
+## Lawmatics
+
+The firm uses Lawmatics, a SaaS, for forms, events, workflows, and email. Use Lawmatics embeds or links for forms; don't build our own forms. Don't use the authenticated Lawmatics API, and don't put API credentials in the repo: tokens have full access to client data and can't be scoped.
+
+### Events page
+
+All event management happens in Lawmatics. To publish an event, create it and attach it to the Event Registration form (ID in `src/utils/navigation.ts`). Lawmatics events have no landing pages, so every registration goes through this form.
+
+`/events` is built in two layers:
+
+- **Base:** the embedded form (`src/components/sections/EventRegistrationForm.astro`). This must always work on its own.
+- **Enhancement:** event cards from `src/utils/lawmatics.ts`, which reads public form data from the anonymous GraphQL endpoint behind Lawmatics' hosted form. It's undocumented and may change, so any failure must fall back to the base without an error.
+
+Only request fields we display, and never request `meetingLink`.
+
+All page text lives in `src/utils/eventsContent.ts`, shaped for a Keystatic singleton. Don't hardcode text in the page or its components.
+
+- Help / embed guides: https://help.lawmatics.com
+- API docs (reference only): https://docs.lawmatics.com/

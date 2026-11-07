@@ -1,0 +1,114 @@
+---
+import { Image } from "astro:assets";
+import bobbiePortrait from "../../assets/bobbie-portrait-cropped.jpg";
+import Button from "../ui/Button.astro";
+import type { EventsPageContent } from "../../utils/eventsContent";
+import { fillTemplate } from "../../utils/eventsHero";
+import type { PublicEvent } from "../../utils/lawmatics";
+
+/**
+ * EventCard - Matches the blog's PostExcerpt card, with an event type eyebrow
+ * and a Register button that jumps to the embedded form.
+ */
+interface Props {
+  event: PublicEvent;
+  content: EventsPageContent["card"];
+}
+
+const { event, content } = Astro.props;
+
+// Lawmatics lists Bobbie as "Roberta", so use the name and portrait from the blog
+const BOBBIE_HOST_ID = "46052";
+const hosts = event.hosts.map((host) =>
+  host.id === BOBBIE_HOST_ID ? { ...host, name: "Bobbie Mooney" } : host,
+);
+const hostNames = new Intl.ListFormat("en-US").format(
+  hosts.map((host) => host.name),
+);
+const hasAvatars = hosts.some(
+  (host) => host.id === BOBBIE_HOST_ID || host.profilePic,
+);
+const avatarClass =
+  "rounded-full object-cover w-6 h-6 ring-1 ring-outer-space-200";
+---
+
+<article
+  class="relative w-full h-full group rounded-xl border p-6 sm:p-8 transition-shadow duration-300 hover:shadow-lg flex flex-col justify-between border-outer-space-200 bg-dutch-white-200"
+>
+  <div>
+    {
+      event.type && (
+        <p class="text-xs font-sans font-semibold uppercase tracking-wider text-outer-space mb-3">
+          {event.type}
+        </p>
+      )
+    }
+    <h3 class="mb-2 text-outer-space-800">{event.name}</h3>
+    {
+      hosts.length > 0 && (
+        <div class="flex items-center gap-2 mb-3">
+          {hasAvatars && (
+            <div class="flex shrink-0 -space-x-2">
+              {hosts.map((host) =>
+                host.id === BOBBIE_HOST_ID ? (
+                  <Image
+                    src={bobbiePortrait}
+                    alt=""
+                    width={24}
+                    height={24}
+                    class={avatarClass}
+                  />
+                ) : (
+                  host.profilePic && (
+                    <img
+                      src={host.profilePic}
+                      alt=""
+                      width="24"
+                      height="24"
+                      loading="lazy"
+                      class={avatarClass}
+                    />
+                  )
+                ),
+              )}
+            </div>
+          )}
+          <span class="text-sm text-outer-space font-sans">
+            {fillTemplate(content.hostedBy, { hosts: hostNames })}
+          </span>
+        </div>
+      )
+    }
+    <p class="text-outer-space-800 font-semibold mb-1">
+      <time datetime={event.startDate}>{event.dateLabel}</time>
+    </p>
+    <p class="text-sm text-outer-space font-sans mb-3">
+      {event.timeLabel}
+      {event.location && <><br />{event.location}</>}
+    </p>
+    {
+      event.description && (
+        <p class="text-outer-space-600 mb-4 whitespace-pre-line">
+          {event.description}
+        </p>
+      )
+    }
+  </div>
+  <div>
+    {
+      event.isFull ? (
+        <p class="font-semibold text-outer-space">{content.full}</p>
+      ) : (
+        <Button
+          href="#register"
+          variant="outer-space"
+          aria-label={fillTemplate(content.registerButtonLabel, {
+            event: event.name,
+          })}
+        >
+          {content.registerButton}
+        </Button>
+      )
+    }
+  </div>
+</article>
