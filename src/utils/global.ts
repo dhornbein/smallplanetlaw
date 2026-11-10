@@ -13,41 +13,6 @@ export const BUSINESS_ADDRESS = {
   line2: "Lakewood, Colorado 80026"
 };
 
-export const MAILCHIMP = {
-  archiveUrl: `https://us15.campaign-archive.com/home/?u=${import.meta.env.MAILCHIMP_USER_ID}&id=${import.meta.env.MAILCHIMP_LIST_ID}`,
-  userId: import.meta.env.MAILCHIMP_USER_ID,
-  listId: import.meta.env.MAILCHIMP_LIST_ID,
-};
-
-export interface SignupLink {
-  label: string;
-  url: string;
-  href: string;
-}
-
-export const MAILCHIMP_SIGNUP_LINKS: Record<string, SignupLink> = {
-  "6-mistakes-guide": {
-    label: "6 Mistakes Families Make Guide",
-    url: "/signup/6-mistakes-guide",
-    href: "https://mailchi.mp/smallplanetlaw/6-mistakes-guide",
-  },
-  "green-estate-planning-guide": {
-    label: "Green Estate Planning Guide",
-    url: "/signup/green-estate-planning-guide",
-    href: "https://mailchi.mp/smallplanetlaw/green-estate-planning-guide",
-  },
-  "love-of-this-place": {
-    label: "Love of This Place",
-    url: "/signup/love-of-this-place",
-    href: "https://mailchi.mp/4699fd0b228a/love-of-this-place",
-  },
-  "top-three-guides": {
-    label: "Top Three Guides",
-    url: "/signup/top-three-guides",
-    href: "https://mailchi.mp/smallplanetlaw/top-three-guides",
-  },
-};
-
 // Lead magnet definitions for A/B testing
 export interface LeadMagnet {
   id: string;

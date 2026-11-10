@@ -26,7 +26,7 @@
 - Astro static site generator with component-based architecture
 - Tailwind CSS v4 for modern, utility-first styling
 - Responsive design optimized for families and professionals
-- Newsletter signup integration
+- Newsletter signup via Lawmatics (see "Newsletter" under Lawmatics below)
 - Contact forms throughout site
 - Content collections for blog/content management
 - Built-in SEO optimization for Denver estate planning market
@@ -165,7 +165,7 @@ src/
 - Optimize for "People also ask" queries related to estate planning
 
 ### Integration Requirements
-- Newsletter signup (platform TBD)
+- Newsletter signup via Lawmatics (see Technical Features)
 - Contact forms with proper validation
 - Scheduling via Lawmatics (link in `src/utils/navigation.ts`)
 - Analytics implementation
@@ -173,7 +173,7 @@ src/
 
 ## Lawmatics
 
-The firm uses Lawmatics, a SaaS, for forms, events, workflows, and email. Use Lawmatics embeds or links for forms; don't build our own forms. Don't use the authenticated Lawmatics API, and don't put API credentials in the repo: tokens have full access to client data and can't be scoped.
+The firm uses Lawmatics, a SaaS, for forms, events, workflows, and email. Use Lawmatics embeds or links for forms; don't build our own forms. The one exception is the newsletter signup (see below). Don't use the authenticated Lawmatics API, and don't put API credentials in the repo: tokens have full access to client data and can't be scoped.
 
 ### Events page
 
@@ -187,6 +187,17 @@ All event management happens in Lawmatics. To publish an event, create it and at
 Only request fields we display, and never request `meetingLink`.
 
 All page text lives in `src/utils/eventsContent.ts`, shaped for a Keystatic singleton. Don't hardcode text in the page or its components.
+
+### Newsletter
+
+Our own signup forms (`Newsletter.astro`, and the free-guide forms in `LeadGenerator.astro`) post to `/api/newsletter`. That endpoint forwards them to the Lawmatics "Subscribe to Newsletter" form through Lawmatics' documented, unauthenticated `POST https://api.lawmatics.com/v1/forms/:uuid/submit` endpoint, so visitors never leave the site. No API credentials are involved.
+
+- The form ID, which inputs are forwarded, and which are required are all in `newsletterForm` in `src/utils/navigation.ts`. Only listed inputs are sent, so a visitor can't set other Lawmatics fields. Keep `required` in step with the Lawmatics form.
+- `/newsletter` is the standalone signup page. Old Mailchimp links at `/signup/*` redirect there with a 302. Don't use a 301 here: browsers cache it indefinitely.
+- `src/utils/emailTypos.ts` flags likely email typos (e.g. "gmial.com"), and `src/utils/emailCheckUI.ts` shows the warning in both forms. It only warns: the first submit stops to show it, and submitting again sends the address as typed.
+- Guide forms show a PDF download button on success. Guides will move to their own Lawmatics lead-gen forms later.
+
+**Keystatic (TODO):** when Keystatic lands, all text visitors see in these forms must become editable there, following the events page pattern. That covers headings, labels, placeholders, button text, success and error messages, the lead magnets in `LEAD_MAGNETS` (`src/utils/global.ts`), and the messages the API returns (`MESSAGES` in `src/pages/api/newsletter.ts`). Don't add more hardcoded form text in the meantime.
 
 - Help / embed guides: https://help.lawmatics.com
 - API docs (reference only): https://docs.lawmatics.com/

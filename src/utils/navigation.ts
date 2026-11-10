@@ -29,6 +29,30 @@ export const eventRegistrationForm = {
     "https://app.lawmatics.com/forms/share/4ef00b99-129a-44d6-b43b-9b14ddd7b36e",
 };
 
+// Lawmatics custom form that newsletter signups are submitted to.
+// Field keys come from the form's "API Details" in the Lawmatics form builder.
+export const newsletterForm = {
+  id: "a41f0bf1-cd05-4f89-b262-55dbecbc171b",
+  /**
+   * Inputs we forward, keyed by the input's `name` in our forms. Anything not
+   * listed here is ignored, so a visitor can't set other Lawmatics fields.
+   * To collect another field (e.g. last name), add it here and add a matching
+   * input to the forms. `required` should match the Lawmatics form.
+   */
+  fields: {
+    firstName: { key: "first_name", required: true },
+    email: { key: "email", required: true, type: "email" },
+  },
+  /** Sent with every signup: ticks "Subscribed to Newsletter" */
+  fixedValues: {
+    custom_field_935354: true,
+  },
+} satisfies {
+  id: string;
+  fields: Record<string, { key: string; required?: boolean; type?: "email" }>;
+  fixedValues: Record<string, string | boolean>;
+};
+
 // Combined quick links for footer
 export const quickLinks: NavItem[] = [...navItems, callToAction];
 

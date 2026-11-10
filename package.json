@@ -12,8 +12,7 @@
   "dependencies": {
     "@astropub/md": "^1.0.0",
     "@fontsource-variable/lora": "^5.2.8",
-    "@fontsource-variable/source-sans-3": "^5.2.9",
-    "@mailchimp/mailchimp_marketing": "^3.0.80"
+    "@fontsource-variable/source-sans-3": "^5.2.9"
   },
   "devDependencies": {
     "@astrojs/netlify": "^7.0.5",

@@ -118,22 +118,12 @@ Access via Tailwind classes: `text-hunter-green`, `bg-olivine-300`, etc.
    - Connect to GitHub and select this repository
    - Netlify auto-detects Astro settings ✅
 
-3. **Add Environment Variables**
-   
-   In Netlify: Site settings → Environment variables → Add variable
-   
-   ```
-   MAILCHIMP_API_KEY=your_api_key
-   MAILCHIMP_SERVER_PREFIX=us21
-   MAILCHIMP_LIST_ID=your_list_id  
-   MAILCHIMP_USER_ID=your_user_id
-   ```
-   
-   **Get credentials:**
-   - API Key: Mailchimp → Account → Extras → API keys
-   - Server Prefix: Part after dash in API key (e.g., "us21")
-   - List ID: Audience → Settings → Audience ID
-   - User ID: In Mailchimp account URL or archive links
+3. **Environment variables**
+
+   None are required. The newsletter endpoint (`src/pages/api/newsletter.ts`)
+   forwards signups to a Lawmatics custom form using Lawmatics' public
+   "Submit Custom Form Entry" endpoint, which needs no API key. The form ID and
+   field keys live in `newsletterForm` in `src/utils/navigation.ts`.
 
 4. **Deploy**
    - Push to `main` branch = automatic deployment

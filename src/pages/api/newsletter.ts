@@ -1,151 +1,135 @@
 import type { APIRoute } from 'astro';
-// @ts-expect-error - No type definitions available for @mailchimp/mailchimp_marketing
-import mailchimp from '@mailchimp/mailchimp_marketing';
-import { createHash } from 'crypto';
-
-// Mark this endpoint as server-rendered
-export const prerender = false;
+import { newsletterForm } from '../../utils/navigation';
 
 /**
- * Generate MD5 hash of lowercase email for Mailchimp subscriber hash
+ * Newsletter signup. Forwards the visitor's details to the Lawmatics
+ * newsletter form through Lawmatics' documented, unauthenticated
+ * "Submit Custom Form Entry" endpoint, then reports back to our own UI.
+ * Docs: https://docs.lawmatics.com/ (Custom Forms > Submit Custom Form Entry)
+ *
+ * Which inputs are forwarded, and which are required, is set in
+ * `newsletterForm` in src/utils/navigation.ts.
  */
-function subscriberHash(email: string): string {
-  return createHash('md5').update(email.toLowerCase()).digest('hex');
+
+export const prerender = false;
+
+const SUBMIT_URL = `https://api.lawmatics.com/v1/forms/${newsletterForm.id}/submit`;
+const TIMEOUT_MS = 8000;
+
+/**
+ * Text shown to visitors. These should become editable in Keystatic along
+ * with the rest of the form text (see "Newsletter" in AGENTS.md).
+ */
+const MESSAGES = {
+  success: 'Thank you for subscribing!',
+  missingField: 'Please fill in all required fields.',
+  invalidEmail: 'Please provide a valid email address.',
+  rejected: "We couldn't sign you up with that information. Please check your details and try again.",
+  failed: 'Something went wrong. Please try again later.',
+};
+
+/** Tracking fields the Lawmatics endpoint accepts alongside form values */
+const UTM_PARAMS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+type Payload = Record<string, string | boolean>;
+
+function json(body: { success: boolean; message: string }, status: number) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
+
+/**
+ * Records which page the signup came from, plus any UTM tags on that page's
+ * address. Uses the Referer header, which browsers send for same-site
+ * requests both from fetch and from a plain form post.
+ */
+function trackingFields(referer: string | null): Payload {
+  if (!referer) return {};
+  try {
+    const url = new URL(referer);
+    const fields: Payload = { referring_url: url.href };
+    for (const param of UTM_PARAMS) {
+      const value = url.searchParams.get(param);
+      if (value) fields[param] = value;
+    }
+    return fields;
+  } catch {
+    return {};
+  }
+}
+
+/**
+ * Maps our inputs to Lawmatics field keys. Returns an error message instead
+ * if a required field is empty or the email is malformed.
+ */
+function formFields(formData: FormData): Payload | string {
+  const fields: Payload = {};
+  for (const [name, field] of Object.entries(newsletterForm.fields)) {
+    const value = formData.get(name)?.toString().trim() ?? '';
+    if (!value) {
+      if (field.required) return MESSAGES.missingField;
+      continue;
+    }
+    if ('type' in field && field.type === 'email' && !EMAIL_PATTERN.test(value)) {
+      return MESSAGES.invalidEmail;
+    }
+    fields[field.key] = value;
+  }
+  return fields;
 }
 
 export const POST: APIRoute = async ({ request }) => {
+  let formData: FormData;
   try {
-    // Read env vars at runtime (process.env for Netlify SSR, not import.meta.env)
-    const apiKey = process.env.MAILCHIMP_API_KEY;
-    const serverPrefix = process.env.MAILCHIMP_SERVER_PREFIX;
-    const listId = process.env.MAILCHIMP_LIST_ID;
-
-    // Validate environment variables
-    if (!apiKey || !serverPrefix || !listId) {
-      console.error('Missing Mailchimp configuration');
-      return new Response(
-        JSON.stringify({
-          success: false,
-          message: 'Newsletter service is not configured. Please try again later.',
-        }),
-        {
-          status: 500,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-    }
-
-    // Configure Mailchimp per-request
-    mailchimp.setConfig({
-      apiKey: apiKey,
-      server: serverPrefix,
-    });
-
-    // Parse form data
-    const formData = await request.formData();
-    const email = formData.get('email')?.toString();
-    const firstName = formData.get('firstName')?.toString();
-    const tags = formData.get('tags')?.toString(); // Comma-separated tag names
-
-    // Validate email
-    if (!email || !email.includes('@')) {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          message: 'Please provide a valid email address.',
-        }),
-        {
-          status: 400,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-    }
-
-    const hash = subscriberHash(email);
-
-    // Use setListMember (PUT/upsert) instead of addListMember (POST)
-    // This gracefully handles existing subscribers, previously unsubscribed,
-    // and cleaned contacts — avoiding "Member Exists" errors.
-    await mailchimp.lists.setListMember(listId, hash, {
-      email_address: email,
-      status_if_new: 'pending', // Double opt-in for new subscribers
-      merge_fields: {
-        FNAME: firstName || '',
-      },
-    });
-
-    // Add tags if provided
-    if (tags) {
-      const tagList = tags.split(',').map((t: string) => t.trim()).filter(Boolean);
-      if (tagList.length > 0) {
-        await mailchimp.lists.updateListMemberTags(listId, hash, {
-          tags: tagList.map((name: string) => ({ name, status: 'active' })),
-        });
-      }
-    }
-
-    return new Response(
-      JSON.stringify({
-        success: true,
-        message: 'Thank you! Please check your email to confirm your subscription.',
-      }),
-      {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
-  } catch (error: any) {
-    console.error('Mailchimp error:', error);
-
-    // Handle specific Mailchimp errors
-    if (error.status === 400 && error.response?.body?.title === 'Member Exists') {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          message: 'This email is already subscribed to our newsletter.',
-        }),
-        {
-          status: 400,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-    }
-
-    if (error.status === 400 && error.response?.body?.title === 'Invalid Resource') {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          message: 'Please provide a valid email address.',
-        }),
-        {
-          status: 400,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-    }
-
-    // Generic error
-    return new Response(
-      JSON.stringify({
-        success: false,
-        message: 'Something went wrong. Please try again later.',
-      }),
-      {
-        status: 500,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    formData = await request.formData();
+  } catch {
+    return json({ success: false, message: MESSAGES.missingField }, 400);
   }
+
+  // Hidden field that people never see. Bots that fill every field get a
+  // normal-looking success and nothing is sent to Lawmatics.
+  if (formData.get('website')?.toString()) {
+    return json({ success: true, message: MESSAGES.success }, 200);
+  }
+
+  const fields = formFields(formData);
+  if (typeof fields === 'string') {
+    return json({ success: false, message: fields }, 400);
+  }
+
+  const payload: Payload = {
+    ...trackingFields(request.headers.get('referer')),
+    ...fields,
+    ...newsletterForm.fixedValues,
+  };
+
+  try {
+    const response = await fetch(SUBMIT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      signal: AbortSignal.timeout(TIMEOUT_MS),
+    });
+
+    if (response.ok) {
+      return json({ success: true, message: MESSAGES.success }, 200);
+    }
+
+    console.error(
+      `Lawmatics newsletter submit failed with ${response.status}:`,
+      await response.text().catch(() => ''),
+    );
+
+    if (response.status >= 400 && response.status < 500) {
+      return json({ success: false, message: MESSAGES.rejected }, 400);
+    }
+  } catch (error) {
+    console.error('Lawmatics newsletter submit error:', error);
+  }
+
+  return json({ success: false, message: MESSAGES.failed }, 502);
 };
