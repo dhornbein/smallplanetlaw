@@ -2,6 +2,13 @@
   command = "npm run build"
   publish = "dist"
 
+# The site UI sets the functions directory to src/pages/api, which makes Netlify
+# bundle Astro's API routes as standalone functions, outside Astro (so imports
+# like "astro:content" fail). Astro's adapter already serves those routes, so
+# point Netlify at the default directory instead; it doesn't need to exist.
+[functions]
+  directory = "netlify/functions"
+
 # Resource PDFs moved to /resources/<slug>/file.pdf when they became a Keystatic
 # collection. Keep the old links (emails, shared links) working.
 [[redirects]]
