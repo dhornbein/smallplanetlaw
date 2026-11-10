@@ -1,5 +1,8 @@
-import type { EventsPageContent } from "./eventsContent";
+import type { CollectionEntry } from "astro:content";
 import type { PublicEvent } from "./lawmatics";
+
+/** Events page text from src/content/pages/events.yaml (edited in Keystatic) */
+export type EventsPageContent = CollectionEntry<"eventsPage">["data"];
 
 const NUMBER_WORDS = [
   "zero",

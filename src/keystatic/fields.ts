@@ -256,3 +256,16 @@ export const pdfFile = (label: string) => {
     },
   };
 };
+
+/**
+ * Plain text with {placeholders} that the site fills in, e.g. "Hosted by {hosts}".
+ * The description lists the placeholders so editors know to keep them.
+ */
+export const template = (label: string, placeholders: string[], description?: string) =>
+  fields.text({
+    label,
+    multiline: true,
+    description: [`Keep ${placeholders.map((name) => `{${name}}`).join(', ')} as written.`, description]
+      .filter(Boolean)
+      .join(' '),
+  });

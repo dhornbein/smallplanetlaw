@@ -42,7 +42,7 @@ Holistic estate planning website for Small Planet Law LLC, built with Astro and 
 │   ├── content/                     # Editable content (managed with Keystatic)
 │   │   ├── pages/*.yaml            # One file per page (hero, sections, cards…)
 │   │   ├── settings.yaml           # Phone, email, address, booking link, nav
-│   │   ├── blog/ faq/ events/      # Markdown collections
+│   │   ├── blog/ faq/              # Markdown collections
 │   │   └── resources/ lead-magnets/  # YAML collections
 │   ├── keystatic/fields.ts          # Shared Keystatic field groups
 │   ├── content.config.ts            # Astro collections (mirror keystatic.config.ts)
@@ -83,7 +83,7 @@ All `.astro` files in `src/pages/` become routes automatically (file-based routi
 
 ## Editing Content (Keystatic)
 
-The site owner edits content at **`/keystatic`**. Each page is a guided form ("Pages"), with blog posts, FAQs, events, resources and lead magnets under "Content", and contact details / navigation under "Settings".
+The site owner edits content at **`/keystatic`**. Each page is a guided form ("Pages"), with blog posts, FAQs, resources and lead magnets under "Content" (events are managed in Lawmatics), and contact details / navigation under "Settings".
 
 - **Locally** (`npm run dev`), Keystatic reads and writes the files in `src/content/` directly — edit at `http://localhost:4321/keystatic` and commit as usual.
 - **In production**, Keystatic Cloud commits to GitHub; Netlify rebuilds the (static) site on every commit. Editors don't need GitHub accounts.

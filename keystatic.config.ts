@@ -1,7 +1,7 @@
 import { collection, config, fields, singleton } from '@keystatic/core';
 import { faqList } from './src/keystatic/faqList';
 import { BrandMark } from './src/keystatic/BrandMark';
-import { body, cards, hero, link, pageImage, pdfFile, richText, section, seo, sizedImage } from './src/keystatic/fields';
+import { body, cards, hero, link, pageImage, pdfFile, richText, section, seo, sizedImage, template } from './src/keystatic/fields';
 
 // Page singletons live in src/content/pages/<file>.yaml. The keys here are also
 // the Astro collection names (see src/content.config.ts).
@@ -18,7 +18,7 @@ export default config({
     brand: { name: 'Small Planet Law', mark: BrandMark },
     navigation: {
       Pages: ['homePage', 'aboutPage', 'servicesPage', 'greenPlanningPage', 'faqPage', 'eventsPage', 'resourcesPage', 'blogPage', 'contactPage'],
-      Content: ['blog', 'faq', 'events', 'resources', 'leadMagnets'],
+      Content: ['blog', 'faq', 'resources', 'leadMagnets'],
       Settings: ['settings'],
     },
   },
@@ -137,10 +137,59 @@ export default config({
       buttonLabel: fields.text({ label: 'Button text' }),
     }),
 
+    // Events themselves are managed in Lawmatics (see "Lawmatics" in AGENTS.md).
+    // This is only the text around them. Words in {braces} are filled in from
+    // live event data, so keep them as they are.
     eventsPage: page('Events', 'events', {
       seo: seo(),
-      hero: hero(),
-      comingSoon: section('Shown when there are no upcoming events'),
+      hero: fields.object(
+        {
+          heading: fields.text({ label: 'Heading', description: 'The main H1 heading, important for SEO' }),
+          intro: fields.text({
+            label: 'Intro',
+            multiline: true,
+            description: 'Followed in the same paragraph by a line about upcoming events (see "Upcoming events line").',
+          }),
+          discoveryCall: template('Discovery Call line', ['link'], 'Shown under the intro. {link} becomes the link below, to the booking URL in Site settings.'),
+          discoveryCallLink: fields.text({ label: 'Discovery Call link text' }),
+        },
+        { label: 'Hero' }
+      ),
+      status: fields.object(
+        {
+          unknown: fields.text({ label: 'Event details unavailable', multiline: true, description: 'Shown if Lawmatics can\'t be reached. The registration form still shows.' }),
+          oneEvent: template('One upcoming event', ['when', 'event']),
+          manyEvents: template('Several upcoming events', ['count', 'when', 'event'], '{count} is spelled out, e.g. "three".'),
+          noEvents: fields.text({ label: 'No upcoming events', multiline: true }),
+          allFull: fields.text({ label: 'All events full', multiline: true }),
+          today: fields.text({ label: 'Word for {when}: today' }),
+          tomorrow: fields.text({ label: 'Word for {when}: tomorrow' }),
+          onDate: template('Phrase for {when}: later dates', ['date'], 'e.g. "on {date}" becomes "on Tue, Nov 18".'),
+        },
+        {
+          label: 'Upcoming events line',
+          description: 'Follows the hero intro and describes events people can still register for.',
+        }
+      ),
+      card: fields.object(
+        {
+          hostedBy: template('Hosts', ['hosts']),
+          registerButton: fields.text({ label: 'Register button text' }),
+          registerButtonLabel: template('Register button label for screen readers', ['event']),
+          full: fields.text({ label: 'Shown instead of the button when an event is full' }),
+        },
+        { label: 'Event cards' }
+      ),
+      registration: fields.object(
+        {
+          heading: fields.text({ label: 'Heading' }),
+          body: fields.text({ label: 'Text above the form', multiline: true }),
+          formFallback: fields.text({ label: 'Text before the fallback link', description: 'Shown under the form, e.g. "Form not loading?"' }),
+          formFallbackLink: fields.text({ label: 'Fallback link text', description: 'Opens the registration form on Lawmatics.' }),
+          noScriptLink: fields.text({ label: 'Link text when JavaScript is off' }),
+        },
+        { label: 'Registration form' }
+      ),
     }),
 
     resourcesPage: page('Resources', 'resources', {
@@ -274,20 +323,6 @@ export default config({
       },
     }),
 
-    events: collection({
-      label: 'Events',
-      path: 'src/content/events/*',
-      slugField: 'title',
-      format: { contentField: 'content' },
-      columns: ['title', 'date'],
-      schema: {
-        title: fields.slug({ name: { label: 'Title' } }),
-        date: fields.datetime({ label: 'Date & time', validation: { isRequired: true } }),
-        location: fields.text({ label: 'Location' }),
-        registrationUrl: fields.url({ label: 'Registration URL' }),
-        content: fields.markdoc({ label: 'Description', extension: 'md' }),
-      },
-    }),
 
     resources: collection({
       label: 'Resources',

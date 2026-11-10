@@ -188,7 +188,7 @@ All event management happens in Lawmatics. To publish an event, create it and at
 
 Only request fields we display, and never request `meetingLink`.
 
-All page text lives in `src/utils/eventsContent.ts`, shaped for a Keystatic singleton. Don't hardcode text in the page or its components.
+All page text is in the Keystatic `eventsPage` singleton (`src/content/pages/events.yaml`). Words in `{braces}` are filled in from live event data by `src/utils/eventsHero.ts`. Don't hardcode text in the page or its components.
 
 ### Newsletter
 

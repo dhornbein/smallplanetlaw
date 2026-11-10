@@ -19,7 +19,7 @@ Working notes from the page-by-page walkthrough. Delete when done.
 ## Research
 
 ### Rich text (WYSIWYG)
-- Blog/FAQ/events already use `fields.markdoc` (a real rich editor). Only the page `body()` helper is a plain Markdown textarea.
+- Blog/FAQ already use `fields.markdoc` (a real rich editor). Only the page `body()` helper is a plain Markdown textarea.
 - `fields.markdoc.inline()` is the nestable version (usable inside `fields.object`/`array`, stored as a string in the YAML). Candidate to replace `body()` in `src/keystatic/fields.ts`.
 - Needs a trial: the stored value is Markdoc syntax, and `Markdown.astro` currently uses `@astropub/md`. Plain paragraphs/bold/links should be identical, but verify.
 - `fields.document` is deprecated; `fields.mdx` disallows HTML and imports. Stay on markdoc.

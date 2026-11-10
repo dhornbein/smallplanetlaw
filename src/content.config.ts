@@ -120,7 +120,38 @@ const faqPage = singleton("faqPage", "pages/faq", () =>
 );
 
 const eventsPage = singleton("eventsPage", "pages/events", () =>
-  z.object({ seo, hero, comingSoon: section }),
+  z.object({
+    seo,
+    hero: z.object({
+      heading: z.string(),
+      intro: z.string(),
+      discoveryCall: z.string(),
+      discoveryCallLink: z.string(),
+    }),
+    status: z.object({
+      unknown: z.string(),
+      oneEvent: z.string(),
+      manyEvents: z.string(),
+      noEvents: z.string(),
+      allFull: z.string(),
+      today: z.string(),
+      tomorrow: z.string(),
+      onDate: z.string(),
+    }),
+    card: z.object({
+      hostedBy: z.string(),
+      registerButton: z.string(),
+      registerButtonLabel: z.string(),
+      full: z.string(),
+    }),
+    registration: z.object({
+      heading: z.string(),
+      body: z.string(),
+      formFallback: z.string(),
+      formFallbackLink: z.string(),
+      noScriptLink: z.string(),
+    }),
+  }),
 );
 
 const resourcesPage = singleton("resourcesPage", "pages/resources", () => z.object({ seo, hero }));
@@ -177,24 +208,6 @@ const faq = defineCollection({
   }),
 });
 
-const events = defineCollection({
-  loader: glob({ pattern: "*.md", base: "./src/content/events" }),
-  schema: z.object({
-    title: z.string(),
-    // Keystatic datetimes have no timezone ("2026-10-01T18:00"). Read them as UTC
-    // and format them in UTC so the build machine's timezone doesn't shift them.
-    date: z
-      .union([z.string(), z.date()])
-      .transform((value) =>
-        typeof value === "string" && !/(Z|[+-]\d\d:?\d\d)$/i.test(value)
-          ? new Date(`${value}Z`)
-          : new Date(value),
-      ),
-    location: z.string().nullish(),
-    registrationUrl: z.url().nullish(),
-  }),
-});
-
 const resources = defineCollection({
   loader: glob({ pattern: "*.yaml", base: "./src/content/resources" }),
   schema: z.object({
@@ -230,7 +243,6 @@ export const collections = {
   settings,
   blog,
   faq,
-  events,
   resources,
   leadMagnets,
 };

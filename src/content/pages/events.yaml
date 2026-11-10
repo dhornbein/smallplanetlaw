@@ -2,15 +2,40 @@ seo:
   title: Events
   description: >-
     Join Small Planet Law for upcoming workshops and community events on estate
-    planning and green legacy giving in Denver, Colorado. Coming soon.
+    planning and green legacy giving in Colorado. See what's coming up and
+    register online.
 hero:
   heading: Events
   intro: >-
     Workshops, community gatherings, and educational events on estate planning
-    and green legacy giving are on the way.
-comingSoon:
-  heading: Coming Soon
-  body: >-
-    We're planning workshops and community events to help you feel informed and
-    empowered about estate planning and green legacy options. Check back soon,
-    or sign up below and we'll let you know as soon as events are scheduled.
+    and leaving a green legacy.
+  discoveryCall: >-
+    Can't make it to any of our events? Learn more about our services and see if
+    we're a fit to meet your needs by {link}. We look forward to connecting!
+  discoveryCallLink: scheduling a free 15-min Discovery Call
+status:
+  unknown: >-
+    You can sign up for any of our upcoming events using our registration form
+    below!
+  oneEvent: Join us {when} for {event}.
+  manyEvents: '{count} chances to join us, starting {when} with {event}.'
+  noEvents: >-
+    We're planning our next gathering. Sign up below and you'll be the first to
+    hear about it.
+  allFull: >-
+    Sorry, we're all booked up for now. Sign up below and you'll be the first to
+    hear about our next event.
+  today: today
+  tomorrow: tomorrow
+  onDate: on {date}
+card:
+  hostedBy: Hosted by {hosts}
+  registerButton: Register
+  registerButtonLabel: Register for {event}
+  full: This event is full
+registration:
+  heading: Register
+  body: Choose an event below and share your details to save your spot.
+  formFallback: Form not loading?
+  formFallbackLink: Register on our secure form page
+  noScriptLink: Open the event registration form

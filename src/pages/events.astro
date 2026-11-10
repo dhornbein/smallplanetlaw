@@ -4,16 +4,15 @@ import CurvedEdge from "../components/ui/CurvedEdge.astro";
 import EventCard from "../components/sections/EventCard.astro";
 import EventRegistrationForm from "../components/sections/EventRegistrationForm.astro";
 import Newsletter from "../components/sections/Newsletter.astro";
-import { eventsPage } from "../utils/eventsContent";
 import { getHeroLede, splitTemplate } from "../utils/eventsHero";
 import { getUpcomingEvents } from "../utils/lawmatics";
-import { getSettings } from "../utils/content";
+import { getSettings, getSingleton } from "../utils/content";
 import { LAWMATICS } from "../utils/site";
 
 // Rendered on demand (and cached at the CDN) so live event details stay current
 export const prerender = false;
 
-const { seo, hero, status, card, registration } = eventsPage;
+const { seo, hero, status, card, registration } = await getSingleton("eventsPage");
 const { callToAction } = await getSettings();
 
 // Live event details enhance the page; without them the embedded form still works
