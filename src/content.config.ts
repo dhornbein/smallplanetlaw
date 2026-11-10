@@ -170,6 +170,45 @@ const contactPage = singleton("contactPage", "pages/contact", () =>
 
 const blogPage = singleton("blogPage", "pages/blog", () => z.object({ seo, hero }));
 
+const newsletter = singleton("newsletter", "newsletter", () =>
+  z.object({
+    page: z.object({ seo }),
+    signup: z.object({
+      heading: z.string(),
+      intro: z.string(),
+      submitButton: z.string(),
+      successHeading: z.string(),
+      successBody: z.string(),
+      resetButton: z.string(),
+    }),
+    guide: z.object({
+      eyebrow: z.string(),
+      successHeading: z.string(),
+      successBody: z.string(),
+      downloadButton: z.string(),
+    }),
+    fields: z.object({
+      emailLabel: z.string(),
+      emailPlaceholder: z.string(),
+      firstNameLabel: z.string(),
+      firstNamePlaceholder: z.string(),
+      sending: z.string(),
+      privacy: z.string(),
+    }),
+    emailCheck: z.object({
+      suggestion: z.string(),
+      missingEnding: z.string(),
+      submitAgain: z.string(),
+    }),
+    messages: z.object({
+      missingField: z.string(),
+      invalidEmail: z.string(),
+      rejected: z.string(),
+      failed: z.string(),
+    }),
+  }),
+);
+
 const settings = singleton("settings", "settings", () =>
   z.object({
     phone: z.object({ display: z.string(), number: z.string() }),
@@ -241,6 +280,7 @@ export const collections = {
   blogPage,
   contactPage,
   settings,
+  newsletter,
   blog,
   faq,
   resources,

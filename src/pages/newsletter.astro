@@ -1,13 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Newsletter from "../components/sections/Newsletter.astro";
+import { getSingleton } from "../utils/content";
 
 export const prerender = true;
+
+const { seo } = (await getSingleton("newsletter")).page;
 ---
 
-<Layout
-  title="Newsletter"
-  description="Sign up for the Small Planet Law newsletter for estate planning tips, green living insights, and updates from our Colorado firm."
->
+<Layout title={seo.title} description={seo.description}>
   <Newsletter headingLevel="h1" class="min-h-[80vh] pt-36" />
 </Layout>

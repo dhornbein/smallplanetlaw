@@ -19,7 +19,7 @@ export default config({
     navigation: {
       Pages: ['homePage', 'aboutPage', 'servicesPage', 'greenPlanningPage', 'faqPage', 'eventsPage', 'resourcesPage', 'blogPage', 'contactPage'],
       Content: ['blog', 'faq', 'resources', 'leadMagnets'],
-      Settings: ['settings'],
+      Settings: ['settings', 'newsletter'],
     },
   },
 
@@ -212,6 +212,69 @@ export default config({
       hero: hero(),
     }),
 
+    // Our own signup forms, sent to Lawmatics by /api/newsletter (see "Newsletter" in AGENTS.md)
+    newsletter: singleton({
+      label: 'Newsletter signup',
+      path: 'src/content/newsletter',
+      schema: {
+        page: fields.object({ seo: seo() }, { label: 'Newsletter page (/newsletter)' }),
+        signup: fields.object(
+          {
+            heading: fields.text({ label: 'Heading' }),
+            intro: fields.text({ label: 'Intro', multiline: true }),
+            submitButton: fields.text({ label: 'Button text' }),
+            successHeading: fields.text({ label: 'Success heading' }),
+            successBody: fields.text({ label: 'Success message', multiline: true }),
+            resetButton: fields.text({ label: '"Sign up someone else" button text' }),
+          },
+          { label: 'Newsletter form', description: 'The "Stay Connected" signup near the bottom of most pages, and on /newsletter.' }
+        ),
+        guide: fields.object(
+          {
+            eyebrow: fields.text({ label: 'Label above the guide title', description: 'e.g. "Free Download"' }),
+            successHeading: fields.text({ label: 'Success heading' }),
+            successBody: fields.text({ label: 'Success message', multiline: true }),
+            downloadButton: fields.text({ label: 'Download button text' }),
+          },
+          {
+            label: 'Free guide forms',
+            description: 'Shared by every guide. Each guide\'s title, teaser, bullets and button text are under Content > Lead magnets.',
+          }
+        ),
+        fields: fields.object(
+          {
+            emailLabel: fields.text({ label: 'Email label' }),
+            emailPlaceholder: fields.text({ label: 'Email placeholder' }),
+            firstNameLabel: fields.text({ label: 'First name label', description: 'Also the placeholder on guide forms, which have no visible labels.' }),
+            firstNamePlaceholder: fields.text({ label: 'First name placeholder', description: 'Newsletter form only.' }),
+            sending: fields.text({ label: 'Button text while sending' }),
+            privacy: fields.text({ label: 'Privacy note under the form' }),
+          },
+          { label: 'Shared by both forms' }
+        ),
+        emailCheck: fields.object(
+          {
+            suggestion: template('Possible typo', ['suggestion'], '{suggestion} becomes a button that fills in the corrected address.'),
+            missingEnding: fields.text({ label: 'Address with no ending (like .com)' }),
+            submitAgain: template('Shown when the warning stops a signup', ['button'], '{button} is the form\'s button text.'),
+          },
+          {
+            label: 'Email typo warning',
+            description: 'Shown when an address looks mistyped, e.g. "gmial.com". It only warns: submitting again sends the address as typed.',
+          }
+        ),
+        messages: fields.object(
+          {
+            missingField: fields.text({ label: 'Required field empty' }),
+            invalidEmail: fields.text({ label: 'Email not valid' }),
+            rejected: fields.text({ label: 'Lawmatics rejected the details', multiline: true }),
+            failed: fields.text({ label: 'Something went wrong', multiline: true, description: 'Also shown if the visitor\'s connection fails.' }),
+          },
+          { label: 'Error messages' }
+        ),
+      },
+    }),
+
     settings: singleton({
       label: 'Site settings',
       path: 'src/content/settings',
@@ -346,7 +409,7 @@ export default config({
           name: { label: 'Title' },
           slug: { label: 'ID', description: 'Referenced by blog posts. Changing it breaks those links.' },
         }),
-        tag: fields.text({ label: 'Mailchimp tag', validation: { isRequired: true } }),
+        tag: fields.text({ label: 'Tag', description: 'Internal name for this guide. Not currently sent to Lawmatics.', validation: { isRequired: true } }),
         teaser: fields.text({ label: 'Teaser', multiline: true }),
         bullets: fields.array(fields.text({ label: 'Bullet' }), { label: 'Bullets', itemLabel: (props) => props.value }),
         downloadUrl: fields.text({ label: 'Download URL' }),

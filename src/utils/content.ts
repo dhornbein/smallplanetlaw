@@ -10,7 +10,8 @@ type SingletonName =
   | "resourcesPage"
   | "blogPage"
   | "contactPage"
-  | "settings";
+  | "settings"
+  | "newsletter";
 
 /** Read a Keystatic singleton (see `singleton()` in src/content.config.ts). */
 export async function getSingleton<C extends SingletonName & CollectionKey>(

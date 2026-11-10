@@ -5,6 +5,8 @@ import Button from "../ui/Button.astro";
 import portraitShadow from "../../assets/hero-shadow-wide.jpg";
 import portraitShadowTall from "../../assets/hero-shadow-tall.jpg";
 import { getCollection } from "astro:content";
+import { getSingleton } from "../../utils/content";
+import { fillTemplate } from "../../utils/template";
 
 interface Props {
   /** Force a specific lead magnet variant by its id (e.g. "green-ep-guide"). Omit for random A/B selection. */
@@ -17,10 +19,13 @@ const leadMagnets = (await getCollection("leadMagnets")).map((entry) => ({
   id: entry.id,
   ...entry.data,
 }));
+
+// Text shared by every guide form, edited in Keystatic (Settings > Newsletter signup)
+const { guide, fields, emailCheck, messages } = await getSingleton("newsletter");
 ---
 
 <section id="lead" class="relative pb-40 bg-neutral-warm">
-  <lead-generator class="block" data-forced-variant={variant ?? ""}>
+  <lead-generator class="block" data-forced-variant={variant ?? ""} data-failed={messages.failed}>
     {leadMagnets.map((magnet, index) => (
       <div
         class="lead-variant hidden"
@@ -45,7 +50,7 @@ const leadMagnets = (await getCollection("leadMagnets")).map((entry) => ({
               )}
               <div class="text-center md:text-left text-white">
                 <p class="text-sm font-semibold uppercase tracking-wider text-olivine-300 mb-3">
-                  Free Download
+                  {guide.eyebrow}
                 </p>
                 <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-white mb-0">
                   {magnet.title}
@@ -77,7 +82,7 @@ const leadMagnets = (await getCollection("leadMagnets")).map((entry) => ({
             <input type="hidden" name="tags" value={magnet.tag} />
             <div class="space-y-3">
               <div>
-                <label for={`lead-email-${index}`} class="sr-only">Email address</label>
+                <label for={`lead-email-${index}`} class="sr-only">{fields.emailLabel}</label>
                 <input
                   type="email"
                   id={`lead-email-${index}`}
@@ -86,23 +91,25 @@ const leadMagnets = (await getCollection("leadMagnets")).map((entry) => ({
                   autocomplete="email"
                   aria-describedby={`lead-email-check-${index}`}
                   class="w-full px-4 py-3 rounded-md border border-neutral text-text-primary placeholder-outer-space-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                  placeholder="you@example.com"
+                  placeholder={fields.emailPlaceholder}
                 />
                 <!-- Possible typo in the email, e.g. "gmial.com" -->
                 <div
                   id={`lead-email-check-${index}`}
                   class="email-check mt-2 p-3 rounded-md bg-amber-50 border border-amber-400 text-amber-900 text-sm text-left hidden"
+                  data-suggestion={emailCheck.suggestion}
+                  data-missing-ending={emailCheck.missingEnding}
                   role="status"
                   aria-live="polite"
                 >
                   <p class="email-check-text"></p>
                   <p class="email-check-note mt-1 hidden">
-                    If your address is correct, select "{magnet.buttonText}" again.
+                    {fillTemplate(emailCheck.submitAgain, { button: magnet.buttonText })}
                   </p>
                 </div>
               </div>
               <div>
-                <label for={`lead-name-${index}`} class="sr-only">First name</label>
+                <label for={`lead-name-${index}`} class="sr-only">{fields.firstNameLabel}</label>
                 <input
                   type="text"
                   id={`lead-name-${index}`}
@@ -110,7 +117,7 @@ const leadMagnets = (await getCollection("leadMagnets")).map((entry) => ({
                   required
                   autocomplete="given-name"
                   class="w-full px-4 py-3 rounded-md border border-neutral text-text-primary placeholder-outer-space-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                  placeholder="First name"
+                  placeholder={fields.firstNameLabel}
                 />
               </div>
               <Button
@@ -120,7 +127,7 @@ const leadMagnets = (await getCollection("leadMagnets")).map((entry) => ({
                 class="w-full font-medium disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span class="submit-text">{magnet.buttonText}</span>
-                <span class="loading-text hidden">Sending...</span>
+                <span class="loading-text hidden">{fields.sending}</span>
               </Button>
             </div>
 
@@ -130,11 +137,9 @@ const leadMagnets = (await getCollection("leadMagnets")).map((entry) => ({
                 <svg class="w-8 h-8 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <p class="font-serif font-bold text-lg">Your guide is ready!</p>
+                <p class="font-serif font-bold text-lg">{guide.successHeading}</p>
               </div>
-              <p class="text-sm text-text-secondary mb-4">
-                Thank you for subscribing. Download your free guide below.
-              </p>
+              <p class="text-sm text-text-secondary mb-4">{guide.successBody}</p>
               <Button
                 href={magnet.downloadUrl}
                 download
@@ -142,7 +147,7 @@ const leadMagnets = (await getCollection("leadMagnets")).map((entry) => ({
                 size="md"
                 class="w-full sm:w-auto font-medium"
               >
-                Download the Guide (PDF)
+                {guide.downloadButton}
               </Button>
             </div>
 
@@ -151,9 +156,7 @@ const leadMagnets = (await getCollection("leadMagnets")).map((entry) => ({
               <p class="error-text"></p>
             </div>
 
-            <p class="text-xs text-text-secondary text-center mt-4">
-              We respect your privacy. Unsubscribe anytime.
-            </p>
+            <p class="text-xs text-text-secondary text-center mt-4">{fields.privacy}</p>
           </form>
         </div>
       </div>
@@ -260,7 +263,7 @@ const leadMagnets = (await getCollection("leadMagnets")).map((entry) => ({
             errorDiv?.classList.remove('hidden');
           }
         } catch (error) {
-          if (errorText) errorText.textContent = 'Something went wrong. Please try again later.';
+          if (errorText) errorText.textContent = this.dataset.failed ?? '';
           errorDiv?.classList.remove('hidden');
         } finally {
           if (submitButton) {

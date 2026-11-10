@@ -1,4 +1,6 @@
 import type { APIRoute } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { getSingleton } from '../../utils/content';
 import { LAWMATICS } from '../../utils/site';
 
 const { newsletterForm } = LAWMATICS;
@@ -18,17 +20,8 @@ export const prerender = false;
 const SUBMIT_URL = `https://api.lawmatics.com/v1/forms/${newsletterForm.id}/submit`;
 const TIMEOUT_MS = 8000;
 
-/**
- * Text shown to visitors. These should become editable in Keystatic along
- * with the rest of the form text (see "Newsletter" in AGENTS.md).
- */
-const MESSAGES = {
-  success: 'Thank you for subscribing!',
-  missingField: 'Please fill in all required fields.',
-  invalidEmail: 'Please provide a valid email address.',
-  rejected: "We couldn't sign you up with that information. Please check your details and try again.",
-  failed: 'Something went wrong. Please try again later.',
-};
+/** Error messages shown to visitors, edited in Keystatic (Settings > Newsletter signup) */
+type Messages = CollectionEntry<'newsletter'>['data']['messages'];
 
 /** Tracking fields the Lawmatics endpoint accepts alongside form values */
 const UTM_PARAMS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
@@ -37,7 +30,8 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type Payload = Record<string, string | boolean>;
 
-function json(body: { success: boolean; message: string }, status: number) {
+/** The forms show their own success text, so only failures carry a message. */
+function json(body: { success: true } | { success: false; message: string }, status: number) {
   return new Response(JSON.stringify(body), {
     status,
     headers: { 'Content-Type': 'application/json' },
@@ -68,16 +62,16 @@ function trackingFields(referer: string | null): Payload {
  * Maps our inputs to Lawmatics field keys. Returns an error message instead
  * if a required field is empty or the email is malformed.
  */
-function formFields(formData: FormData): Payload | string {
+function formFields(formData: FormData, messages: Messages): Payload | string {
   const fields: Payload = {};
   for (const [name, field] of Object.entries(newsletterForm.fields)) {
     const value = formData.get(name)?.toString().trim() ?? '';
     if (!value) {
-      if (field.required) return MESSAGES.missingField;
+      if (field.required) return messages.missingField;
       continue;
     }
     if ('type' in field && field.type === 'email' && !EMAIL_PATTERN.test(value)) {
-      return MESSAGES.invalidEmail;
+      return messages.invalidEmail;
     }
     fields[field.key] = value;
   }
@@ -85,20 +79,22 @@ function formFields(formData: FormData): Payload | string {
 }
 
 export const POST: APIRoute = async ({ request }) => {
+  const { messages } = await getSingleton('newsletter');
+
   let formData: FormData;
   try {
     formData = await request.formData();
   } catch {
-    return json({ success: false, message: MESSAGES.missingField }, 400);
+    return json({ success: false, message: messages.missingField }, 400);
   }
 
   // Hidden field that people never see. Bots that fill every field get a
   // normal-looking success and nothing is sent to Lawmatics.
   if (formData.get('website')?.toString()) {
-    return json({ success: true, message: MESSAGES.success }, 200);
+    return json({ success: true }, 200);
   }
 
-  const fields = formFields(formData);
+  const fields = formFields(formData, messages);
   if (typeof fields === 'string') {
     return json({ success: false, message: fields }, 400);
   }
@@ -118,7 +114,7 @@ export const POST: APIRoute = async ({ request }) => {
     });
 
     if (response.ok) {
-      return json({ success: true, message: MESSAGES.success }, 200);
+      return json({ success: true }, 200);
     }
 
     console.error(
@@ -127,11 +123,11 @@ export const POST: APIRoute = async ({ request }) => {
     );
 
     if (response.status >= 400 && response.status < 500) {
-      return json({ success: false, message: MESSAGES.rejected }, 400);
+      return json({ success: false, message: messages.rejected }, 400);
     }
   } catch (error) {
     console.error('Lawmatics newsletter submit error:', error);
   }
 
-  return json({ success: false, message: MESSAGES.failed }, 502);
+  return json({ success: false, message: messages.failed }, 502);
 };

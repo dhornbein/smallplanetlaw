@@ -1,0 +1,40 @@
+page:
+  seo:
+    title: Newsletter
+    description: >-
+      Sign up for the Small Planet Law newsletter for estate planning tips,
+      green living insights, and updates from our Colorado firm.
+signup:
+  heading: Stay Connected
+  intro: >-
+    Get estate planning tips, green living insights, and updates from Small
+    Planet Law.
+  submitButton: Sign Up
+  successHeading: You're subscribed!
+  successBody: >-
+    Thank you for joining the Small Planet Law newsletter. Look for our next
+    update in your inbox.
+  resetButton: Add another email
+guide:
+  eyebrow: Free Download
+  successHeading: Your guide is ready!
+  successBody: Thank you for subscribing. Download your free guide below.
+  downloadButton: Download the Guide (PDF)
+fields:
+  emailLabel: Email address
+  emailPlaceholder: you@example.com
+  firstNameLabel: First name
+  firstNamePlaceholder: Your first name
+  sending: Sending...
+  privacy: We respect your privacy. Unsubscribe anytime.
+emailCheck:
+  suggestion: Did you mean {suggestion}?
+  missingEnding: This email address is missing an ending like .com.
+  submitAgain: If your address is correct, select "{button}" again.
+messages:
+  missingField: Please fill in all required fields.
+  invalidEmail: Please provide a valid email address.
+  rejected: >-
+    We couldn't sign you up with that information. Please check your details
+    and try again.
+  failed: Something went wrong. Please try again later.

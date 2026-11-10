@@ -196,10 +196,9 @@ Our own signup forms (`Newsletter.astro`, and the free-guide forms in `LeadGener
 
 - The form ID, which inputs are forwarded, and which are required are all in `LAWMATICS.newsletterForm` in `src/utils/site.ts`. Only listed inputs are sent, so a visitor can't set other Lawmatics fields. Keep `required` in step with the Lawmatics form.
 - `/newsletter` is the standalone signup page. Old Mailchimp links at `/signup/*` redirect there with a 302. Don't use a 301 here: browsers cache it indefinitely.
-- `src/utils/emailTypos.ts` flags likely email typos (e.g. "gmial.com"), and `src/utils/emailCheckUI.ts` shows the warning in both forms. It only warns: the first submit stops to show it, and submitting again sends the address as typed.
+- `src/utils/emailTypos.ts` flags likely email typos (e.g. "gmial.com"), and `src/utils/emailCheckUI.ts` shows the warning in both forms, using wording passed in from Keystatic as data attributes. It only warns: the first submit stops to show it, and submitting again sends the address as typed.
 - Guide forms show a PDF download button on success. Guides will move to their own Lawmatics lead-gen forms later.
-
-**Keystatic (TODO):** when Keystatic lands, all text visitors see in these forms must become editable there, following the events page pattern. That covers headings, labels, placeholders, button text, success and error messages, the lead magnets in `LEAD_MAGNETS` (`src/utils/global.ts`), and the messages the API returns (`MESSAGES` in `src/pages/api/newsletter.ts`). Don't add more hardcoded form text in the meantime.
+- All text visitors see in these forms is edited in Keystatic: the shared form text, typo warning and API error messages are in the `newsletter` singleton (`src/content/newsletter.yaml`, under Settings > Newsletter signup), and each guide's title, teaser, bullets, button text and PDF are in the `leadMagnets` collection. Don't hardcode form text in the components or the endpoint.
 
 - Help / embed guides: https://help.lawmatics.com
 - API docs (reference only): https://docs.lawmatics.com/

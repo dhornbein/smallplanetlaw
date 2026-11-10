@@ -4,6 +4,11 @@
  * Expects a warning box next to the email input containing
  * `.email-check-text` (filled in here) and `.email-check-note` (shown when the
  * warning stops a submit). The box starts hidden with the `hidden` class.
+ *
+ * The wording comes from the box's data attributes, set from Keystatic
+ * (`emailCheck` in the newsletter singleton):
+ * - `data-suggestion`: e.g. "Did you mean {suggestion}?"
+ * - `data-missing-ending`: shown for an address like "you@gmail"
  */
 import { checkEmail } from "./emailTypos";
 
@@ -62,9 +67,10 @@ export function attachEmailCheck(
         hide();
         input.focus();
       });
-      text.append("Did you mean ", useSuggestion, "?");
+      const [before, after = ""] = (box.dataset.suggestion ?? "{suggestion}").split("{suggestion}");
+      text.append(before, useSuggestion, after);
     } else {
-      text.textContent = result.message;
+      text.textContent = box.dataset.missingEnding ?? "";
     }
 
     note?.classList.toggle("hidden", !isSubmitting);

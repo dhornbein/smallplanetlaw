@@ -74,7 +74,7 @@ const TLD_TYPOS: Record<string, string> = {
 
 export type EmailCheck =
   | { kind: "suggestion"; suggestion: string }
-  | { kind: "warning"; message: string };
+  | { kind: "missingEnding" };
 
 /**
  * Edit distance where swapping two neighboring letters counts as one edit,
@@ -149,10 +149,7 @@ export function checkEmail(input: string): EmailCheck | null {
   if (!domain.includes(".")) {
     const guess = closestCommonDomain(`${domain}.com`);
     if (guess) return { kind: "suggestion", suggestion: `${local}@${guess}` };
-    return {
-      kind: "warning",
-      message: "This email address is missing an ending like .com.",
-    };
+    return { kind: "missingEnding" };
   }
 
   domain = fixTld(domain);
