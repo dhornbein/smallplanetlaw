@@ -19,7 +19,7 @@ export default config({
     navigation: {
       Pages: ['homePage', 'aboutPage', 'servicesPage', 'greenPlanningPage', 'faqPage', 'eventsPage', 'resourcesPage', 'blogPage', 'contactPage'],
       Content: ['blog', 'faq', 'events', 'resources', 'leadMagnets'],
-      Settings: ['settings', 'signupLinks'],
+      Settings: ['settings'],
     },
   },
 
@@ -321,19 +321,6 @@ export default config({
           directory: 'src/assets/content/lead-magnets',
           publicPath: '../../assets/content/lead-magnets/',
         }),
-      },
-    }),
-
-    signupLinks: collection({
-      label: 'Signup links',
-      path: 'src/content/signup-links/*',
-      slugField: 'label',
-      schema: {
-        label: fields.slug({
-          name: { label: 'Label' },
-          slug: { label: 'Path', description: 'The short link is /signup/<path>.' },
-        }),
-        href: fields.url({ label: 'Mailchimp URL', validation: { isRequired: true } }),
       },
     }),
   },

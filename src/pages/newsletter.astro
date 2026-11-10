@@ -1,0 +1,13 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Newsletter from "../components/sections/Newsletter.astro";
+
+export const prerender = true;
+---
+
+<Layout
+  title="Newsletter"
+  description="Sign up for the Small Planet Law newsletter for estate planning tips, green living insights, and updates from our Colorado firm."
+>
+  <Newsletter headingLevel="h1" class="min-h-[80vh] pt-36" />
+</Layout>

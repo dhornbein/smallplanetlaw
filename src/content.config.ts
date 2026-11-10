@@ -217,14 +217,6 @@ const leadMagnets = defineCollection({
     }),
 });
 
-const signupLinks = defineCollection({
-  loader: glob({ pattern: "*.yaml", base: "./src/content/signup-links" }),
-  schema: z.object({
-    label: z.string(),
-    href: z.url(),
-  }),
-});
-
 export const collections = {
   homePage,
   aboutPage,
@@ -241,5 +233,4 @@ export const collections = {
   events,
   resources,
   leadMagnets,
-  signupLinks,
 };

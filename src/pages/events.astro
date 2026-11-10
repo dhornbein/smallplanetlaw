@@ -1,91 +1,117 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import CurvedEdge from "../components/ui/CurvedEdge.astro";
+import EventCard from "../components/sections/EventCard.astro";
+import EventRegistrationForm from "../components/sections/EventRegistrationForm.astro";
 import Newsletter from "../components/sections/Newsletter.astro";
-import Button from "../components/ui/Button.astro";
-import Markdown from "../components/ui/Markdown.astro";
-import { getCollection, render } from "astro:content";
-import { getSingleton } from "../utils/content";
+import { eventsPage } from "../utils/eventsContent";
+import { getHeroLede, splitTemplate } from "../utils/eventsHero";
+import { getUpcomingEvents } from "../utils/lawmatics";
+import { getSettings } from "../utils/content";
+import { LAWMATICS } from "../utils/site";
 
-const { seo, hero, comingSoon } = await getSingleton("eventsPage");
+// Rendered on demand (and cached at the CDN) so live event details stay current
+export const prerender = false;
 
-// The site is static, so "upcoming" is relative to the last build (to within a few hours,
-// since event times are wall-clock times stored as UTC — see content.config.ts).
-const now = new Date();
-const events = await Promise.all(
-  (await getCollection("events", (event) => event.data.date >= now))
-    .sort((a, b) => a.data.date.getTime() - b.data.date.getTime())
-    .map(async (event) => ({ ...event.data, Content: (await render(event)).Content })),
+const { seo, hero, status, card, registration } = eventsPage;
+const { callToAction } = await getSettings();
+
+// Live event details enhance the page; without them the embedded form still works
+const events = await getUpcomingEvents(LAWMATICS.eventRegistrationForm.id);
+
+// Only cache successful lookups so a Lawmatics outage clears on the next request
+if (events !== null) {
+  Astro.response.headers.set(
+    "Cache-Control",
+    "public, max-age=0, must-revalidate",
+  );
+  Astro.response.headers.set(
+    "Netlify-CDN-Cache-Control",
+    "public, durable, s-maxage=300, stale-while-revalidate=3600",
+  );
+}
+
+const hasEvents = events !== null && events.length > 0;
+// A failed lookup keeps the form: we can't tell that registration is closed
+const showForm = events === null || events.some((event) => !event.isFull);
+const lede = getHeroLede(events, status);
+const discoveryCall = splitTemplate(
+  hero.discoveryCall,
+  "link",
+  hero.discoveryCallLink,
 );
 ---
 
 <Layout title={seo.title} description={seo.description}>
-  <!-- Hero Section -->
-  <section
-    class="bg-secondary text-primary-variant show-header relative px-8 py-24 lg:py-28"
+  <!-- Page Header -->
+  <header
+    class="bg-outer-space text-white show-header relative px-8 py-20 lg:py-24"
   >
-    <div class="max-w-4xl mx-auto">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
       <h1>{hero.heading}</h1>
-      <Markdown content={hero.intro} class="text-xl leading-relaxed max-w-prose" />
+      <!-- Static intro and live status share a paragraph to keep the header short -->
+      <p class="text-lg lg:text-xl text-olivine-100 max-w-prose">
+        {hero.intro}{" "}
+        <span class="text-white font-semibold">
+          {lede.before}{lede.inserted && <span class="font-serif italic">{lede.inserted}</span>}{lede.after}
+        </span>
+      </p>
+      <p class="mt-4 text-base text-outer-space-100 max-w-prose">
+        {discoveryCall.before}{discoveryCall.inserted && (
+          <a
+            href={callToAction.href}
+            target={callToAction.target}
+            rel="noopener noreferrer"
+            class="text-white underline decoration-olivine underline-offset-4 hover:text-olivine-300"
+          >{discoveryCall.inserted}</a>
+        )}{discoveryCall.after}
+      </p>
     </div>
-  </section>
-
-  <section
-    class="relative bg-primary text-text-primary-inverse px-4 sm:px-6 lg:px-8 pt-10 pb-30"
-  >
-    <CurvedEdge fillColor="fill-primary" />
-
     {
-      events.length > 0 ? (
-        <ul class="max-w-3xl mx-auto w-full space-y-8">
+      !hasEvents && !showForm && (
+        <CurvedEdge fillColor="fill-outer-space" position="bottom" />
+      )
+    }
+  </header>
+
+  <!-- Event List -->
+  {
+    hasEvents && (
+      <section class="py-16 lg:py-20 relative bg-light">
+        <CurvedEdge fillColor="fill-light" />
+        <ul class="flex flex-wrap gap-6 sm:gap-8 px-6 md:px-16 justify-center">
           {events.map((event) => (
-            <li class="bg-white/10 rounded-lg p-8">
-              <h2 class="text-secondary">{event.title}</h2>
-              <p class="text-lg font-semibold mb-4">
-                {event.date.toLocaleString("en-US", {
-                  dateStyle: "full",
-                  timeStyle: "short",
-                  timeZone: "UTC",
-                })}
-                {event.location && <span class="block font-normal opacity-90">{event.location}</span>}
-              </p>
-              <div class="text-lg leading-relaxed space-y-4">
-                <event.Content />
-              </div>
-              {event.registrationUrl && (
-                <div class="mt-6">
-                  <Button href={event.registrationUrl} target="_blank" variant="secondary" size="lg">
-                    Register
-                  </Button>
-                </div>
-              )}
+            <li class="w-full md:max-w-md">
+              <EventCard event={event} content={card} />
             </li>
           ))}
         </ul>
-      ) : (
-        <div class="max-w-2xl mx-auto w-full text-center">
-          <svg
-            class="w-14 h-14 mx-auto mb-6 text-secondary"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-            ></path>
-          </svg>
-          <h2>{comingSoon.heading}</h2>
-          <Markdown content={comingSoon.body} class="text-xl leading-relaxed mb-10" />
-        </div>
-      )
-    }
+        {!showForm && <CurvedEdge fillColor="fill-light" position="bottom" />}
+      </section>
+    )
+  }
 
-    <CurvedEdge fillColor="fill-primary" position="bottom" />
-  </section>
+  <!-- Registration -->
+  {
+    showForm && (
+      <section class="relative bg-primary text-text-primary-inverse px-4 sm:px-6 lg:px-8 pt-10 pb-30">
+        <CurvedEdge fillColor="fill-primary" />
+
+        <div class="max-w-2xl mx-auto w-full">
+          <!-- Margin clears the header, which also drops out of the page flow as it sticks -->
+          <h2 id="register" class="text-center scroll-mt-48">
+            {registration.heading}
+          </h2>
+          <p class="text-xl leading-relaxed mb-10 text-center">
+            {registration.body}
+          </p>
+          <EventRegistrationForm content={registration} />
+        </div>
+
+        <CurvedEdge fillColor="fill-primary" position="bottom" />
+      </section>
+    )
+  }
 
   <Newsletter />
 </Layout>

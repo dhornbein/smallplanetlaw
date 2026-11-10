@@ -75,5 +75,3 @@ Creating this kind of comprehensive plan might feel overwhelming, especially if 
 ## How I Can Help
 
 When you work with Small Planet Law, we don't just create documents and send you on your way. Instead, we help you build a Life & Legacy Plan that protects your family relationships as much as it protects your assets. We start with education about what would happen to you and your family without a plan in place. Then we work together to create a comprehensive plan that reflects your unique family dynamics, your values, and your wishes for care.
-
-[Book a call with me here](https://calendar.app.google/xefoyp1nDzcnPvYo9) today to learn more.

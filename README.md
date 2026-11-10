@@ -43,12 +43,12 @@ Holistic estate planning website for Small Planet Law LLC, built with Astro and 
 │   │   ├── pages/*.yaml            # One file per page (hero, sections, cards…)
 │   │   ├── settings.yaml           # Phone, email, address, booking link, nav
 │   │   ├── blog/ faq/ events/      # Markdown collections
-│   │   └── resources/ lead-magnets/ signup-links/  # YAML collections
+│   │   └── resources/ lead-magnets/  # YAML collections
 │   ├── keystatic/fields.ts          # Shared Keystatic field groups
 │   ├── content.config.ts            # Astro collections (mirror keystatic.config.ts)
 │   └── utils/                       # Utility functions & data
 │       ├── content.ts              # getSingleton() / getSettings() helpers
-│       └── site.ts                 # Site constants + Mailchimp config
+│       └── site.ts                 # Site constants + Lawmatics form IDs
 ├── keystatic.config.ts  # Keystatic admin schema (/keystatic)
 ├── astro.config.mjs     # Astro configuration
 ├── tsconfig.json        # TypeScript configuration
@@ -79,11 +79,11 @@ All `.astro` files in `src/pages/` become routes automatically (file-based routi
 
 - **`src/content/`** - All editable copy. Page layout and design stay in the `.astro` files; the words, images and links come from these files.
 - **`src/utils/content.ts`** - `getSingleton("homePage")` reads a page file; `getSettings()` returns contact details, navigation and the booking CTA
-- **`src/utils/site.ts`** - Site constants (name, analytics ID, structured data) and Mailchimp config (from env vars)
+- **`src/utils/site.ts`** - Site constants (name, analytics ID, structured data) and Lawmatics form IDs
 
 ## Editing Content (Keystatic)
 
-The site owner edits content at **`/keystatic`**. Each page is a guided form ("Pages"), with blog posts, FAQs, events, resources and lead magnets under "Content", and contact details / navigation / signup short links under "Settings".
+The site owner edits content at **`/keystatic`**. Each page is a guided form ("Pages"), with blog posts, FAQs, events, resources and lead magnets under "Content", and contact details / navigation under "Settings".
 
 - **Locally** (`npm run dev`), Keystatic reads and writes the files in `src/content/` directly — edit at `http://localhost:4321/keystatic` and commit as usual.
 - **In production**, Keystatic Cloud commits to GitHub; Netlify rebuilds the (static) site on every commit. Editors don't need GitHub accounts.
@@ -143,22 +143,12 @@ Access via Tailwind classes: `text-hunter-green`, `bg-olivine-300`, etc.
    - Connect to GitHub and select this repository
    - Netlify auto-detects Astro settings ✅
 
-3. **Add Environment Variables**
-   
-   In Netlify: Site settings → Environment variables → Add variable
-   
-   ```
-   MAILCHIMP_API_KEY=your_api_key
-   MAILCHIMP_SERVER_PREFIX=us21
-   MAILCHIMP_LIST_ID=your_list_id  
-   MAILCHIMP_USER_ID=your_user_id
-   ```
-   
-   **Get credentials:**
-   - API Key: Mailchimp → Account → Extras → API keys
-   - Server Prefix: Part after dash in API key (e.g., "us21")
-   - List ID: Audience → Settings → Audience ID
-   - User ID: In Mailchimp account URL or archive links
+3. **Environment variables**
+
+   None are required. The newsletter endpoint (`src/pages/api/newsletter.ts`)
+   forwards signups to a Lawmatics custom form using Lawmatics' public
+   "Submit Custom Form Entry" endpoint, which needs no API key. The form ID and
+   field keys live in `LAWMATICS.newsletterForm` in `src/utils/site.ts`.
 
 4. **Deploy**
    - Push to `main` branch = automatic deployment

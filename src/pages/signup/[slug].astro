@@ -1,15 +1,13 @@
 ---
-import { getEntry } from "astro:content";
+// Old Mailchimp signup links (e.g. /signup/6-mistakes-guide) may still be on
+// printed material or in past emails. Send them all to the newsletter page.
+//
+// Use a temporary (302) redirect. Browsers cache a 301 indefinitely, which is
+// how visitors ended up stuck on the old 301 to Mailchimp, and the destination
+// may change when guide signups move to their own Lawmatics forms.
 
-// Rendered on demand so the short link answers with a real 301 redirect.
+// Rendered on demand: the site is otherwise static, and this matches any slug.
 export const prerender = false;
 
-const { slug } = Astro.params;
-const link = slug ? await getEntry("signupLinks", slug) : undefined;
-
-if (!link) {
-  return Astro.redirect("/404", 301);
-}
-
-return Astro.redirect(link.data.href, 301);
+return Astro.redirect("/newsletter", 302);
 ---

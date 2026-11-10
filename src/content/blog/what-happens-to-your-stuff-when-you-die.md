@@ -67,4 +67,4 @@ Your possessions represent your life story, but without proper planning, they ca
 
 I help you create a comprehensive Life & Legacy Plan so that your loved ones stay out of court and conflict and have a plan that works when they need it. Once you've created your plan, you can rest easy knowing your wishes will be honored, your loved ones cared for, and your assets protected. I'll also touch base regularly to ensure your plan stays updated over time, taking the burden off your shoulders to make changes to your plan when needed. After all, you have enough to worry about each day.
 
-Don't wait until it's too late. [Click here to schedule a complimentary 15-minute Discovery Call](https://calendar.app.google/xefoyp1nDzcnPvYo9) to learn more.
+Don't wait until it's too late. Book below to learn more.

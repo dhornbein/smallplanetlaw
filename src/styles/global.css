@@ -1,5 +1,6 @@
 /* Import variable fonts - loaded immediately, no FOUT */
 @import "@fontsource-variable/lora";
+@import "@fontsource-variable/lora/wght-italic.css";
 @import "@fontsource-variable/source-sans-3";
 
 @import "tailwindcss";
