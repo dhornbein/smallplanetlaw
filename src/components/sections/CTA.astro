@@ -6,7 +6,10 @@ interface Props {
 }
 
 const { variant } = Astro.props;
+
+// Lead-gen (free guide) section is off site-wide for now. It will come back
+// built on the Lawmatics lead-gen form; see "Lead generation" in AGENTS.md.
+const SHOW_LEAD_GEN = false;
 ---
 
-<LeadGenerator variant={variant} />
-
+{SHOW_LEAD_GEN && <LeadGenerator variant={variant} />}

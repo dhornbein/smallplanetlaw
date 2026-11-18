@@ -195,9 +195,15 @@ Our own signup forms (`Newsletter.astro`, and the free-guide forms in `LeadGener
 - The form ID, which inputs are forwarded, and which are required are all in `newsletterForm` in `src/utils/navigation.ts`. Only listed inputs are sent, so a visitor can't set other Lawmatics fields. Keep `required` in step with the Lawmatics form.
 - `/newsletter` is the standalone signup page. Old Mailchimp links at `/signup/*` redirect there with a 302. Don't use a 301 here: browsers cache it indefinitely.
 - `src/utils/emailTypos.ts` flags likely email typos (e.g. "gmial.com"), and `src/utils/emailCheckUI.ts` shows the warning in both forms. It only warns: the first submit stops to show it, and submitting again sends the address as typed.
-- Guide forms show a PDF download button on success. Guides will move to their own Lawmatics lead-gen forms later.
+- Guide forms show a PDF download button on success. Guides will move to their own Lawmatics lead-gen forms later (see "Lead generation" below).
 
 **Keystatic (TODO):** when Keystatic lands, all text visitors see in these forms must become editable there, following the events page pattern. That covers headings, labels, placeholders, button text, success and error messages, the lead magnets in `LEAD_MAGNETS` (`src/utils/global.ts`), and the messages the API returns (`MESSAGES` in `src/pages/api/newsletter.ts`). Don't add more hardcoded form text in the meantime.
+
+### Lead generation (currently off)
+
+The free-guide section (`LeadGenerator.astro`) is turned off site-wide by `SHOW_LEAD_GEN = false` in `src/components/sections/CTA.astro`. Every page and blog post reaches it only through `CTA`, so that flag controls all of it. `LEAD_MAGNETS`, the guide PDFs and `/resources` are unchanged.
+
+**TODO:** the next version will be built on the existing Lawmatics lead-gen form: https://app.lawmatics.com/forms/share/219779ea-a904-44b6-a2e4-1f04f3368202. Build on that form rather than making a new one, and don't turn the current guide forms back on (they post to the newsletter form). When it's done, update or remove the `SHOW_LEAD_GEN` flag and this section.
 
 - Help / embed guides: https://help.lawmatics.com
 - API docs (reference only): https://docs.lawmatics.com/

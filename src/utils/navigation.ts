@@ -18,7 +18,7 @@ export const navItems: NavItem[] = [
 
 export const callToAction: NavItem = {
   name: "Book A Call",
-  href: "https://app.lawmatics.com/forms/share/87520261-e73c-4bc1-927d-dbc8dee65af8",
+  href: "https://app.lawmatics.com/forms/share/ee7ca60f-ac40-484f-8c4c-5f30b43c0adb",
   target: "_blank",
 };
 
